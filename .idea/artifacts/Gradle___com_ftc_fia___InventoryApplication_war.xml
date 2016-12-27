@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="Gradle : com.ftc.fia : InventoryApplication.war">
+    <output-path>$PROJECT_DIR$/build/libs</output-path>
+    <properties id="gradle-properties">
+      <options external-project-path="$PROJECT_DIR$" />
+    </properties>
+    <root id="archive" name="InventoryApplication.war">
+      <element id="artifact" artifact-name="Gradle : com.ftc.fia : InventoryApplication.war (exploded)" />
+    </root>
+  </artifact>
+</component>
