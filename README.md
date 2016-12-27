@@ -3,8 +3,8 @@ InventoryApplication
 Initial Configuration and Setup (Gradle build).
 
 1. Install MySQL database with username: root, password:root and make sure it is up and running. 
-    -> http://dev.mysql.com/downloads/workbench/
-2. Go to intelliJ -> file -> new -> project From version control -> gitHub
+    -> http://dev.mysql.com/downloads/windows/installer/5.7.html
+2. Go to intelliJ -> file -> new -> project From version control -> git
 3. For the git repository url use -> https://github.com/FTC-Utility/InventoryApplication.git
 4. Give the parent directory destination of your project wherever you want it to be. 
 5. Download apache tomcat 32 or 64 bit from the link , http://tomcat.apache.org/download-90.cgi
