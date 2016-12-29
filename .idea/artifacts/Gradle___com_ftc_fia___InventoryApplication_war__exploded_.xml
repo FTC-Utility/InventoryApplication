@@ -19,7 +19,6 @@
         <element id="directory" name="lib">
           <element id="library" level="project" name="Gradle: ch.qos.logback:logback-classic:1.1.3" />
           <element id="library" level="project" name="Gradle: org.springframework:spring-webmvc:4.3.4.RELEASE" />
-          <element id="library" level="project" name="Gradle: org.hibernate.javax.persistence:hibernate-jpa-2.0-api:1.0.1.Final" />
           <element id="library" level="project" name="Gradle: org.hibernate:hibernate-core:5.2.5.Final" />
           <element id="library" level="project" name="Gradle: org.hibernate:hibernate-entitymanager:5.2.5.Final" />
           <element id="library" level="project" name="Gradle: org.springframework:spring-core:4.3.4.RELEASE" />

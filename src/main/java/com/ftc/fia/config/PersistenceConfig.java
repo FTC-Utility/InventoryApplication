@@ -57,7 +57,7 @@ public class PersistenceConfig {
         jpaProperties.put("hibernate.dialect", env.getRequiredProperty("hibernate.dialect"));
         factory.setJpaProperties(jpaProperties);
 
-        factory.afterPropertiesSet();
+//        factory.afterPropertiesSet();
         factory.setLoadTimeWeaver(new InstrumentationLoadTimeWeaver());
         return factory;
     }

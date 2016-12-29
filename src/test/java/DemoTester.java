@@ -32,7 +32,6 @@ public class DemoTester
 
     private MockMvc mockmvc;
 
-
     @Before
     public void setup()
     {
