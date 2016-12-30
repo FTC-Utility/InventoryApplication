@@ -1,7 +1,6 @@
 package com.ftc.fia.domain;
 
 import javax.persistence.*;
-import java.net.PasswordAuthentication;
 import java.util.List;
 
 /**
@@ -25,24 +24,23 @@ public class User {
     private String email;
 
     @OneToOne
-    @JoinColumn(name="company_abbrev")
+    @JoinColumn(name="company_abbrev",referencedColumnName = "abbrev")
     private Company company_abbrev;
 
     @OneToMany
-    @JoinColumn(name = "id")
-    private List<User_Notifications> userNotifications;
+    @JoinColumn(name = "id",referencedColumnName = "")
+    private List<UserNotification> userNotifications;
 
     @OneToOne
     @JoinColumn(name = "user_password_id",referencedColumnName = "id")
-    private User_Password user_password_id;
+    private UserPassword user_password_id;
 
     @OneToOne
     @JoinColumn(name="position_name", referencedColumnName = "name")
     private Position position_name;
 
-    @OneToMany
-    @JoinColumn(name = "roleId",referencedColumnName = "id")
-    private List<User_Role> user_roles;
+    @OneToMany(mappedBy = "user_id")
+    private List<UserRole> user_roles;
 
 
     public User(String firstName, String lastName, String email) {
@@ -94,19 +92,19 @@ public class User {
         this.company_abbrev = company_abbrev;
     }
 
-    public List<User_Notifications> getUserNotifications() {
+    public List<UserNotification> getUserNotifications() {
         return userNotifications;
     }
 
-    public void setUserNotifications(List<User_Notifications> userNotifications) {
+    public void setUserNotifications(List<UserNotification> userNotifications) {
         this.userNotifications = userNotifications;
     }
 
-    public User_Password getUser_password_id() {
+    public UserPassword getUser_password_id() {
         return user_password_id;
     }
 
-    public void setUser_password_id(User_Password user_password_id) {
+    public void setUser_password_id(UserPassword user_password_id) {
         this.user_password_id = user_password_id;
     }
 
@@ -118,11 +116,11 @@ public class User {
         this.position_name = position_name;
     }
 
-/*    public List<User_Role> getUser_roles() {
+    public List<UserRole> getUser_roles() {
         return user_roles;
     }
 
-    public void setUser_roles(List<User_Role> user_roles) {
+    public void setUser_roles(List<UserRole> user_roles) {
         this.user_roles = user_roles;
-    }*/
+    }
 }

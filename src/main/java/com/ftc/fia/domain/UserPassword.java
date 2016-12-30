@@ -11,11 +11,10 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "user_password")
-public class User_Password {
+public class UserPassword {
 
 
     private int id;
-
 
     private String password_hash;
 
@@ -28,12 +27,12 @@ public class User_Password {
     private LocalDate expire_date;
 
 
-    private User_Password user_id;
+    private UserPassword user_id;
 
-    public User_Password() {
+    public UserPassword() {
     }
 
-    public User_Password(String password_hash, LocalDate created_date, LocalDate expire_date) {
+    public UserPassword(String password_hash, LocalDate created_date, LocalDate expire_date) {
         this.password_hash = password_hash;
         this.created_date = created_date;
 /*        this.expire_date = expire_date;*/
@@ -76,19 +75,19 @@ public class User_Password {
 
     @OneToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
-    public User_Password getUser_id() {
+    public UserPassword getUser_id() {
         return user_id;
     }
 
-    public void setUser_id(User_Password user_id) {
+    public void setUser_id(UserPassword user_id) {
         this.user_id = user_id;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof User_Password)) return false;
-        User_Password that = (User_Password) o;
+        if (!(o instanceof UserPassword)) return false;
+        UserPassword that = (UserPassword) o;
         return getId() == that.getId() &&
                 Objects.equals(getPassword_hash(), that.getPassword_hash()) &&
                 Objects.equals(getCreated_date(), that.getCreated_date()) &&

@@ -9,8 +9,8 @@ import java.util.Objects;
  * Created by Eyuel Tadesse on 12/28/2016.
  */
 @Entity
-@Table(name = "user_notifications")
-public class User_Notifications {
+@Table(name = "user_notification")
+public class UserNotification {
 
     @Id
     @GeneratedValue
@@ -27,14 +27,14 @@ public class User_Notifications {
 
     @ManyToOne
     @JoinColumn(name = "notif_type", referencedColumnName = "type")
-    private Notification_Type notif_type;
+    private NotificationType notif_type;
 
     @Column(name = "active")
     @Type(type = "org.hibernate.type.NumericBooleanType")
     private boolean active;
 
 
-    public User_Notifications() {
+    public UserNotification() {
     }
 
 
@@ -62,11 +62,11 @@ public class User_Notifications {
         this.notif_name = notif_name;
     }
 
-    public Notification_Type getNotif_type() {
+    public NotificationType getNotif_type() {
         return notif_type;
     }
 
-    public void setNotif_type(Notification_Type notif_type) {
+    public void setNotif_type(NotificationType notif_type) {
         this.notif_type = notif_type;
     }
 
@@ -81,8 +81,8 @@ public class User_Notifications {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof User_Notifications)) return false;
-        User_Notifications that = (User_Notifications) o;
+        if (!(o instanceof UserNotification)) return false;
+        UserNotification that = (UserNotification) o;
         return getId() == that.getId() &&
                 isActive() == that.isActive() &&
                 Objects.equals(getUser_id(), that.getUser_id()) &&
@@ -97,7 +97,7 @@ public class User_Notifications {
 
     @Override
     public String toString() {
-        return "User_Notifications{" +
+        return "UserNotification{" +
                 "id=" + id +
                 ", user_id=" + user_id +
                 ", notif_name='" + notif_name + '\'' +

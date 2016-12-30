@@ -11,7 +11,7 @@ import java.util.Objects;
  */
 @Entity
 @Table(name ="notification_type")
-public class Notification_Type {
+public class NotificationType {
 
     @Id
     @Column(name = "type")
@@ -20,10 +20,10 @@ public class Notification_Type {
     @Column(name = "description")
     private String description;
 
-    public Notification_Type() {
+    public NotificationType() {
     }
 
-    public Notification_Type(String type, String description) {
+    public NotificationType(String type, String description) {
         this.type = type;
         this.description = description;
     }
@@ -47,8 +47,8 @@ public class Notification_Type {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Notification_Type)) return false;
-        Notification_Type that = (Notification_Type) o;
+        if (!(o instanceof NotificationType)) return false;
+        NotificationType that = (NotificationType) o;
         return Objects.equals(getType(), that.getType()) &&
                 Objects.equals(getDescription(), that.getDescription());
     }
