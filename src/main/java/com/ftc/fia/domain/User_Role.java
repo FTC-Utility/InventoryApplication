@@ -9,7 +9,7 @@ import java.util.Objects;
 /**
  * Created by Eyuel Tadesse on 12/29/2016.
  */
-/*@Entity
+@Entity
 @Table
 public class User_Role {
     @Id
@@ -39,4 +39,4 @@ public class User_Role {
     public int hashCode() {
         return Objects.hash(getId());
     }
-}*/
+}

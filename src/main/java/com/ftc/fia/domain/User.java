@@ -40,9 +40,9 @@ public class User {
     @JoinColumn(name="position_name", referencedColumnName = "name")
     private Position position_name;
 
-/*    @OneToMany
+    @OneToMany
     @JoinColumn(name = "roleId",referencedColumnName = "id")
-    private List<User_Role> user_roles;*/
+    private List<User_Role> user_roles;
 
 
     public User(String firstName, String lastName, String email) {
