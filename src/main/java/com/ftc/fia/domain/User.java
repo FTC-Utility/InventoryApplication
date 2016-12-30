@@ -39,7 +39,7 @@ public class User {
     @JoinColumn(name="position_name", referencedColumnName = "name")
     private Position position_name;
 
-    @OneToMany(mappedBy = "user_id")
+    @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<UserRole> user_roles;
 
 
