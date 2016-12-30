@@ -17,16 +17,22 @@ public class TestController {
     ITestMeService iTestMeService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String test(Model model) {
+     public String test(Model model) {
 
-        model.addAttribute("tests", iTestMeService.getTests());
-        return "test";
-    }
+         model.addAttribute("tests", iTestMeService.getTests());
+         return "test";
+     }
+
+     @RequestMapping(value = "/signup", method = RequestMethod.GET)
+     public String signup() {
+
+         //model.addAttribute("signup", "");
+         return "newUserSignUp";
+     }
 
     @RequestMapping(value = "/test", method = RequestMethod.POST)
     public String testPost(TestMe testMe) {
         iTestMeService.createTest(testMe);
         return "redirect:/";
     }
-
 }
