@@ -7,10 +7,9 @@ import java.util.Objects;
 /**
  * Created by Eyuel Tadesse on 12/28/2016.
  */
-/*
 @Entity
-@Table(name = "website_roles")
-public class Website_Roles {
+@Table(name = "website_role")
+public class Website_Role {
 
     @Id
     @Column(name = "name")
@@ -19,10 +18,11 @@ public class Website_Roles {
     @Column(name = "description")
     private String description;
 
-    @OneToMany(mappedBy = "Website_Roles")
-    private List<User_Role> user_role;
+/*    @OneToMany
+    @JoinColumn(name ="user_role_id", referencedColumnName = "id")
+    private List<UserRole> user_role;*/
 
-    public Website_Roles() {
+    public Website_Role() {
     }
 
     public String getName() {
@@ -41,19 +41,19 @@ public class Website_Roles {
         this.description = description;
     }
 
-    public List<User_Role> getUser_role() {
+/*    public List<UserRole> getUser_role() {
         return user_role;
     }
 
-    public void setUser_role(List<User_Role> user_role) {
+    public void setUser_role(List<UserRole> user_role) {
         this.user_role = user_role;
-    }
+    }*/
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Website_Roles)) return false;
-        Website_Roles that = (Website_Roles) o;
+        if (!(o instanceof Website_Role)) return false;
+        Website_Role that = (Website_Role) o;
         return Objects.equals(getName(), that.getName()) &&
                 Objects.equals(getDescription(), that.getDescription());
     }
@@ -65,10 +65,9 @@ public class Website_Roles {
 
     @Override
     public String toString() {
-        return "Website_Roles{" +
+        return "Website_Role{" +
                 "name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 '}';
     }
 }
-*/
