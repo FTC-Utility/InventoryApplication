@@ -19,15 +19,15 @@ public class UserNotification {
 
     @ManyToOne
     @JoinColumn(name ="user_id",referencedColumnName = "id")
-    private User user_id;
+    private User userId;
 
     @ManyToOne
     @JoinColumn(name = "notif_name", referencedColumnName = "name")
-    private Notification notif_name;
+    private Notification notifName;
 
     @ManyToOne
     @JoinColumn(name = "notif_type", referencedColumnName = "type")
-    private NotificationType notif_type;
+    private NotificationType notifType;
 
     @Column(name = "active")
     @Type(type = "org.hibernate.type.NumericBooleanType")
@@ -47,27 +47,27 @@ public class UserNotification {
     }
 
     public User getUser_id() {
-        return user_id;
+        return userId;
     }
 
     public void setUser_id(User user_id) {
-        this.user_id = user_id;
+        this.userId = user_id;
     }
 
     public Notification getNotif_name() {
-        return notif_name;
+        return notifName;
     }
 
     public void setNotif_name(Notification notif_name) {
-        this.notif_name = notif_name;
+        this.notifName = notif_name;
     }
 
     public NotificationType getNotif_type() {
-        return notif_type;
+        return notifType;
     }
 
     public void setNotif_type(NotificationType notif_type) {
-        this.notif_type = notif_type;
+        this.notifType = notif_type;
     }
 
     public boolean isActive() {
@@ -99,9 +99,9 @@ public class UserNotification {
     public String toString() {
         return "UserNotification{" +
                 "id=" + id +
-                ", user_id=" + user_id +
-                ", notif_name='" + notif_name + '\'' +
-                ", notif_type='" + notif_type + '\'' +
+                ", user_id=" + userId +
+                ", notif_name='" + notifName + '\'' +
+                ", notif_type='" + notifType + '\'' +
                 ", active=" + active +
                 '}';
     }

@@ -1,7 +1,6 @@
 package com.ftc.fia.domain;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Objects;
 
 /**
@@ -9,7 +8,7 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "website_role")
-public class Website_Role {
+public class WebsiteRole {
 
     @Id
     @Column(name = "name")
@@ -22,7 +21,7 @@ public class Website_Role {
     @JoinColumn(name ="user_role_id", referencedColumnName = "id")
     private List<UserRole> user_role;*/
 
-    public Website_Role() {
+    public WebsiteRole() {
     }
 
     public String getName() {
@@ -52,8 +51,8 @@ public class Website_Role {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Website_Role)) return false;
-        Website_Role that = (Website_Role) o;
+        if (!(o instanceof WebsiteRole)) return false;
+        WebsiteRole that = (WebsiteRole) o;
         return Objects.equals(getName(), that.getName()) &&
                 Objects.equals(getDescription(), that.getDescription());
     }
@@ -65,7 +64,7 @@ public class Website_Role {
 
     @Override
     public String toString() {
-        return "Website_Role{" +
+        return "WebsiteRole{" +
                 "name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 '}';

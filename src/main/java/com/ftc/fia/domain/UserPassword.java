@@ -13,29 +13,30 @@ import java.util.Objects;
 @Table(name = "user_password")
 public class UserPassword {
 
-
     private int id;
 
-    private String password_hash;
+    private String passwordHash;
 
     @Column(name = "created_date")
     @Type(type = "com.ftc.fia.util.LocalDateAttributeConverter")
-    private LocalDate created_date;
+    private LocalDate createdDate;
 
     @Column(name = "expire_date")
     @Type(type = "com.ftc.fia.util.LocalDateAttributeConverter")
-    private LocalDate expire_date;
+    private LocalDate expireDate;
 
 
-    private UserPassword user_id;
+    private UserPassword userId;
 
     public UserPassword() {
     }
 
-    public UserPassword(String password_hash, LocalDate created_date, LocalDate expire_date) {
-        this.password_hash = password_hash;
-        this.created_date = created_date;
-/*        this.expire_date = expire_date;*/
+    public UserPassword(int id, String passwordHash, LocalDate createdDate, LocalDate expireDate, UserPassword userId) {
+        this.id = id;
+        this.passwordHash = passwordHash;
+        this.createdDate = createdDate;
+        this.expireDate = expireDate;
+        this.userId = userId;
     }
 
     @Id
@@ -50,37 +51,37 @@ public class UserPassword {
 
     @Column
     public String getPassword_hash() {
-        return password_hash;
+        return passwordHash;
     }
 
     public void setPassword_hash(String password_hash) {
-        this.password_hash = password_hash;
+        this.passwordHash = password_hash;
     }
 
     public LocalDate getCreated_date() {
-        return created_date;
+        return createdDate;
     }
 
     public void setCreated_date(LocalDate created_date) {
-        this.created_date = created_date;
+        this.createdDate = created_date;
     }
 
     public LocalDate getExpire_date() {
-        return expire_date;
+        return expireDate;
     }
 
     public void setExpire_date(LocalDate expire_date) {
-        this.expire_date = expire_date;
+        this.expireDate = expire_date;
     }
 
     @OneToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     public UserPassword getUser_id() {
-        return user_id;
+        return userId;
     }
 
     public void setUser_id(UserPassword user_id) {
-        this.user_id = user_id;
+        this.userId = user_id;
     }
 
     @Override

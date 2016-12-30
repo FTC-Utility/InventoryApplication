@@ -17,31 +17,23 @@ public class UserPreference {
 
     @Lob
     @Column(name = "profile_Pic")
-    private Byte[] profile_pic;
+    private Byte[] profilePic;
 
     @Column(name = "send_user_notifs")
-    private boolean send_user_notifs;
+    private boolean sendUserNotifs;
 
     @Column(name = "send_admin_notifs")
-    private boolean send_admin_notifs;
+    private boolean sendAdminNotifs;
 
     @ManyToOne
     @JoinColumn(name="user_id", referencedColumnName = "id")
-    private User user_id;
+    private User userId;
 
     @ManyToOne
     @JoinColumn(name="site_skin_name", referencedColumnName = "name")
-    private Website_Skins website_skins;
+    private WebsiteSkin websiteSkins;
 
     public UserPreference() {
-    }
-
-    public UserPreference(Byte[] profile_pic, boolean send_user_notifs, boolean send_admin_notifs, User user_id, Website_Skins website_skins) {
-        this.profile_pic = profile_pic;
-        this.send_user_notifs = send_user_notifs;
-        this.send_admin_notifs = send_admin_notifs;
-        this.user_id = user_id;
-        this.website_skins = website_skins;
     }
 
     public int getId() {
@@ -52,56 +44,44 @@ public class UserPreference {
         this.id = id;
     }
 
-    public Byte[] getProfile_pic() {
-        return profile_pic;
+    public Byte[] getProfilePic() {
+        return profilePic;
     }
 
-    public void setProfile_pic(Byte[] profile_pic) {
-        this.profile_pic = profile_pic;
+    public void setProfilePic(Byte[] profilePic) {
+        this.profilePic = profilePic;
     }
 
-    public boolean isSend_user_notifs() {
-        return send_user_notifs;
+    public boolean isSendUserNotifs() {
+        return sendUserNotifs;
     }
 
-    public void setSend_user_notifs(boolean send_user_notifs) {
-        this.send_user_notifs = send_user_notifs;
+    public void setSendUserNotifs(boolean sendUserNotifs) {
+        this.sendUserNotifs = sendUserNotifs;
     }
 
-    public boolean isSend_admin_notifs() {
-        return send_admin_notifs;
+    public boolean isSendAdminNotifs() {
+        return sendAdminNotifs;
     }
 
-    public void setSend_admin_notifs(boolean send_admin_notifs) {
-        this.send_admin_notifs = send_admin_notifs;
+    public void setSendAdminNotifs(boolean sendAdminNotifs) {
+        this.sendAdminNotifs = sendAdminNotifs;
     }
 
-    public User getUser_id() {
-        return user_id;
+    public User getUserId() {
+        return userId;
     }
 
-    public void setUser_id(User user_id) {
-        this.user_id = user_id;
+    public void setUserId(User userId) {
+        this.userId = userId;
     }
 
-    public Website_Skins getWebsite_skins() {
-        return website_skins;
+    public WebsiteSkin getWebsiteSkins() {
+        return websiteSkins;
     }
 
-    public void setWebsite_skins(Website_Skins website_skins) {
-        this.website_skins = website_skins;
-    }
-
-    @Override
-    public String toString() {
-        return "UserPreference{" +
-                "id=" + id +
-                ", profile_pic=" + Arrays.toString(profile_pic) +
-                ", send_user_notifs=" + send_user_notifs +
-                ", send_admin_notifs=" + send_admin_notifs +
-                ", user_id=" + user_id +
-                ", website_skins=" + website_skins +
-                '}';
+    public void setWebsiteSkins(WebsiteSkin websiteSkins) {
+        this.websiteSkins = websiteSkins;
     }
 
     @Override
@@ -110,15 +90,27 @@ public class UserPreference {
         if (!(o instanceof UserPreference)) return false;
         UserPreference that = (UserPreference) o;
         return getId() == that.getId() &&
-                isSend_user_notifs() == that.isSend_user_notifs() &&
-                isSend_admin_notifs() == that.isSend_admin_notifs() &&
-                Arrays.equals(getProfile_pic(), that.getProfile_pic()) &&
-                Objects.equals(getUser_id(), that.getUser_id()) &&
-                Objects.equals(getWebsite_skins(), that.getWebsite_skins());
+                isSendUserNotifs() == that.isSendUserNotifs() &&
+                isSendAdminNotifs() == that.isSendAdminNotifs() &&
+                Arrays.equals(getProfilePic(), that.getProfilePic()) &&
+                Objects.equals(getUserId(), that.getUserId()) &&
+                Objects.equals(getWebsiteSkins(), that.getWebsiteSkins());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getProfile_pic(), isSend_user_notifs(), isSend_admin_notifs(), getUser_id(), getWebsite_skins());
+        return Objects.hash(getId(), getProfilePic(), isSendUserNotifs(), isSendAdminNotifs(), getUserId(), getWebsiteSkins());
+    }
+
+    @Override
+    public String toString() {
+        return "UserPreference{" +
+                "id=" + id +
+                ", profilePic=" + Arrays.toString(profilePic) +
+                ", sendUserNotifs=" + sendUserNotifs +
+                ", sendAdminNotifs=" + sendAdminNotifs +
+                ", userId=" + userId +
+                ", websiteSkins=" + websiteSkins +
+                '}';
     }
 }

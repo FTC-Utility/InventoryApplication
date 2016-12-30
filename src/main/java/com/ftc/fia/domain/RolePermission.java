@@ -16,7 +16,7 @@ public class RolePermission {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name ="site_role_name",referencedColumnName = "name")
-    private Website_Role site_role_name;
+    private WebsiteRole site_role_name;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name ="permission_name" , referencedColumnName = "name")
@@ -33,11 +33,11 @@ public class RolePermission {
         this.id = id;
     }
 
-    public Website_Role getSite_role_name() {
+    public WebsiteRole getSite_role_name() {
         return site_role_name;
     }
 
-    public void setSite_role_name(Website_Role site_role_name) {
+    public void setSite_role_name(WebsiteRole site_role_name) {
         this.site_role_name = site_role_name;
     }
 

@@ -15,11 +15,11 @@ public class UserRole {
 
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private User user_id;
+    private User userId;
 
     @ManyToOne
     @JoinColumn(name = "site_role_name", referencedColumnName = "name")
-    private Website_Role site_role_name;
+    private WebsiteRole siteRoleName;
 
     public UserRole() {
     }
@@ -32,12 +32,20 @@ public class UserRole {
         this.id = id;
     }
 
-    public User getUser_id() {
-        return user_id;
+    public User getUserId() {
+        return userId;
     }
 
-    public void setUser_id(User user_id) {
-        this.user_id = user_id;
+    public void setUserId(User userId) {
+        this.userId = userId;
+    }
+
+    public WebsiteRole getSiteRoleName() {
+        return siteRoleName;
+    }
+
+    public void setSiteRoleName(WebsiteRole siteRoleName) {
+        this.siteRoleName = siteRoleName;
     }
 
     @Override
@@ -51,5 +59,14 @@ public class UserRole {
     @Override
     public int hashCode() {
         return Objects.hash(getId());
+    }
+
+    @Override
+    public String toString() {
+        return "UserRole{" +
+                "id=" + id +
+                ", userId=" + userId +
+                ", siteRoleName=" + siteRoleName +
+                '}';
     }
 }
