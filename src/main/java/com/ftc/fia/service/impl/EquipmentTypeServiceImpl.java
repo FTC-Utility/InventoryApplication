@@ -25,6 +25,11 @@ public class EquipmentTypeServiceImpl implements IEquipmentTypeService {
         return equipmentTypeBuisness.getEquipmentTypeById(id);
     }
 
+    @Override
+    public EquipmentType getEquipmentByDescription(String description) {
+        return equipmentTypeBuisness.getEquipmentTypeByDescription(description);
+    }
+
     public List<EquipmentType> findAll() {
         return equipmentTypeBuisness.findAll();
     }

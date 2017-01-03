@@ -11,13 +11,17 @@ import java.util.Objects;
 public class EquipmentType {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     @Column(name = "description")
     private String description;
 
     public EquipmentType() {
+    }
+
+    public EquipmentType(String description) {
+        this.description = description;
     }
 
     public EquipmentType(int id, String description) {
@@ -54,12 +58,11 @@ public class EquipmentType {
         if (this == o) return true;
         if (!(o instanceof EquipmentType)) return false;
         EquipmentType that = (EquipmentType) o;
-        return Objects.equals(getId(), that.getId()) &&
-                Objects.equals(getDescription(), that.getDescription());
+        return Objects.equals(getDescription(), that.getDescription());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getDescription());
+        return Objects.hash(getDescription());
     }
 }
