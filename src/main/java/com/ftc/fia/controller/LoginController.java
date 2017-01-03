@@ -28,17 +28,15 @@ public class LoginController {
 
     @RequestMapping(value = "/newUserRegisterHere", method = RequestMethod.GET)
     public String newUserRegisterHere(Model model) {
-        // This is just stub code for now. This will have to change in a future sub-task that will do the real
-        // processing.
+
         System.out.println("Method Executed: newUserRegisterHere");
-        return "login";
+        return "newUserSignUp";
     }
 
     @RequestMapping(value = "/lostPassword", method = RequestMethod.GET)
     public String lostPassword(Model model) {
-        // This is just stub code for now. This will have to change in a future sub-task that will do the real
-        // processing.
+
         System.out.println("Method Executed: lostPassword");
-        return "login";
+        return "lostPasswordReset";
     }
 }
