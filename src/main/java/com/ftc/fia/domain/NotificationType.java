@@ -1,9 +1,6 @@
 package com.ftc.fia.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Objects;
 
 /**
@@ -14,8 +11,9 @@ import java.util.Objects;
 public class NotificationType {
 
     @Id
-    @Column(name = "type")
-    private String type;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
+    private int id;
 
     @Column(name = "description")
     private String description;
@@ -23,17 +21,17 @@ public class NotificationType {
     public NotificationType() {
     }
 
-    public NotificationType(String type, String description) {
-        this.type = type;
+    public NotificationType(int id, String description) {
+        this.id = id;
         this.description = description;
     }
 
-    public String getType() {
-        return type;
+    public int getId() {
+        return id;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getDescription() {
@@ -49,12 +47,12 @@ public class NotificationType {
         if (this == o) return true;
         if (!(o instanceof NotificationType)) return false;
         NotificationType that = (NotificationType) o;
-        return Objects.equals(getType(), that.getType()) &&
+        return Objects.equals(getId(), that.getId()) &&
                 Objects.equals(getDescription(), that.getDescription());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getType(), getDescription());
+        return Objects.hash(getId(), getDescription());
     }
 }

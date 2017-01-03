@@ -1,9 +1,6 @@
 package com.ftc.fia.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Objects;
 
 /**
@@ -14,17 +11,18 @@ import java.util.Objects;
 public class TokeType {
 
     @Id
-    private String type;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
 
     @Column(name = "description")
     private String description;
 
-    public String getType() {
-        return type;
+    public int getId() {
+        return id;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getDescription() {
@@ -43,19 +41,19 @@ public class TokeType {
         if (this == o) return true;
         if (!(o instanceof TokeType)) return false;
         TokeType tokeType = (TokeType) o;
-        return Objects.equals(getType(), tokeType.getType()) &&
+        return Objects.equals(getId(), tokeType.getId()) &&
                 Objects.equals(getDescription(), tokeType.getDescription());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getType(), getDescription());
+        return Objects.hash(getId(), getDescription());
     }
 
     @Override
     public String toString() {
         return "TokeType{" +
-                "type='" + type + '\'' +
+                "type='" + id + '\'' +
                 ", description='" + description + '\'' +
                 '}';
     }

@@ -1,9 +1,6 @@
 package com.ftc.fia.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Objects;
 
 /**
@@ -14,8 +11,9 @@ import java.util.Objects;
 public class Permission {
 
     @Id
-    @Column(name = "name")
-    private String name;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
+    private int id;
 
     @Column(name = "description")
     private String description;
@@ -23,17 +21,17 @@ public class Permission {
     public Permission() {
     }
 
-    public Permission(String name, String description) {
-        this.name = name;
+    public Permission(int id, String description) {
+        this.id = id;
         this.description = description;
     }
 
-    public String getName() {
-        return name;
+    public int getId() {
+        return id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getDescription() {
@@ -49,12 +47,20 @@ public class Permission {
         if (this == o) return true;
         if (!(o instanceof Permission)) return false;
         Permission that = (Permission) o;
-        return Objects.equals(getName(), that.getName()) &&
+        return getId() == that.getId() &&
                 Objects.equals(getDescription(), that.getDescription());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getName(), getDescription());
+        return Objects.hash(getId(), getDescription());
+    }
+
+    @Override
+    public String toString() {
+        return "Permission{" +
+                "id=" + id +
+                ", description='" + description + '\'' +
+                '}';
     }
 }

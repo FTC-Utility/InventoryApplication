@@ -14,7 +14,7 @@ public class UserToken {
     private int id;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name ="toke_type", referencedColumnName = "type")
+    @JoinColumn(name ="toke_type", referencedColumnName = "id")
     private TokeType tokenType;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)

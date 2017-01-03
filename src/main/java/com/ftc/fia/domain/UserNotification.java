@@ -26,8 +26,8 @@ public class UserNotification {
     private Notification notifName;
 
     @ManyToOne
-    @JoinColumn(name = "notif_type", referencedColumnName = "type")
-    private NotificationType notifType;
+    @JoinColumn(name = "notif_type_id", referencedColumnName = "id")
+    private NotificationType notifTypeId;
 
     @Column(name = "active")
     @Type(type = "org.hibernate.type.NumericBooleanType")
@@ -62,12 +62,28 @@ public class UserNotification {
         this.notifName = notif_name;
     }
 
-    public NotificationType getNotif_type() {
-        return notifType;
+    public User getUserId() {
+        return userId;
     }
 
-    public void setNotif_type(NotificationType notif_type) {
-        this.notifType = notif_type;
+    public void setUserId(User userId) {
+        this.userId = userId;
+    }
+
+    public Notification getNotifName() {
+        return notifName;
+    }
+
+    public void setNotifName(Notification notifName) {
+        this.notifName = notifName;
+    }
+
+    public NotificationType getNotifTypeId() {
+        return notifTypeId;
+    }
+
+    public void setNotifTypeId(NotificationType notifTypeId) {
+        this.notifTypeId = notifTypeId;
     }
 
     public boolean isActive() {
@@ -85,24 +101,13 @@ public class UserNotification {
         UserNotification that = (UserNotification) o;
         return getId() == that.getId() &&
                 isActive() == that.isActive() &&
-                Objects.equals(getUser_id(), that.getUser_id()) &&
-                Objects.equals(getNotif_name(), that.getNotif_name()) &&
-                Objects.equals(getNotif_type(), that.getNotif_type());
+                Objects.equals(getUserId(), that.getUserId()) &&
+                Objects.equals(getNotifName(), that.getNotifName()) &&
+                Objects.equals(getNotifTypeId(), that.getNotifTypeId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getUser_id(), getNotif_name(), getNotif_type(), isActive());
-    }
-
-    @Override
-    public String toString() {
-        return "UserNotification{" +
-                "id=" + id +
-                ", user_id=" + userId +
-                ", notif_name='" + notifName + '\'' +
-                ", notif_type='" + notifType + '\'' +
-                ", active=" + active +
-                '}';
+        return Objects.hash(getId(), getUserId(), getNotifName(), getNotifTypeId(), isActive());
     }
 }

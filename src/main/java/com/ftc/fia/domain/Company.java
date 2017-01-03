@@ -1,9 +1,6 @@
 package com.ftc.fia.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Objects;
@@ -16,28 +13,28 @@ import java.util.Objects;
 public class Company {
 
     @Id
-    @Column(name ="abbrev",nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name ="id",nullable = false)
     @NotNull
-    @Size(min=1)
-    private String abbrev;
+    private int id;
 
     @Column(name ="name", nullable = false)
     private String name;
 
-    public Company(String abbrev, String name) {
-        this.abbrev = abbrev;
+    public Company(int id, String name) {
+        this.id = id;
         this.name = name;
     }
 
     public Company() {
     }
 
-    public String getAbbrev() {
-        return abbrev;
+    public int getId() {
+        return id;
     }
 
-    public void setAbbrev(String abbrev) {
-        this.abbrev = abbrev;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -49,24 +46,24 @@ public class Company {
     }
 
     @Override
-    public String toString() {
-        return "Company{" +
-                "abbrev='" + abbrev + '\'' +
-                ", name='" + name + '\'' +
-                '}';
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Company)) return false;
         Company company = (Company) o;
-        return Objects.equals(getAbbrev(), company.getAbbrev()) &&
+        return getId() == company.getId() &&
                 Objects.equals(getName(), company.getName());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getAbbrev(), getName());
+        return Objects.hash(getId(), getName());
+    }
+
+    @Override
+    public String toString() {
+        return "Company{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
     }
 }

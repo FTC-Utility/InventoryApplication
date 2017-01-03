@@ -20,8 +20,8 @@ public class RolePermission {
     private WebsiteRole site_role_id;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name ="permission_name" , referencedColumnName = "name")
-    private Permission permission_name;
+    @JoinColumn(name ="permission_id" , referencedColumnName = "id")
+    private Permission permission_id;
 
     public RolePermission() {
     }
@@ -42,12 +42,12 @@ public class RolePermission {
         this.site_role_id = site_role_id;
     }
 
-    public Permission getPermission_name() {
-        return permission_name;
+    public Permission getPermission_id() {
+        return permission_id;
     }
 
-    public void setPermission_name(Permission permission_name) {
-        this.permission_name = permission_name;
+    public void setPermission_id(Permission permission_id) {
+        this.permission_id = permission_id;
     }
 
     @Override
@@ -57,12 +57,12 @@ public class RolePermission {
         RolePermission that = (RolePermission) o;
         return getId() == that.getId() &&
                 Objects.equals(getSite_role_id(), that.getSite_role_id()) &&
-                Objects.equals(getPermission_name(), that.getPermission_name());
+                Objects.equals(getPermission_id(), that.getPermission_id());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getSite_role_id(), getPermission_name());
+        return Objects.hash(getId(), getSite_role_id(), getPermission_id());
     }
 
     @Override
@@ -70,7 +70,7 @@ public class RolePermission {
         return "RolePermission{" +
                 "id=" + id +
                 ", site_role_id=" + site_role_id +
-                ", permission_name=" + permission_name +
+                ", permission_id=" + permission_id +
                 '}';
     }
 }

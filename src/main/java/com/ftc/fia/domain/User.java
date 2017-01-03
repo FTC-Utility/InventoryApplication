@@ -2,6 +2,7 @@ package com.ftc.fia.domain;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by Eyuel Tadesse on 12/28/2016.
@@ -24,8 +25,8 @@ public class User {
     private String email;
 
     @OneToOne
-    @JoinColumn(name="company_abbrev",referencedColumnName = "abbrev")
-    private Company company_abbrev;
+    @JoinColumn(name="company_id",referencedColumnName = "id")
+    private Company company_id;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "id",referencedColumnName = "id")
@@ -84,12 +85,12 @@ public class User {
         this.email = email;
     }
 
-    public Company getCompany_abbrev() {
-        return company_abbrev;
+    public Company getCompany_id() {
+        return company_id;
     }
 
-    public void setCompany_abbrev(Company company_abbrev) {
-        this.company_abbrev = company_abbrev;
+    public void setCompany_id(Company company_id) {
+        this.company_id = company_id;
     }
 
     public List<UserNotification> getUserNotifications() {
@@ -122,5 +123,41 @@ public class User {
 
     public void setUser_roles(List<UserRole> user_roles) {
         this.user_roles = user_roles;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof User)) return false;
+        User user = (User) o;
+        return getId() == user.getId() &&
+                Objects.equals(getFirstName(), user.getFirstName()) &&
+                Objects.equals(getLastName(), user.getLastName()) &&
+                Objects.equals(getEmail(), user.getEmail()) &&
+                Objects.equals(getCompany_id(), user.getCompany_id()) &&
+                Objects.equals(getUserNotifications(), user.getUserNotifications()) &&
+                Objects.equals(getUser_password_id(), user.getUser_password_id()) &&
+                Objects.equals(getPosition_name(), user.getPosition_name()) &&
+                Objects.equals(getUser_roles(), user.getUser_roles());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getFirstName(), getLastName(), getEmail(), getCompany_id(), getUserNotifications(), getUser_password_id(), getPosition_name(), getUser_roles());
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", company_id=" + company_id +
+                ", userNotifications=" + userNotifications +
+                ", user_password_id=" + user_password_id +
+                ", position_name=" + position_name +
+                ", user_roles=" + user_roles +
+                '}';
     }
 }
