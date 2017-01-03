@@ -28,7 +28,7 @@
                 <br/>
 
                 <label for="pwd">Password:</label>
-                <input type="password" id="pwd" name="pwd" class="form-control" placeholder="Password">
+                <input type="password" minlength="5" maxlength="30" id="pwd" name="pwd" class="form-control" placeholder="Password">
                 <br/>
 
                 <div class="checkbox">
