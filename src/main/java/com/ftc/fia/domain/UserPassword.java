@@ -25,21 +25,17 @@ public class UserPassword {
     @Type(type = "com.ftc.fia.util.LocalDateAttributeConverter")
     private LocalDate expireDate;
 
-    @Transient
+
     private String confirmPassword;
-
-
-    private UserPassword userId;
 
     public UserPassword() {
     }
 
-    public UserPassword(int id, String passwordHash, LocalDate createdDate, LocalDate expireDate, UserPassword userId) {
+    public UserPassword(int id, String passwordHash, LocalDate createdDate, LocalDate expireDate) {
         this.id = id;
         this.passwordHash = passwordHash;
         this.createdDate = createdDate;
         this.expireDate = expireDate;
-        this.userId = userId;
     }
 
     @Id
@@ -76,6 +72,7 @@ public class UserPassword {
         this.expireDate = expireDate;
     }
 
+    @Transient
     public String getConfirmPassword() {
         return confirmPassword;
     }
@@ -83,7 +80,7 @@ public class UserPassword {
     public void setConfirmPassword(String confirmPassword) {
         this.confirmPassword = confirmPassword;
     }
-
+/*
     public UserPassword getUserId() {
         return userId;
     }
@@ -100,23 +97,22 @@ public class UserPassword {
 
     public void setUser_id(UserPassword user_id) {
         this.userId = user_id;
-    }
+    }*/
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof UserPassword)) return false;
         UserPassword that = (UserPassword) o;
-        return Objects.equals(getPasswordHash(), that.getPasswordHash()) &&
+        return getId() == that.getId() &&
+                Objects.equals(getPasswordHash(), that.getPasswordHash()) &&
                 Objects.equals(getCreatedDate(), that.getCreatedDate()) &&
-                Objects.equals(getExpireDate(), that.getExpireDate()) &&
-                Objects.equals(getConfirmPassword(), that.getConfirmPassword()) &&
-                Objects.equals(getUserId(), that.getUserId());
+                Objects.equals(getExpireDate(), that.getExpireDate());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getPasswordHash(), getCreatedDate(), getExpireDate(), getConfirmPassword(), getUserId());
+        return Objects.hash(getId(), getPasswordHash(), getCreatedDate(), getExpireDate());
     }
 
     @Override
@@ -127,7 +123,6 @@ public class UserPassword {
                 ", createdDate=" + createdDate +
                 ", expireDate=" + expireDate +
                 ", confirmPassword='" + confirmPassword + '\'' +
-                ", userId=" + userId +
                 '}';
     }
 }
