@@ -18,7 +18,7 @@ public class Vendor {
     private String name;
 
     @Column(name = "cust_service")
-    private String cust_service;
+    private String custService;
 
     @Column(name = "website")
     private String website;
@@ -26,9 +26,9 @@ public class Vendor {
     public Vendor() {
     }
 
-    public Vendor(String name, String cust_service, String website) {
+    public Vendor(String name, String custService, String website) {
         this.name = name;
-        this.cust_service = cust_service;
+        this.custService = custService;
         this.website = website;
     }
 
@@ -48,12 +48,12 @@ public class Vendor {
         this.name = name;
     }
 
-    public String getCust_service() {
-        return cust_service;
+    public String getCustService() {
+        return custService;
     }
 
-    public void setCust_service(String cust_service) {
-        this.cust_service = cust_service;
+    public void setCustService(String custService) {
+        this.custService = custService;
     }
 
     public String getWebsite() {
@@ -71,13 +71,13 @@ public class Vendor {
         Vendor vendor = (Vendor) o;
         return getId() == vendor.getId() &&
                 Objects.equals(getName(), vendor.getName()) &&
-                Objects.equals(getCust_service(), vendor.getCust_service()) &&
+                Objects.equals(getCustService(), vendor.getCustService()) &&
                 Objects.equals(getWebsite(), vendor.getWebsite());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getName(), getCust_service(), getWebsite());
+        return Objects.hash(getId(), getName(), getCustService(), getWebsite());
     }
 
     @Override
@@ -85,7 +85,7 @@ public class Vendor {
         return "Vendor{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", cust_service='" + cust_service + '\'' +
+                ", custService='" + custService + '\'' +
                 ", website='" + website + '\'' +
                 '}';
     }

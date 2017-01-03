@@ -10,7 +10,7 @@ import java.util.Objects;
  * Created by Eyuel Tadesse on 12/28/2016.
  */
 @Entity
-@Table(name ="notifications")
+@Table(name ="notification")
 public class Notification {
 
     @Id

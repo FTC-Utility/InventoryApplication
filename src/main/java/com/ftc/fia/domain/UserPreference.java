@@ -19,19 +19,19 @@ public class UserPreference {
     @Column(name = "profile_Pic")
     private Byte[] profilePic;
 
-    @Column(name = "send_user_notifs")
-    private boolean sendUserNotifs;
+    @Column(name = "send_user_notif")
+    private boolean sendUserNotif;
 
-    @Column(name = "send_admin_notifs")
-    private boolean sendAdminNotifs;
+    @Column(name = "send_admin_notif")
+    private boolean sendAdminNotif;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name="user_id", referencedColumnName = "id")
     private User userId;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name="site_skin_name", referencedColumnName = "name")
-    private WebsiteSkin websiteSkins;
+    private WebsiteSkin site_skin_name;
 
     public UserPreference() {
     }
@@ -52,20 +52,20 @@ public class UserPreference {
         this.profilePic = profilePic;
     }
 
-    public boolean isSendUserNotifs() {
-        return sendUserNotifs;
+    public boolean isSendUserNotif() {
+        return sendUserNotif;
     }
 
-    public void setSendUserNotifs(boolean sendUserNotifs) {
-        this.sendUserNotifs = sendUserNotifs;
+    public void setSendUserNotif(boolean sendUserNotif) {
+        this.sendUserNotif = sendUserNotif;
     }
 
-    public boolean isSendAdminNotifs() {
-        return sendAdminNotifs;
+    public boolean isSendAdminNotif() {
+        return sendAdminNotif;
     }
 
-    public void setSendAdminNotifs(boolean sendAdminNotifs) {
-        this.sendAdminNotifs = sendAdminNotifs;
+    public void setSendAdminNotif(boolean sendAdminNotif) {
+        this.sendAdminNotif = sendAdminNotif;
     }
 
     public User getUserId() {
@@ -76,12 +76,12 @@ public class UserPreference {
         this.userId = userId;
     }
 
-    public WebsiteSkin getWebsiteSkins() {
-        return websiteSkins;
+    public WebsiteSkin getSite_skin_name() {
+        return site_skin_name;
     }
 
-    public void setWebsiteSkins(WebsiteSkin websiteSkins) {
-        this.websiteSkins = websiteSkins;
+    public void setSite_skin_name(WebsiteSkin site_skin_name) {
+        this.site_skin_name = site_skin_name;
     }
 
     @Override
@@ -90,16 +90,16 @@ public class UserPreference {
         if (!(o instanceof UserPreference)) return false;
         UserPreference that = (UserPreference) o;
         return getId() == that.getId() &&
-                isSendUserNotifs() == that.isSendUserNotifs() &&
-                isSendAdminNotifs() == that.isSendAdminNotifs() &&
+                isSendUserNotif() == that.isSendUserNotif() &&
+                isSendAdminNotif() == that.isSendAdminNotif() &&
                 Arrays.equals(getProfilePic(), that.getProfilePic()) &&
                 Objects.equals(getUserId(), that.getUserId()) &&
-                Objects.equals(getWebsiteSkins(), that.getWebsiteSkins());
+                Objects.equals(getSite_skin_name(), that.getSite_skin_name());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getProfilePic(), isSendUserNotifs(), isSendAdminNotifs(), getUserId(), getWebsiteSkins());
+        return Objects.hash(getId(), getProfilePic(), isSendUserNotif(), isSendAdminNotif(), getUserId(), getSite_skin_name());
     }
 
     @Override
@@ -107,10 +107,10 @@ public class UserPreference {
         return "UserPreference{" +
                 "id=" + id +
                 ", profilePic=" + Arrays.toString(profilePic) +
-                ", sendUserNotifs=" + sendUserNotifs +
-                ", sendAdminNotifs=" + sendAdminNotifs +
+                ", sendUserNotif=" + sendUserNotif +
+                ", sendAdminNotif=" + sendAdminNotif +
                 ", userId=" + userId +
-                ", websiteSkins=" + websiteSkins +
+                ", site_skin_name=" + site_skin_name +
                 '}';
     }
 }
