@@ -15,16 +15,30 @@
         <div class="col-xs-12 col-md-4 col-md-offset-4 account-wall clearfix">
 
             <h1 class="text-center login-title">Login</h1>
-            <form action="" method="post" class="form-signin">
+
+            <form action="signIn" method="post" class="form-signin">
+                <a href="newUserRegisterHere"><b>New User? Register Here</b></a>
+                <br/><br/>
+
+                <a href="lostPassword"><b>Lost Password?</b></a>
+                <br/><br/>
+
                 <label for="Email">Email Address:</label>
-                <input type="email" id="Email" class="form-control" placeholder="Email" autofocus required>
+                <input type="email" id="email" name="email" class="form-control" placeholder="Email" autofocus required>
                 <br/>
 
                 <label for="pwd">Password:</label>
-                <input type="password" id="pwd" class="form-control" placeholder="Password">
+                <input type="password" minlength="5" maxlength="30" id="pwd" name="pwd" class="form-control" placeholder="Password">
                 <br/>
 
-                <button class="btn btn-lg btn-primary btn-block float-xs-right" type="submit">
+                <div class="checkbox">
+                   <label for="rememberMe" id="labelRememberMe">
+                   <input type="checkbox" id="rememberMe" name="rememberMe"><b>Remember Me</b>
+                   </label>
+                </div>
+                <br/>
+
+                <button class="btn btn-lg btn-primary btn-block float-xs-right" type="submit" placeholder="RememberMe">
                     Sign In
                 </button>
             </form>
