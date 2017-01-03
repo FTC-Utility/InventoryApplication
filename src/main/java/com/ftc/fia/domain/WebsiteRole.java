@@ -11,8 +11,8 @@ import java.util.Objects;
 public class WebsiteRole {
 
     @Id
-    @Column(name = "name")
-    private String name;
+    @Column(name = "id")
+    private String id;
 
     @Column(name = "description")
     private String description;
@@ -24,12 +24,12 @@ public class WebsiteRole {
     public WebsiteRole() {
     }
 
-    public String getName() {
-        return name;
+    public String getId() {
+        return id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getDescription() {
@@ -53,19 +53,19 @@ public class WebsiteRole {
         if (this == o) return true;
         if (!(o instanceof WebsiteRole)) return false;
         WebsiteRole that = (WebsiteRole) o;
-        return Objects.equals(getName(), that.getName()) &&
+        return Objects.equals(getId(), that.getId()) &&
                 Objects.equals(getDescription(), that.getDescription());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getName(), getDescription());
+        return Objects.hash(getId(), getDescription());
     }
 
     @Override
     public String toString() {
         return "WebsiteRole{" +
-                "name='" + name + '\'' +
+                "name='" + id + '\'' +
                 ", description='" + description + '\'' +
                 '}';
     }

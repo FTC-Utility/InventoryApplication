@@ -27,15 +27,15 @@ public class User {
     @JoinColumn(name="company_abbrev",referencedColumnName = "abbrev")
     private Company company_abbrev;
 
-    @OneToMany
-    @JoinColumn(name = "id",referencedColumnName = "")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "id",referencedColumnName = "id")
     private List<UserNotification> userNotifications;
 
     @OneToOne
     @JoinColumn(name = "user_password_id",referencedColumnName = "id")
     private UserPassword user_password_id;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name="position_name", referencedColumnName = "name")
     private Position position_name;
 
