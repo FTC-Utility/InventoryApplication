@@ -1,9 +1,6 @@
 package com.ftc.fia.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Objects;
 
 /**
@@ -11,29 +8,29 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "equipment_Type")
-public class Equipment_Type {
+public class EquipmentType {
 
     @Id
-    @Column(name = "type")
-    private String type;
+    @GeneratedValue
+    private int id;
 
     @Column(name = "description")
     private String description;
 
-    public Equipment_Type() {
+    public EquipmentType() {
     }
 
-    public Equipment_Type(String type, String description) {
-        this.type = type;
+    public EquipmentType(int id, String description) {
+        this.id = id;
         this.description = description;
     }
 
-    public String getType() {
-        return type;
+    public int getId() {
+        return id;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getDescription() {
@@ -46,8 +43,8 @@ public class Equipment_Type {
 
     @Override
     public String toString() {
-        return "Equipment_Type{" +
-                "type='" + type + '\'' +
+        return "EquipmentType{" +
+                "type='" + id + '\'' +
                 ", description='" + description + '\'' +
                 '}';
     }
@@ -55,14 +52,14 @@ public class Equipment_Type {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Equipment_Type)) return false;
-        Equipment_Type that = (Equipment_Type) o;
-        return Objects.equals(getType(), that.getType()) &&
+        if (!(o instanceof EquipmentType)) return false;
+        EquipmentType that = (EquipmentType) o;
+        return Objects.equals(getId(), that.getId()) &&
                 Objects.equals(getDescription(), that.getDescription());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getType(), getDescription());
+        return Objects.hash(getId(), getDescription());
     }
 }
