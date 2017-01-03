@@ -11,7 +11,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.8/validator.min.js"></script>
 
 	<link rel="stylesheet" href="style.css">
-	<script src="valid.js"></script>
+
 </head>
 
 <body>
@@ -29,13 +29,13 @@
 
 				<div class="form-group">
 					<label for="firstname">First Name</label>
-					<input type="text" id="firstname" class="form-control " placeholder="First Name" data-minlength="2" data-error="Please enter atleast 2 characters" required>
+					<input type="text" id="firstname" class="form-control " placeholder="First Name" data-minlength="2" data-error="Please enter at least 2 characters" pattern="[A-Za-z]+" title="Letters only" required>
 					<div class="help-block with-errors"></div>
 				</div>
 
 				<div class="form-group">
 					<label for="lastname">Last Name</label>
-					<input type="text" id="lastname" class="form-control " placeholder="Last Name" data-minlength="2" data-error="Please enter atleast 2 characters" required>
+					<input type="text" id="lastname" class="form-control " placeholder="Last Name" data-minlength="2" data-error="Please enter at least 2 characters" pattern="[A-Za-z]+" title="Letters only" required>
 					<div class="help-block with-errors"></div>
 				</div>
 
@@ -65,7 +65,7 @@
 
 				<div class="form-group has-feedback">
 					<label for="pwd">Password</label>
-					<input type="password" id="pwd" class="form-control" placeholder="Password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$" data-minlength="5" data-error="Password must be atleast 5 characters and must have atleast one number, one uppercase and one lowercase letter" required>
+					<input type="password" id="pwd" class="form-control" placeholder="Password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$" data-minlength="5" title="Password must be at least 5 characters and must have at least one number, one uppercase and one lowercase letter" data-error="Password must be at least 5 characters and must have at least one number, one uppercase and one lowercase letter" required>
 					<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
 					<div class="help-block with-errors"></div>
 				</div>
