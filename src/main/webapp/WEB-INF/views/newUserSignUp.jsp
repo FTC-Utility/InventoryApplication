@@ -65,7 +65,7 @@
 
 				<div class="form-group has-feedback">
 					<label for="pwd">Password</label>
-					<input type="password" id="pwd" class="form-control" placeholder="Password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$" data-minlength="5" data-error="Password must be atleast 5 charaxters and must have atleast one number, one uppercase and one lowercase letter" required>
+					<input type="password" id="pwd" class="form-control" placeholder="Password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$" data-minlength="5" data-error="Password must be atleast 5 characters and must have atleast one number, one uppercase and one lowercase letter" required>
 					<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
 					<div class="help-block with-errors"></div>
 				</div>
