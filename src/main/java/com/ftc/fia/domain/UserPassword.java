@@ -25,6 +25,9 @@ public class UserPassword {
     @Type(type = "com.ftc.fia.util.LocalDateAttributeConverter")
     private LocalDate expireDate;
 
+    @Transient
+    private String confirmPassword;
+
 
     private UserPassword userId;
 
@@ -49,29 +52,44 @@ public class UserPassword {
         this.id = id;
     }
 
-    @Column
-    public String getPassword_hash() {
+    public String getPasswordHash() {
         return passwordHash;
     }
 
-    public void setPassword_hash(String password_hash) {
-        this.passwordHash = password_hash;
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
     }
 
-    public LocalDate getCreated_date() {
+    public LocalDate getCreatedDate() {
         return createdDate;
     }
 
-    public void setCreated_date(LocalDate created_date) {
-        this.createdDate = created_date;
+    public void setCreatedDate(LocalDate createdDate) {
+        this.createdDate = createdDate;
     }
 
-    public LocalDate getExpire_date() {
+    public LocalDate getExpireDate() {
         return expireDate;
     }
 
-    public void setExpire_date(LocalDate expire_date) {
-        this.expireDate = expire_date;
+    public void setExpireDate(LocalDate expireDate) {
+        this.expireDate = expireDate;
+    }
+
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
+    }
+
+    public UserPassword getUserId() {
+        return userId;
+    }
+
+    public void setUserId(UserPassword userId) {
+        this.userId = userId;
     }
 
     @OneToOne
@@ -89,15 +107,27 @@ public class UserPassword {
         if (this == o) return true;
         if (!(o instanceof UserPassword)) return false;
         UserPassword that = (UserPassword) o;
-        return getId() == that.getId() &&
-                Objects.equals(getPassword_hash(), that.getPassword_hash()) &&
-                Objects.equals(getCreated_date(), that.getCreated_date()) &&
-                Objects.equals(getExpire_date(), that.getExpire_date()) &&
-                Objects.equals(getUser_id(), that.getUser_id());
+        return Objects.equals(getPasswordHash(), that.getPasswordHash()) &&
+                Objects.equals(getCreatedDate(), that.getCreatedDate()) &&
+                Objects.equals(getExpireDate(), that.getExpireDate()) &&
+                Objects.equals(getConfirmPassword(), that.getConfirmPassword()) &&
+                Objects.equals(getUserId(), that.getUserId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getPassword_hash(), getCreated_date(), getExpire_date(), getUser_id());
+        return Objects.hash(getPasswordHash(), getCreatedDate(), getExpireDate(), getConfirmPassword(), getUserId());
+    }
+
+    @Override
+    public String toString() {
+        return "UserPassword{" +
+                "id=" + id +
+                ", passwordHash='" + passwordHash + '\'' +
+                ", createdDate=" + createdDate +
+                ", expireDate=" + expireDate +
+                ", confirmPassword='" + confirmPassword + '\'' +
+                ", userId=" + userId +
+                '}';
     }
 }

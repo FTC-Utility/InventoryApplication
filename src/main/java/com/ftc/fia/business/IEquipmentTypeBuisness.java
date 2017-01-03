@@ -9,6 +9,7 @@ import java.util.List;
  */
 public interface IEquipmentTypeBuisness {
     EquipmentType getEquipmentTypeById(int id);
+    EquipmentType getEquipmentTypeByDescription(String description);
     List<EquipmentType> findAll();
     EquipmentType createEquipmentType(EquipmentType equipmentType);
     void updateEquipmentType(EquipmentType equipmentType);

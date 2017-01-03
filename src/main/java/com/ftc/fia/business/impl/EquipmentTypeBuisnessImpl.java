@@ -24,6 +24,11 @@ public class EquipmentTypeBuisnessImpl implements IEquipmentTypeBuisness {
     }
 
     @Override
+    public EquipmentType getEquipmentTypeByDescription(String description) {
+        return equipmentTypeRepository.getEquipmentTypeByDesc(description);
+    }
+
+    @Override
     public List<EquipmentType> findAll() {
 
         return equipmentTypeRepository.findAll();
