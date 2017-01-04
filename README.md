@@ -17,3 +17,4 @@ Initial Configuration and Setup (Gradle build).
 14. Make sure the port number is not occupied with another application and run it.
 15. You should see a test page and test it by inserting data to the database.
 
+Testing switch in commit
