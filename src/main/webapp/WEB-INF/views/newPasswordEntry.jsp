@@ -19,7 +19,7 @@
             <form action="setPassword" method="post" class="form-signin">
 
                 <label for="pin">PIN:</label>
-                <input type="text" minlength="4" maxlength="10" id="pin" name="pin" class="form-control" placeholder="PIN">
+                <input type="number" minlength="4" maxlength="10" id="pin" name="pin" class="form-control" placeholder="PIN">
                 <br/>
 
                 <label for="pwd">Password:</label>

@@ -26,7 +26,7 @@ public class LoginController {
         return "login";
     }
 
-    @RequestMapping(value = "/newUserRegisterHere", method = RequestMethod.GET)
+    @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String newUserRegisterHere(Model model) {
 
         System.out.println("Method Executed: newUserRegisterHere");
