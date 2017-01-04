@@ -28,6 +28,8 @@ public class UserPassword {
 
     private String confirmPassword;
 
+    private User userId;
+
     public UserPassword() {
     }
 
@@ -80,24 +82,16 @@ public class UserPassword {
     public void setConfirmPassword(String confirmPassword) {
         this.confirmPassword = confirmPassword;
     }
-/*
-    public UserPassword getUserId() {
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    public User getUserId() {
         return userId;
     }
 
-    public void setUserId(UserPassword userId) {
+    public void setUserId(User userId) {
         this.userId = userId;
     }
-
-    @OneToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    public UserPassword getUser_id() {
-        return userId;
-    }
-
-    public void setUser_id(UserPassword user_id) {
-        this.userId = user_id;
-    }*/
 
     @Override
     public boolean equals(Object o) {
