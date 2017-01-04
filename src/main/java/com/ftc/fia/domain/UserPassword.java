@@ -82,22 +82,15 @@ public class UserPassword {
     public void setConfirmPassword(String confirmPassword) {
         this.confirmPassword = confirmPassword;
     }
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     public User getUserId() {
         return userId;
     }
 
     public void setUserId(User userId) {
         this.userId = userId;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    public User getUser_id() {
-        return userId;
-    }
-
-    public void setUser_id(User user_id) {
-        this.userId = user_id;
     }
 
     @Override
