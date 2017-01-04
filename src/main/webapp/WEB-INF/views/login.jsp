@@ -31,8 +31,8 @@
                    <label for="Email">Email Address:</label>
                    <input type="email" id="email" name="email" class="form-control" placeholder="example@mail.com"
                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
-                          title="Email address is invalid: Must have the pattern similar to 'example@mail.com' pattern."
-                          data-error="Email address is invalid: Must have the pattern similar to 'example@mail.com' pattern."
+                          title="Must have the pattern similar to 'example@mail.com' pattern."
+                          data-error="Must have the pattern similar to 'example@mail.com' pattern."
                        autofocus required>
                     <div class="help-block with-errors"></div>
                 </div>
