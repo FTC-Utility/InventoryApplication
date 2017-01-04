@@ -32,16 +32,15 @@ public class User {
     @JoinColumn(name = "id",referencedColumnName = "id")
     private List<UserNotification> userNotifications;
 
-    @OneToOne
-    @JoinColumn(name = "user_password_id",referencedColumnName = "id")
-    private UserPassword user_password_id;
-
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name="position_name", referencedColumnName = "name")
-    private Position position_name;
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name="position_id", referencedColumnName = "id")
+    private Position position_id;
 
     @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<UserRole> user_roles;
+
+    @Column(name = "confirmed")
+    private boolean confirmed;
 
 
     public User(String firstName, String lastName, String email) {
@@ -101,20 +100,12 @@ public class User {
         this.userNotifications = userNotifications;
     }
 
-    public UserPassword getUser_password_id() {
-        return user_password_id;
+    public Position getPosition_id() {
+        return position_id;
     }
 
-    public void setUser_password_id(UserPassword user_password_id) {
-        this.user_password_id = user_password_id;
-    }
-
-    public Position getPosition_name() {
-        return position_name;
-    }
-
-    public void setPosition_name(Position position_name) {
-        this.position_name = position_name;
+    public void setPosition_id(Position position_id) {
+        this.position_id = position_id;
     }
 
     public List<UserRole> getUser_roles() {
@@ -125,25 +116,33 @@ public class User {
         this.user_roles = user_roles;
     }
 
+    public boolean isConfirmed() {
+        return confirmed;
+    }
+
+    public void setConfirmed(boolean confirmed) {
+        this.confirmed = confirmed;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof User)) return false;
         User user = (User) o;
         return getId() == user.getId() &&
+                isConfirmed() == user.isConfirmed() &&
                 Objects.equals(getFirstName(), user.getFirstName()) &&
                 Objects.equals(getLastName(), user.getLastName()) &&
                 Objects.equals(getEmail(), user.getEmail()) &&
                 Objects.equals(getCompany_id(), user.getCompany_id()) &&
                 Objects.equals(getUserNotifications(), user.getUserNotifications()) &&
-                Objects.equals(getUser_password_id(), user.getUser_password_id()) &&
-                Objects.equals(getPosition_name(), user.getPosition_name()) &&
+                Objects.equals(getPosition_id(), user.getPosition_id()) &&
                 Objects.equals(getUser_roles(), user.getUser_roles());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getFirstName(), getLastName(), getEmail(), getCompany_id(), getUserNotifications(), getUser_password_id(), getPosition_name(), getUser_roles());
+        return Objects.hash(getId(), getFirstName(), getLastName(), getEmail(), getCompany_id(), getUserNotifications(), getPosition_id(), getUser_roles(), isConfirmed());
     }
 
     @Override
@@ -155,9 +154,9 @@ public class User {
                 ", email='" + email + '\'' +
                 ", company_id=" + company_id +
                 ", userNotifications=" + userNotifications +
-                ", user_password_id=" + user_password_id +
-                ", position_name=" + position_name +
+                ", position_id=" + position_id +
                 ", user_roles=" + user_roles +
+                ", confirmed=" + confirmed +
                 '}';
     }
 }
