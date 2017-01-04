@@ -22,25 +22,33 @@
 			<h1 class="text-center login-title">New User Sign Up</h1>
 			<form id="signup" action="create" method="post" class="form-signin">
 				<div class="form-group">
-					<label for="Email">Email address</label>
-					<input type="email" id="Email" class="form-control " placeholder="example@mail.com" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" data-error="Email address is invalid" autofocus required>
+					<label for="Email">Email Address:</label>
+					<input type="email" id="Email" class="form-control " placeholder="example@mail.com"
+						   pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+						   title="Must have the pattern similar to 'example@mail.com' pattern."
+						   data-error="Must have the pattern similar to 'example@mail.com' pattern."
+						   autofocus required>
 					<div class="help-block with-errors"></div>
 				</div>
 
 				<div class="form-group">
-					<label for="firstname">First Name</label>
-					<input type="text" id="firstname" class="form-control " placeholder="First Name" data-minlength="2" data-error="Please enter at least 2 characters" pattern="[A-Za-z]+" title="Letters only" required>
+					<label for="firstname">First Name:</label>
+					<input type="text" id="firstname" class="form-control " placeholder="First Name" data-minlength="2"
+						   data-error="Please enter at least 2 characters" pattern="[A-Za-z]+" title="Letters only"
+						   required>
 					<div class="help-block with-errors"></div>
 				</div>
 
 				<div class="form-group">
-					<label for="lastname">Last Name</label>
-					<input type="text" id="lastname" class="form-control " placeholder="Last Name" data-minlength="2" data-error="Please enter at least 2 characters" pattern="[A-Za-z]+" title="Letters only" required>
+					<label for="lastname">Last Name:</label>
+					<input type="text" id="lastname" class="form-control " placeholder="Last Name" data-minlength="2"
+						   data-error="Please enter at least 2 characters" pattern="[A-Za-z]+" title="Letters only"
+						   required>
 					<div class="help-block with-errors"></div>
 				</div>
 
 				<div class="form-group">
-					<label for="cmpnyAbbrev">Select Company</label>
+					<label for="cmpnyAbbrev">Select Company:</label>
 					<select class="form-control " id="cmpnyAbbrev" data-error="Please select a company" required>
 						<option value="" disabled selected>Select Company</option>
 						<option>ASG</option>
@@ -52,7 +60,7 @@
 				</div>
 
 				<div class="form-group">
-					<label for="position">Select Position</label>
+					<label for="position">Select Position:</label>
 					<select class="form-control" id="position" data-error="Please select a position" required>
 						<option value="" disabled selected>Select Position</option>
 						<option>Developer</option>
@@ -64,15 +72,20 @@
 				</div>
 
 				<div class="form-group has-feedback">
-					<label for="pwd">Password</label>
-					<input type="password" id="pwd" class="form-control" placeholder="Password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$" data-minlength="5" title="Password must be at least 5 characters and must have at least one number, one uppercase and one lowercase letter" data-error="Password must be at least 5 characters and must have at least one number, one uppercase and one lowercase letter" required>
+					<label for="pwd">Password:</label>
+					<input type="password" id="pwd" class="form-control" placeholder="Password"
+						   pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$" data-minlength="5" maxlength="30"
+						   title="Password must be at least 5 characters, a maximum of 30 characters, and must have at least one number, one uppercase and one lowercase letter"
+						   data-error="Password must be at least 5 characters, a maximum of 30 charcters, and must have at least one number, one uppercase and one lowercase letter"
+						   required>
 					<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
 					<div class="help-block with-errors"></div>
 				</div>
 
 				<div class="form-group has-feedback">
-					<label for="confirm_pwd">Confirm Password</label>
-					<input type="password" id="confirm_pwd" data-match="#pwd" class="form-control " placeholder="Confirm Password"  data-match-error="Password must match" required>
+					<label for="confirm_pwd">Confirm Password:</label>
+					<input type="password" id="confirm_pwd" data-match="#pwd" class="form-control "
+						   placeholder="Confirm Password"  data-match-error="Password must match" required>
 					<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
 					<div class="help-block with-errors"></div>
 				</div>
@@ -92,6 +105,5 @@
 </body>
 <script>
     $('#signup').validator();
-
 </script>
 </html>

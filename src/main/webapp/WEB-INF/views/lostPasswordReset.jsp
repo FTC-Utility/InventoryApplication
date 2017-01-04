@@ -7,8 +7,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="style.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.8/validator.min.js"></script>
+
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <div class="container">
@@ -17,10 +21,17 @@
 
             <h1 class="text-center login-title">Lost Password Reset</h1>
 
-            <form action="sendNow" method="post" class="form-signin">
+            <form action="sendNow" id="sendNow" method="post" class="form-signin">
 
-                <label for="Email">Email Address:</label>
-                <input type="email" id="email" name="email" class="form-control" placeholder="Email" autofocus required>
+                <div class="form-group">
+                    <label for="Email">Email Address:</label>
+                    <input type="email" id="email" name="email" class="form-control" placeholder="example@mail.com"
+                           pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                           title="Must have the pattern similar to 'example@mail.com' pattern."
+                           data-error="Must have the pattern similar to 'example@mail.com' pattern."
+                           autofocus required>
+                    <div class="help-block with-errors"></div>
+                </div>
                 <br/>
 
                 <button class="btn btn-lg btn-primary btn-block float-xs-right" type="submit" placeholder="SendNow">
@@ -30,6 +41,8 @@
         </div>
     </div>
 </div>
-
 </body>
+<script>
+    $('#sendNow').validator();
+</script>
 </html>
