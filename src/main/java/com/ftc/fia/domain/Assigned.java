@@ -14,7 +14,7 @@ public class Assigned
     @Id @GeneratedValue
     int id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "soft_license_id")
     SoftwareLicense softwareLicense;
 

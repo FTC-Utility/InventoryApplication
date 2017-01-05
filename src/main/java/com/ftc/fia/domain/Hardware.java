@@ -36,7 +36,9 @@ public class Hardware implements Serializable
     EquipmentType equip_type;
 
     @OneToMany
-    @JoinTable(name = "position_hardware", joinColumns = @JoinColumn(name = "equip_type_id", referencedColumnName = "equip_type_id"), inverseJoinColumns = @JoinColumn(name = "position_id"))
+    @JoinTable(name = "position_hardware", joinColumns = @JoinColumn(name = "equip_type_id",
+            referencedColumnName = "equip_type_id"),
+            inverseJoinColumns = @JoinColumn(name = "position_id"))
     Collection<Position> positions = new ArrayList<>();
 
     public Collection<Position> getPositions() {

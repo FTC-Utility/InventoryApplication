@@ -33,7 +33,7 @@ public class SoftwareLicense
     @Column(name = "expiration_date")
     private LocalDate expirationDate;
 
-    @OneToMany(mappedBy = "softwareLicense", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "softwareLicense", fetch = FetchType.LAZY)
     private Collection<Assigned> assigneds = new HashSet<>();
 
     @OneToMany(mappedBy = "softwareLicense")
