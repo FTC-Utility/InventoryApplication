@@ -2,6 +2,8 @@ package com.ftc.fia.domain;
 
 import javax.persistence.*;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Objects;
 
 /**
@@ -11,12 +13,14 @@ import java.util.Objects;
 @Table(name = "software")
 public class Software {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     @Column(name = "name")
     private String name;
+
+    @OneToMany(mappedBy = "software")
+    private Collection<SoftwareLicense> softwareLicenses = new ArrayList<>();
 
     public int getId() {
         return id;
@@ -35,6 +39,10 @@ public class Software {
     }
 
     public Software() {
+    }
+
+    public Software(String name) {
+        this.name = name;
     }
 
     @Override

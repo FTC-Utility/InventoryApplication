@@ -12,9 +12,8 @@ import java.util.Objects;
 @Table(name = "company")
 public class Company {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name ="id",nullable = false)
+    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name ="id", nullable = false)
     @NotNull
     private int id;
 
