@@ -3,7 +3,9 @@ package com.ftc.fia.domain;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * Created by Eyuel Tadesse on 12/30/2016.
@@ -11,6 +13,7 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name ="persistent_login")
 public class PersistentLogin {
+
 
     private String series;
 
@@ -60,10 +63,6 @@ public class PersistentLogin {
     public void setLastUsed(LocalDateTime lastUsed) {
         this.lastUsed = lastUsed;
     }
-
-
-
-
 
     @Override
     public String toString() {
