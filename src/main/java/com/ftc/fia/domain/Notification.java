@@ -1,9 +1,6 @@
 package com.ftc.fia.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Objects;
 
 /**
@@ -14,8 +11,9 @@ import java.util.Objects;
 public class Notification {
 
     @Id
-    @Column(name ="name")
-    private String name;
+    @Column(name ="id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
 
     @Column(name = "description")
     private String description;
@@ -23,17 +21,17 @@ public class Notification {
     public Notification() {
     }
 
-    public Notification(String name, String description) {
-        this.name = name;
+    public Notification(int id, String description) {
+        this.id = id;
         this.description = description;
     }
 
-    public String getName() {
-        return name;
+    public int getId() {
+        return id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getDescription() {
@@ -49,19 +47,19 @@ public class Notification {
         if (this == o) return true;
         if (!(o instanceof Notification)) return false;
         Notification that = (Notification) o;
-        return Objects.equals(getName(), that.getName()) &&
+        return Objects.equals(getId(), that.getId()) &&
                 Objects.equals(getDescription(), that.getDescription());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getName(), getDescription());
+        return Objects.hash(getId(), getDescription());
     }
 
     @Override
     public String toString() {
         return "Notification{" +
-                "name='" + name + '\'' +
+                "id='" + id + '\'' +
                 ", description='" + description + '\'' +
                 '}';
     }

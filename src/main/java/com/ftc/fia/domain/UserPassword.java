@@ -28,7 +28,7 @@ public class UserPassword {
 
     private String confirmPassword;
 
-    private User userId;
+    private User user;
 
     public UserPassword() {
     }
@@ -85,12 +85,12 @@ public class UserPassword {
 
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
-    public User getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(User userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override

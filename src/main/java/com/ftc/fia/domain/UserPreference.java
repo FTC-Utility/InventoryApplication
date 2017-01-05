@@ -27,11 +27,11 @@ public class UserPreference {
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name="user_id", referencedColumnName = "id")
-    private User userId;
+    private User user;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name="site_skin_name", referencedColumnName = "name")
-    private WebsiteSkin site_skin_name;
+    @JoinColumn(name="site_skin_name", referencedColumnName = "id")
+    private WebsiteSkin websiteSkin;
 
     public UserPreference() {
     }
@@ -68,20 +68,20 @@ public class UserPreference {
         this.sendAdminNotif = sendAdminNotif;
     }
 
-    public User getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(User userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public WebsiteSkin getSite_skin_name() {
-        return site_skin_name;
+    public WebsiteSkin getWebsiteSkin() {
+        return websiteSkin;
     }
 
-    public void setSite_skin_name(WebsiteSkin site_skin_name) {
-        this.site_skin_name = site_skin_name;
+    public void setWebsiteSkin(WebsiteSkin websiteSkin) {
+        this.websiteSkin = websiteSkin;
     }
 
     @Override
@@ -93,13 +93,13 @@ public class UserPreference {
                 isSendUserNotif() == that.isSendUserNotif() &&
                 isSendAdminNotif() == that.isSendAdminNotif() &&
                 Arrays.equals(getProfilePic(), that.getProfilePic()) &&
-                Objects.equals(getUserId(), that.getUserId()) &&
-                Objects.equals(getSite_skin_name(), that.getSite_skin_name());
+                Objects.equals(getUser(), that.getUser()) &&
+                Objects.equals(getWebsiteSkin(), that.getWebsiteSkin());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getProfilePic(), isSendUserNotif(), isSendAdminNotif(), getUserId(), getSite_skin_name());
+        return Objects.hash(getId(), getProfilePic(), isSendUserNotif(), isSendAdminNotif(), getUser(), getWebsiteSkin());
     }
 
     @Override
@@ -109,8 +109,8 @@ public class UserPreference {
                 ", profilePic=" + Arrays.toString(profilePic) +
                 ", sendUserNotif=" + sendUserNotif +
                 ", sendAdminNotif=" + sendAdminNotif +
-                ", userId=" + userId +
-                ", site_skin_name=" + site_skin_name +
+                ", user=" + user +
+                ", websiteSkin=" + websiteSkin +
                 '}';
     }
 }

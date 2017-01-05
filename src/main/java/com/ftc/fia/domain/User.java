@@ -26,17 +26,17 @@ public class User {
 
     @OneToOne
     @JoinColumn(name="company_id",referencedColumnName = "id")
-    private Company company_id;
+    private Company company;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "id",referencedColumnName = "id")
+    @JoinColumn(name = "notification_id",referencedColumnName = "id")
     private List<UserNotification> userNotifications;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name="position_id", referencedColumnName = "id")
-    private Position position_id;
+    private Position position;
 
-    @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<UserRole> user_roles;
 
     @Column(name = "confirmed")
@@ -84,12 +84,12 @@ public class User {
         this.email = email;
     }
 
-    public Company getCompany_id() {
-        return company_id;
+    public Company getCompany() {
+        return company;
     }
 
-    public void setCompany_id(Company company_id) {
-        this.company_id = company_id;
+    public void setCompany(Company company) {
+        this.company = company;
     }
 
     public List<UserNotification> getUserNotifications() {
@@ -100,12 +100,12 @@ public class User {
         this.userNotifications = userNotifications;
     }
 
-    public Position getPosition_id() {
-        return position_id;
+    public Position getPosition() {
+        return position;
     }
 
-    public void setPosition_id(Position position_id) {
-        this.position_id = position_id;
+    public void setPosition(Position position) {
+        this.position = position;
     }
 
     public List<UserRole> getUser_roles() {
@@ -134,15 +134,15 @@ public class User {
                 Objects.equals(getFirstName(), user.getFirstName()) &&
                 Objects.equals(getLastName(), user.getLastName()) &&
                 Objects.equals(getEmail(), user.getEmail()) &&
-                Objects.equals(getCompany_id(), user.getCompany_id()) &&
+                Objects.equals(getCompany(), user.getCompany()) &&
                 Objects.equals(getUserNotifications(), user.getUserNotifications()) &&
-                Objects.equals(getPosition_id(), user.getPosition_id()) &&
+                Objects.equals(getPosition(), user.getPosition()) &&
                 Objects.equals(getUser_roles(), user.getUser_roles());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getFirstName(), getLastName(), getEmail(), getCompany_id(), getUserNotifications(), getPosition_id(), getUser_roles(), isConfirmed());
+        return Objects.hash(getId(), getFirstName(), getLastName(), getEmail(), getCompany(), getUserNotifications(), getPosition(), getUser_roles(), isConfirmed());
     }
 
     @Override
@@ -152,9 +152,9 @@ public class User {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
-                ", company_id=" + company_id +
+                ", company_id=" + company +
                 ", userNotifications=" + userNotifications +
-                ", position_id=" + position_id +
+                ", position_id=" + position +
                 ", user_roles=" + user_roles +
                 ", confirmed=" + confirmed +
                 '}';

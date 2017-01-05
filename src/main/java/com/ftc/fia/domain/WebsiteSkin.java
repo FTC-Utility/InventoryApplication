@@ -1,9 +1,7 @@
 package com.ftc.fia.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.Objects;
 
 /**
  * Created by Eyuel Tadesse on 12/28/2016.
@@ -13,7 +11,8 @@ import javax.persistence.Table;
 public class WebsiteSkin {
 
     @Id
-    private String name;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
 
     @Column(name = "css_fileName")
     private String cssFileName;
@@ -21,20 +20,20 @@ public class WebsiteSkin {
     @Column(name = "full_name")
     private String fullName;
 
-    public WebsiteSkin(String name, String cssFileName) {
-        this.name = name;
+    public WebsiteSkin(String fullName, String cssFileName) {
+        this.fullName = fullName;
         this.cssFileName = cssFileName;
     }
 
     public WebsiteSkin() {
     }
 
-    public String getName() {
-        return name;
+    public int getId() {
+        return id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getCssFileName() {
@@ -54,13 +53,26 @@ public class WebsiteSkin {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof WebsiteSkin)) return false;
+        WebsiteSkin that = (WebsiteSkin) o;
+        return getId() == that.getId() &&
+                Objects.equals(getCssFileName(), that.getCssFileName()) &&
+                Objects.equals(getFullName(), that.getFullName());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getCssFileName(), getFullName());
+    }
+
+    @Override
     public String toString() {
         return "WebsiteSkin{" +
-                "name='" + name + '\'' +
+                "id=" + id +
                 ", cssFileName='" + cssFileName + '\'' +
                 ", fullName='" + fullName + '\'' +
                 '}';
     }
-
-
 }

@@ -15,11 +15,11 @@ public class UserRole {
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private User userId;
+    private User user;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "site_role_id", referencedColumnName = "id")
-    private WebsiteRole siteRoleId;
+    private WebsiteRole websiteRole;
 
     public UserRole() {
     }
@@ -32,20 +32,20 @@ public class UserRole {
         this.id = id;
     }
 
-    public User getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(User userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public WebsiteRole getSiteRoleId() {
-        return siteRoleId;
+    public WebsiteRole getWebsiteRole() {
+        return websiteRole;
     }
 
-    public void setSiteRoleId(WebsiteRole siteRoleId) {
-        this.siteRoleId = siteRoleId;
+    public void setWebsiteRole(WebsiteRole websiteRole) {
+        this.websiteRole = websiteRole;
     }
 
     @Override
@@ -65,8 +65,8 @@ public class UserRole {
     public String toString() {
         return "UserRole{" +
                 "id=" + id +
-                ", userId=" + userId +
-                ", siteRoleName=" + siteRoleId +
+                ", user=" + user +
+                ", websiteRole=" + websiteRole +
                 '}';
     }
 }

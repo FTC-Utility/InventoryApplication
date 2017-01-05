@@ -22,12 +22,12 @@ public class UserNotification {
     private User userId;
 
     @ManyToOne
-    @JoinColumn(name = "notif_name", referencedColumnName = "name")
-    private Notification notifName;
+    @JoinColumn(name = "notif_name", referencedColumnName = "id")
+    private Notification notification;
 
     @ManyToOne
     @JoinColumn(name = "notif_type_id", referencedColumnName = "id")
-    private NotificationType notifTypeId;
+    private NotificationType notificationType;
 
     @Column(name = "active")
     @Type(type = "org.hibernate.type.NumericBooleanType")
@@ -54,13 +54,6 @@ public class UserNotification {
         this.userId = user_id;
     }
 
-    public Notification getNotif_name() {
-        return notifName;
-    }
-
-    public void setNotif_name(Notification notif_name) {
-        this.notifName = notif_name;
-    }
 
     public User getUserId() {
         return userId;
@@ -70,20 +63,20 @@ public class UserNotification {
         this.userId = userId;
     }
 
-    public Notification getNotifName() {
-        return notifName;
+    public Notification getNotification() {
+        return notification;
     }
 
-    public void setNotifName(Notification notifName) {
-        this.notifName = notifName;
+    public void setNotification(Notification notification) {
+        this.notification = notification;
     }
 
-    public NotificationType getNotifTypeId() {
-        return notifTypeId;
+    public NotificationType getNotificationType() {
+        return notificationType;
     }
 
-    public void setNotifTypeId(NotificationType notifTypeId) {
-        this.notifTypeId = notifTypeId;
+    public void setNotificationType(NotificationType notificationType) {
+        this.notificationType = notificationType;
     }
 
     public boolean isActive() {
@@ -102,12 +95,23 @@ public class UserNotification {
         return getId() == that.getId() &&
                 isActive() == that.isActive() &&
                 Objects.equals(getUserId(), that.getUserId()) &&
-                Objects.equals(getNotifName(), that.getNotifName()) &&
-                Objects.equals(getNotifTypeId(), that.getNotifTypeId());
+                Objects.equals(getNotification(), that.getNotification()) &&
+                Objects.equals(getNotificationType(), that.getNotificationType());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getUserId(), getNotifName(), getNotifTypeId(), isActive());
+        return Objects.hash(getId(), getUserId(), getNotification(), getNotificationType(), isActive());
+    }
+
+    @Override
+    public String toString() {
+        return "UserNotification{" +
+                "id=" + id +
+                ", userId=" + userId +
+                ", notification=" + notification +
+                ", notificationType=" + notificationType +
+                ", active=" + active +
+                '}';
     }
 }

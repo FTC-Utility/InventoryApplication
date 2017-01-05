@@ -17,11 +17,11 @@ public class RolePermission {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name ="site_role_id",referencedColumnName = "id")
-    private WebsiteRole site_role_id;
+    private WebsiteRole websiteRole;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name ="permission_id" , referencedColumnName = "id")
-    private Permission permission_id;
+    private Permission permission;
 
     public RolePermission() {
     }
@@ -34,20 +34,20 @@ public class RolePermission {
         this.id = id;
     }
 
-    public WebsiteRole getSite_role_id() {
-        return site_role_id;
+    public WebsiteRole getWebsiteRole() {
+        return websiteRole;
     }
 
-    public void setSite_role_id(WebsiteRole site_role_id) {
-        this.site_role_id = site_role_id;
+    public void setWebsiteRole(WebsiteRole websiteRole) {
+        this.websiteRole = websiteRole;
     }
 
-    public Permission getPermission_id() {
-        return permission_id;
+    public Permission getPermission() {
+        return permission;
     }
 
-    public void setPermission_id(Permission permission_id) {
-        this.permission_id = permission_id;
+    public void setPermission(Permission permission) {
+        this.permission = permission;
     }
 
     @Override
@@ -56,21 +56,21 @@ public class RolePermission {
         if (!(o instanceof RolePermission)) return false;
         RolePermission that = (RolePermission) o;
         return getId() == that.getId() &&
-                Objects.equals(getSite_role_id(), that.getSite_role_id()) &&
-                Objects.equals(getPermission_id(), that.getPermission_id());
+                Objects.equals(getWebsiteRole(), that.getWebsiteRole()) &&
+                Objects.equals(getPermission(), that.getPermission());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getSite_role_id(), getPermission_id());
+        return Objects.hash(getId(), getWebsiteRole(), getPermission());
     }
 
     @Override
     public String toString() {
         return "RolePermission{" +
                 "id=" + id +
-                ", site_role_id=" + site_role_id +
-                ", permission_id=" + permission_id +
+                ", websiteRole=" + websiteRole +
+                ", permission=" + permission +
                 '}';
     }
 }

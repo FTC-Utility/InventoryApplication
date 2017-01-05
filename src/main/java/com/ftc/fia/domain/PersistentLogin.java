@@ -14,7 +14,7 @@ public class PersistentLogin {
 
     private String series;
 
-    private User userId;
+    private User user;
 
     private String token;
 
@@ -36,12 +36,12 @@ public class PersistentLogin {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name ="user_id", referencedColumnName = "id")
-    public User getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(User userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Column(name = "token",length = 64)
@@ -61,11 +61,15 @@ public class PersistentLogin {
         this.lastUsed = lastUsed;
     }
 
+
+
+
+
     @Override
     public String toString() {
         return "PersistentLogin{" +
                 "series='" + series + '\'' +
-                ", userId=" + userId +
+                ", userId=" + user +
                 ", token='" + token + '\'' +
                 ", last_used=" + lastUsed +
                 '}';
