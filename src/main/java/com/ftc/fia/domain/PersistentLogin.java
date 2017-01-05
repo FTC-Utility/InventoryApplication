@@ -14,6 +14,7 @@ import java.util.Date;
 @Table(name ="persistent_login")
 public class PersistentLogin {
 
+    int id;
 
     private String series;
 

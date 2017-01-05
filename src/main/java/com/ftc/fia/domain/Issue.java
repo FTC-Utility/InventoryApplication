@@ -14,26 +14,20 @@ import java.util.Collection;
 @Table(name = "issue")
 public class Issue
 {
-    @Id @GeneratedValue
     int id;
 
-    @ManyToOne
-    @JoinColumn(name = "soft_license_id")
     SoftwareLicense softwareLicense;
 
     @Column(name = "request_date")
     @Type(type = "com.ftc.fia.util.LocalDateAttributeConverter")
     LocalDate request_date;
 
-    @Column(name="resolveDate")
+    @Column(name="resolve_date")
     @Type(type = "com.ftc.fia.util.LocalDateAttributeConverter")
     LocalDate resolveDate;
 
     String description;
     String resolution;
-
-    @OneToMany
-    Collection<SoftwareLicense> softwareLicenses = new ArrayList<>();
 
     public LocalDate getRequest_date() {
         return request_date;
@@ -70,6 +64,7 @@ public class Issue
     public Issue() {
     }
 
+    @Id @GeneratedValue
     public int getId() {
         return id;
     }
@@ -78,6 +73,8 @@ public class Issue
         this.id = id;
     }
 
+    @ManyToOne
+    @JoinColumn(name = "soft_license_id")
     public SoftwareLicense getSoftwareLicense() {
         return softwareLicense;
     }

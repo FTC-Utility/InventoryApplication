@@ -17,7 +17,7 @@ public class Audit
     @JoinColumn(name = "license_type_id")
     LicenseType licenseType;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "soft_license_id")
     SoftwareLicense softwareLicense;
 

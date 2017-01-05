@@ -4,6 +4,8 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Collection;
+import java.util.HashSet;
 
 /**
  * Created by Zelalem Belay on 1/5/2017.
@@ -13,11 +15,8 @@ import java.time.LocalDate;
 @Table(name = "assigned")
 public class Assigned
 {
-    @Id @GeneratedValue
     int id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "soft_license_id")
     SoftwareLicense softwareLicense;
 
     @Type(type = "com.ftc.fia.util.LocalDateAttributeConverter")
@@ -26,15 +25,26 @@ public class Assigned
     @Type(type = "com.ftc.fia.util.LocalDateAttributeConverter")
     LocalDate unassigned;
 
+    Collection<Audit> audits = new HashSet<>();
+
     public Assigned(LocalDate assigned, LocalDate unassigned) {
         this.assigned = assigned;
         this.unassigned = unassigned;
     }
 
+    @OneToMany(cascade = CascadeType.ALL)
+    public Collection<Audit> getAudits() {
+        return audits;
+    }
+
+    public void setAudits(Collection<Audit> audits) {
+        this.audits = audits;
+    }
 
     public Assigned() {
     }
 
+    @Id @GeneratedValue
     public int getId() {
         return id;
     }
@@ -43,6 +53,7 @@ public class Assigned
         this.id = id;
     }
 
+    @ManyToOne(cascade = CascadeType.ALL)
     public SoftwareLicense getSoftwareLicense() {
         return softwareLicense;
     }
