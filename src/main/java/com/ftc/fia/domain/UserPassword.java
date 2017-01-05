@@ -83,7 +83,7 @@ public class UserPassword {
     }
 
     @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JoinColumn(name = "user_id", referencedColumnName = "id",foreignKey = @ForeignKey(name ="FkUserPwd_UserID"))
     public User getUser() {
         return user;
     }

@@ -25,21 +25,21 @@ public class User {
     private String email;
 
     @OneToOne
-    @JoinColumn(name="company_id",referencedColumnName = "id")
+    @JoinColumn(name="company_id",referencedColumnName = "id", foreignKey = @ForeignKey(name = "FkUser_CompanyID"))
     private Company company;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "notification_id",referencedColumnName = "id")
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    //@JoinColumn(name = "notification_id",referencedColumnName = "id", foreignKey = @ForeignKey(name = "FkUserNotif_UserID"))
     private List<UserNotification> userNotifications;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name="position_id", referencedColumnName = "id")
+    @JoinColumn(name="position_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "FkUser_PositionID"))
     private Position position;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<UserRole> user_roles;
 
-    @Column(name = "confirmed")
+    @Column(name = "confirmed", columnDefinition = "TINYINT")
     private boolean confirmed;
 
 

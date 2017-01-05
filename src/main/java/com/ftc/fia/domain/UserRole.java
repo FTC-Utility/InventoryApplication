@@ -14,11 +14,11 @@ public class UserRole {
     private int id;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JoinColumn(name = "user_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "FkUserRoles_UserID"))
     private User user;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "site_role_id", referencedColumnName = "id")
+    @JoinColumn(name = "site_role_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "FkUserRoles_SiteRoleID"))
     private WebsiteRole websiteRole;
 
     public UserRole() {

@@ -39,7 +39,7 @@ public class UserToken {
     }
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name ="toke_type_id", referencedColumnName = "id")
+    @JoinColumn(name ="toke_type_id", referencedColumnName = "id",foreignKey = @ForeignKey(name = "FkUserTokens_TokenTypeID"))
     public TokeType getTokenType() {
         return tokenType;
     }
@@ -58,7 +58,7 @@ public class UserToken {
     }
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JoinColumn(name = "user_id", referencedColumnName = "id",foreignKey = @ForeignKey(name="FkUserTokens_UserId"))
     public User getUser() {
         return user;
     }

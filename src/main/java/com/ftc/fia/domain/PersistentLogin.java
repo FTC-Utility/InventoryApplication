@@ -3,9 +3,8 @@ package com.ftc.fia.domain;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.util.Date;
+
 
 /**
  * Created by Eyuel Tadesse on 12/30/2016.
@@ -39,7 +38,7 @@ public class PersistentLogin {
     }
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name ="user_id", referencedColumnName = "id")
+    @JoinColumn(name ="user_id", referencedColumnName = "id", foreignKey = @ForeignKey(name ="FkPersistentLogin_UserID"))
     public User getUser() {
         return user;
     }

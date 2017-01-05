@@ -18,18 +18,18 @@ public class UserNotification {
     private int id;
 
     @ManyToOne
-    @JoinColumn(name ="user_id",referencedColumnName = "id")
-    private User userId;
+    @JoinColumn(name ="user_id",referencedColumnName = "id",foreignKey = @ForeignKey(name ="FkUserNotif_UserID" ))
+    private User user;
 
     @ManyToOne
-    @JoinColumn(name = "notif_name", referencedColumnName = "id")
+    @JoinColumn(name = "notification_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "FkUserNotif_NotificationID"))
     private Notification notification;
 
     @ManyToOne
-    @JoinColumn(name = "notif_type_id", referencedColumnName = "id")
+    @JoinColumn(name = "notif_type_id", referencedColumnName = "id",foreignKey = @ForeignKey(name="FkUserNotif_NotifTypeID"))
     private NotificationType notificationType;
 
-    @Column(name = "active")
+    @Column(name = "active", columnDefinition = "TINYINT")
     @Type(type = "org.hibernate.type.NumericBooleanType")
     private boolean active;
 
@@ -46,21 +46,12 @@ public class UserNotification {
         this.id = id;
     }
 
-    public User getUser_id() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUser_id(User user_id) {
-        this.userId = user_id;
-    }
-
-
-    public User getUserId() {
-        return userId;
-    }
-
-    public void setUserId(User userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Notification getNotification() {
@@ -94,21 +85,21 @@ public class UserNotification {
         UserNotification that = (UserNotification) o;
         return getId() == that.getId() &&
                 isActive() == that.isActive() &&
-                Objects.equals(getUserId(), that.getUserId()) &&
+                Objects.equals(getUser(), that.getUser()) &&
                 Objects.equals(getNotification(), that.getNotification()) &&
                 Objects.equals(getNotificationType(), that.getNotificationType());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getUserId(), getNotification(), getNotificationType(), isActive());
+        return Objects.hash(getId(), getUser(), getNotification(), getNotificationType(), isActive());
     }
 
     @Override
     public String toString() {
         return "UserNotification{" +
                 "id=" + id +
-                ", userId=" + userId +
+                ", userId=" + user +
                 ", notification=" + notification +
                 ", notificationType=" + notificationType +
                 ", active=" + active +
