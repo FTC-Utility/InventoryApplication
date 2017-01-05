@@ -15,7 +15,7 @@ public interface IEquipmentTypeRepository extends JpaRepository<EquipmentType, L
     @Query("FROM EquipmentType e WHERE e.id = :equipment_type_id")
     EquipmentType getEquipmentTypeById(@Param("equipment_type_id") int equipment_type_id);
 
-    @Query("FROM EquipmentType e WHERE e.description = :equipTypeDesc")
-    EquipmentType getEquipmentTypeByDesc(@Param("equipTypeDesc") String equipTypeDesc);
+    @Query("FROM EquipmentType e WHERE e.name = :equipTypeName")
+    EquipmentType getEquipmentTypeByDesc(@Param("equipTypeName") String equipTypeName);
 
 }
