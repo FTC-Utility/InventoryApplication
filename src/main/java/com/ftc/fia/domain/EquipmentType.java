@@ -14,19 +14,19 @@ public class EquipmentType {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @Column(name = "description")
-    private String description;
+    @Column(name = "name")
+    private String name;
 
     public EquipmentType() {
     }
 
     public EquipmentType(String description) {
-        this.description = description;
+        this.name = name;
     }
 
-    public EquipmentType(int id, String description) {
+    public EquipmentType(int id, String name) {
         this.id = id;
-        this.description = description;
+        this.name = name;
     }
 
     public int getId() {
@@ -37,20 +37,12 @@ public class EquipmentType {
         this.id = id;
     }
 
-    public String getDescription() {
-        return description;
+    public String getName() {
+        return name;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    @Override
-    public String toString() {
-        return "EquipmentType{" +
-                "type='" + id + '\'' +
-                ", description='" + description + '\'' +
-                '}';
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
@@ -58,11 +50,20 @@ public class EquipmentType {
         if (this == o) return true;
         if (!(o instanceof EquipmentType)) return false;
         EquipmentType that = (EquipmentType) o;
-        return Objects.equals(getDescription(), that.getDescription());
+        return getId() == that.getId() &&
+                Objects.equals(getName(), that.getName());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getDescription());
+        return Objects.hash(getId(), getName());
+    }
+
+    @Override
+    public String toString() {
+        return "EquipmentType{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
     }
 }
