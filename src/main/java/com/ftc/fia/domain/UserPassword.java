@@ -33,8 +33,7 @@ public class UserPassword {
     public UserPassword() {
     }
 
-    public UserPassword(int id, String passwordHash, LocalDate createdDate, LocalDate expireDate) {
-        this.id = id;
+    public UserPassword( String passwordHash, LocalDate createdDate, LocalDate expireDate) {
         this.passwordHash = passwordHash;
         this.createdDate = createdDate;
         this.expireDate = expireDate;
