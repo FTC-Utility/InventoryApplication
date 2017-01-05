@@ -28,7 +28,7 @@ public class LoginController {
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String newUserRegisterHere(Model model) {
-
+        // model.addAttribute();
         System.out.println("Method Executed: newUserRegisterHere");
         return "newUserSignUp";
     }
