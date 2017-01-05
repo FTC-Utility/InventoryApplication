@@ -10,29 +10,29 @@ import java.util.Objects;
  * Created by Eyuel Tadesse on 12/28/2016.
  */
 @Entity
-@Table(name ="license_Type")
-public class License_Type {
+@Table(name = "audit_event")
+public class AuditEvent {
 
     @Id
-    private String type;
+    private int id;
 
     @Column(name = "description")
     private String description;
 
-    public License_Type() {
+    public AuditEvent() {
     }
 
-    public License_Type(String type, String description) {
-        this.type = type;
+    public AuditEvent(int id, String description) {
+        this.id = id;
         this.description = description;
     }
 
-    public String getType() {
-        return type;
+    public int getId() {
+        return id;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getDescription() {
@@ -46,21 +46,21 @@ public class License_Type {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof License_Type)) return false;
-        License_Type that = (License_Type) o;
-        return Objects.equals(getType(), that.getType()) &&
+        if (!(o instanceof AuditEvent)) return false;
+        AuditEvent that = (AuditEvent) o;
+        return getId() == that.getId() &&
                 Objects.equals(getDescription(), that.getDescription());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getType(), getDescription());
+        return Objects.hash(getId(), getDescription());
     }
 
     @Override
     public String toString() {
-        return "License_Type{" +
-                "type='" + type + '\'' +
+        return "AuditEvent{" +
+                "id=" + id +
                 ", description='" + description + '\'' +
                 '}';
     }
