@@ -32,6 +32,7 @@ public class Assigned
         this.unassigned = unassigned;
     }
 
+
     @OneToMany(cascade = CascadeType.ALL)
     public Collection<Audit> getAudits() {
         return audits;
