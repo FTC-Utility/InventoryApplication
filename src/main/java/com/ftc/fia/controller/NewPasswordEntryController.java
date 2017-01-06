@@ -51,7 +51,14 @@ public class NewPasswordEntryController {
         }
         */
 
-        Map returnedMap = iSetPasswordService.setPassword(dataDto);
+        Map returnedMap = null;
+        try {
+            returnedMap = iSetPasswordService.setPassword(dataDto);
+        } catch (Exception ex) {
+            String errorMessage = "Exception occurred: " + ex.getMessage();
+            model.addAttribute("errorMessage", errorMessage);
+            return "errorPage";
+        }
 
         if (returnedMap.containsKey("errorMessage")) {
             String errorMessage = (String) returnedMap.get("errorMessage");
@@ -59,6 +66,6 @@ public class NewPasswordEntryController {
             return "errorPage";
         }
 
-        return "newPasswordEntry";
+        return "login";
     }
 }

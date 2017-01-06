@@ -4,12 +4,15 @@ import com.ftc.fia.business.ISetUserPasswordBusiness;
 import com.ftc.fia.business.ITwoFactorAuthValidatePINBusiness;
 
 import com.ftc.fia.domain.User;
+import com.ftc.fia.domain.UserPassword;
 
 import com.ftc.fia.dto.NewPasswordEntryDto;
+import com.ftc.fia.repository.IUserPasswordRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -20,6 +23,9 @@ public class SetUserPasswordBusinessImpl implements ISetUserPasswordBusiness {
 
     @Autowired
     ITwoFactorAuthValidatePINBusiness iTwoFactorAuthValidatePINBusiness;
+
+    @Autowired
+    IUserPasswordRepository iUserPasswordRepository;
 
     /**
      * Sets the Password for a user given the "newPasswordEntryDto" input.
@@ -56,7 +62,18 @@ public class SetUserPasswordBusinessImpl implements ISetUserPasswordBusiness {
 
         Map returnMap = new HashMap();
 
-        // Will put nothing for now. Will add later password update to database.
+        UserPassword userPassword = null;
+        List<UserPassword> userPasswordList = iUserPasswordRepository.findByUser(user);
+        if (userPasswordList.isEmpty()) {
+            userPassword = new UserPassword();
+            userPassword.setUser(user);
+
+        } else {
+            userPassword = userPasswordList.get(0);
+        }
+        userPassword.setPasswordHash(password);
+
+        iUserPasswordRepository.save(userPassword);
 
         return returnMap;
     }
