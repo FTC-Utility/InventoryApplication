@@ -2,6 +2,7 @@ package com.ftc.fia.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,10 +20,15 @@ public class NewPasswordEntryController {
 
     @RequestMapping(value = "/setPassword", method = RequestMethod.POST)
     public String setPassword(@RequestParam("pin") String pin, @RequestParam("pwd") String password,
-                              @RequestParam("confirmPwd") String confirmPassword) {
+                              @RequestParam("confirmPwd") String confirmPassword, Model model) {
         // This is just stub code for now. This will have to change in a future sub-task that will do the real
         // processing.
         System.out.println("PIN = [" + pin + "], password = [" + password + "], confirmPasswsord = [" + confirmPassword + "]");
+
+        if (pin.equals("123456")) {
+            model.addAttribute("errorMessage", "This is an Error Message!");
+            return "errorPage";
+        }
         return "newPasswordEntry";
     }
 }
