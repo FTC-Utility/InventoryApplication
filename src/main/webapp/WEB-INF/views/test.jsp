@@ -7,6 +7,7 @@
 <title>Test</title>
 </head>
 <body>
+<h1>Data: ${data}</h1>
 <center style="margin-top: 150px">
 	<form action="test" method="post">
 	<table>

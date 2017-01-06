@@ -1,6 +1,7 @@
 package com.ftc.fia.domain;
 
 import com.oracle.jrockit.jfr.EventDefinition;
+import org.hamcrest.core.Is;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -32,14 +33,26 @@ public class Hardware implements Serializable
     @OneToOne
     HardwareStatus hardware_status;
 
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Collection<Issue> issues = new ArrayList<>();
+
     @OneToOne
     EquipmentType equip_type;
+
+    String serial_num;
+
+    String tag_num;
+
+    LocalDate purchase_date;
 
     @OneToMany
     @JoinTable(name = "position_hardware", joinColumns = @JoinColumn(name = "equip_type_id",
             referencedColumnName = "equip_type_id"),
             inverseJoinColumns = @JoinColumn(name = "position_id"))
-    Collection<Position> positions = new ArrayList<>();
+    private Collection<Position> positions = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Collection<Assigned> assigneds = new ArrayList<>();
 
     public Collection<Position> getPositions() {
         return positions;
@@ -48,13 +61,6 @@ public class Hardware implements Serializable
     public void setPositions(List<Position> positions) {
         this.positions = positions;
     }
-
-    String serial_num;
-
-    String tag_num;
-
-    LocalDate purchase_date;
-
 
     public Hardware(EquipmentType equip_type, String name, String description, Manufacturer manufacturer,
                     Vendor vendor, String serial_num, String tag_num, LocalDate purchase_date, HardwareStatus hardware_status) {
@@ -87,6 +93,14 @@ public class Hardware implements Serializable
     }
 
     public Hardware() {
+    }
+
+    public Collection<Issue> getIssues() {
+        return issues;
+    }
+
+    public void setIssues(Collection<Issue> issues) {
+        this.issues = issues;
     }
 
     @Override
@@ -142,6 +156,18 @@ public class Hardware implements Serializable
         result = 31 * result + (getTag_num() != null ? getTag_num().hashCode() : 0);
         result = 31 * result + (getPurchase_date() != null ? getPurchase_date().hashCode() : 0);
         return result;
+    }
+
+    public void setPositions(Collection<Position> positions) {
+        this.positions = positions;
+    }
+
+    public Collection<Assigned> getAssigneds() {
+        return assigneds;
+    }
+
+    public void setAssigneds(Collection<Assigned> assigneds) {
+        this.assigneds = assigneds;
     }
 
     public EquipmentType getEquip_type() {

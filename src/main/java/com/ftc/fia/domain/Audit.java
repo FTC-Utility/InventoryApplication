@@ -21,6 +21,14 @@ public class Audit
     @JoinColumn(name = "soft_license_id")
     SoftwareLicense softwareLicense;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "assigned_id")
+    Assigned assigned;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "issue_id")
+    Issue issue;
+
     public SoftwareLicense getSoftwareLicense() {
         return softwareLicense;
     }
@@ -30,6 +38,14 @@ public class Audit
     }
 
     public Audit() {
+    }
+
+    public Issue getIssue() {
+        return issue;
+    }
+
+    public void setIssue(Issue issue) {
+        this.issue = issue;
     }
 
     public int getId() {
@@ -48,4 +64,11 @@ public class Audit
         this.licenseType = licenseType;
     }
 
+    public Assigned getAssigned() {
+        return assigned;
+    }
+
+    public void setAssigned(Assigned assigned) {
+        this.assigned = assigned;
+    }
 }

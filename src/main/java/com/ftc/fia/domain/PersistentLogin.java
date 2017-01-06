@@ -21,7 +21,6 @@ public class PersistentLogin {
 
     private String token;
 
-    @Column(name = "last_used")
     @Type(type = "com.ftc.fia.util.LocalDateTimeAttributeConverter")
     private LocalDateTime lastUsed;
 
@@ -56,6 +55,7 @@ public class PersistentLogin {
         this.token = token;
     }
 
+    @Column(name = "last_used")
     public LocalDateTime getLastUsed() {
         return lastUsed;
     }
