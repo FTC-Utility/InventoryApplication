@@ -16,11 +16,11 @@ public class RolePermission {
 
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name ="site_role_id",referencedColumnName = "id")
+    @JoinColumn(name ="site_role_id",referencedColumnName = "id",foreignKey = @ForeignKey(name = "FkRolePerm_SiteRoleID"))
     private WebsiteRole websiteRole;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name ="permission_id" , referencedColumnName = "id")
+    @JoinColumn(name ="permission_id" , referencedColumnName = "id",foreignKey = @ForeignKey(name = "FkRolePerm_PermissionID"))
     private Permission permission;
 
     public RolePermission() {

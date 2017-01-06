@@ -11,7 +11,7 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "hardware_Status")
-public class Hardware_Status {
+public class HardwareStatus {
 
     @Id
     @Column(name = "status")
@@ -20,10 +20,10 @@ public class Hardware_Status {
     @Column(name = "description")
     private String description;
 
-    public Hardware_Status() {
+    public HardwareStatus() {
     }
 
-    public Hardware_Status(String status, String description) {
+    public HardwareStatus(String status, String description) {
         this.status = status;
         this.description = description;
     }
@@ -47,8 +47,8 @@ public class Hardware_Status {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Hardware_Status)) return false;
-        Hardware_Status that = (Hardware_Status) o;
+        if (!(o instanceof HardwareStatus)) return false;
+        HardwareStatus that = (HardwareStatus) o;
         return Objects.equals(getStatus(), that.getStatus()) &&
                 Objects.equals(getDescription(), that.getDescription());
     }

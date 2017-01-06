@@ -21,9 +21,10 @@ public class UserToken {
 
     private String value;
 
-    @Column(name = "expire_date")
     @Type(type = "com.ftc.fia.util.LocalDateTimeAttributeConverter")
     private LocalDateTime expiredDate;
+
+    private String secretKey;
 
     public UserToken() {
     }
@@ -39,7 +40,7 @@ public class UserToken {
     }
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name ="toke_type_id", referencedColumnName = "id")
+    @JoinColumn(name ="toke_type_id", referencedColumnName = "id",foreignKey = @ForeignKey(name = "FkUserTokens_TokenTypeID"))
     public TokeType getTokenType() {
         return tokenType;
     }
@@ -58,7 +59,7 @@ public class UserToken {
     }
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JoinColumn(name = "user_id", referencedColumnName = "id",foreignKey = @ForeignKey(name="FkUserTokens_UserId"))
     public User getUser() {
         return user;
     }
@@ -67,12 +68,22 @@ public class UserToken {
         this.user = user;
     }
 
+    @Column(name = "expire_date",columnDefinition = "TIMESTAMP")
     public LocalDateTime getExpiredDate() {
         return expiredDate;
     }
 
     public void setExpiredDate(LocalDateTime expiredDate) {
         this.expiredDate = expiredDate;
+    }
+
+    @Column(name = "secret_key", length = 16)
+    public String getSecretKey() {
+        return secretKey;
+    }
+
+    public void setSecretKey(String secretKey) {
+        this.secretKey = secretKey;
     }
 
     @Override
@@ -84,12 +95,13 @@ public class UserToken {
                 Objects.equals(getTokenType(), userToken.getTokenType()) &&
                 Objects.equals(getUser(), userToken.getUser()) &&
                 Objects.equals(getValue(), userToken.getValue()) &&
-                Objects.equals(getExpiredDate(), userToken.getExpiredDate());
+                Objects.equals(getExpiredDate(), userToken.getExpiredDate()) &&
+                Objects.equals(getSecretKey(), userToken.getSecretKey());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getTokenType(), getUser(), getValue(), getExpiredDate());
+        return Objects.hash(getId(), getTokenType(), getUser(), getValue(), getExpiredDate(), getSecretKey());
     }
 
     @Override
@@ -100,6 +112,7 @@ public class UserToken {
                 ", user=" + user +
                 ", value='" + value + '\'' +
                 ", expiredDate=" + expiredDate +
+                ", secretKey='" + secretKey + '\'' +
                 '}';
     }
 }

@@ -26,11 +26,11 @@ public class UserPreference {
     private boolean sendAdminNotif;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name="user_id", referencedColumnName = "id")
+    @JoinColumn(name="user_id", referencedColumnName = "id",foreignKey = @ForeignKey(name = "FkUserPref_UserId"))
     private User user;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name="site_skin_name", referencedColumnName = "id")
+    @JoinColumn(name="site_skin_name", referencedColumnName = "id", foreignKey = @ForeignKey(name = "FkUserPref_SiteSkinID"))
     private WebsiteSkin websiteSkin;
 
     public UserPreference() {
