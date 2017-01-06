@@ -25,9 +25,9 @@
                 <div class="form-group has-feedback">
                    <label for="pin">PIN:</label>
                    <input type="text" id="pin" name="pin" class="form-control" placeholder="PIN"
-                          pattern="^[0-9]*$" data-minlength="4" maxlength="10"
-                          title="PIN must be only numbers, at least 4 numbers, and a maximum of 10 numbers."
-                          data-error="PIN must be only numbers, at least 4 numbers, and a maximum of 10 numbers.">
+                          pattern="^[0-9]*$" data-minlength="6" minlength="6" maxlength="6"
+                          title="PIN must be only numbers and be exactly 6 numbers."
+                          data-error="PIN must be only numbers be exactly 6 numbers.">
                     <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                     <div class="help-block with-errors"></div>
                 </div>
@@ -52,6 +52,8 @@
                     <div class="help-block with-errors"></div>
                 </div>
                 <br/>
+
+                <input type="hidden" name="token" value="${tokenValue}">
 
                 <button class="btn btn-lg btn-primary btn-block float-xs-right" type="submit" placeholder="SetPassword">
                     Set Password
