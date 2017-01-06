@@ -28,11 +28,6 @@ public class SetPasswordServiceImpl implements ISetPasswordService {
     @Override
     public Map setPassword(NewPasswordEntryDto dataDto) {
 
-        // Map returnedMap = new HashMap();
-
-        // Below done for debugging purposes.
-        // returnedMap.put("errorMessage", "Invalid PIN Entered!");
-
         Map returnedMap = iSetUserPasswordBusiness.setPassword(dataDto);
         return returnedMap;
     }
