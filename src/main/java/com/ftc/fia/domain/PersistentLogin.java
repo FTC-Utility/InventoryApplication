@@ -4,6 +4,7 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 
 /**
@@ -21,7 +22,6 @@ public class PersistentLogin {
 
     private String token;
 
-    @Column(name = "last_used")
     @Type(type = "com.ftc.fia.util.LocalDateTimeAttributeConverter")
     private LocalDateTime lastUsed;
 
@@ -56,6 +56,7 @@ public class PersistentLogin {
         this.token = token;
     }
 
+    @Column(name = "last_used",columnDefinition = "TIMESTAMP")
     public LocalDateTime getLastUsed() {
         return lastUsed;
     }

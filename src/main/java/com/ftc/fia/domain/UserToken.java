@@ -21,7 +21,6 @@ public class UserToken {
 
     private String value;
 
-    @Column(name = "expire_date")
     @Type(type = "com.ftc.fia.util.LocalDateTimeAttributeConverter")
     private LocalDateTime expiredDate;
 
@@ -67,6 +66,7 @@ public class UserToken {
         this.user = user;
     }
 
+    @Column(name = "expire_date",columnDefinition = "TIMESTAMP")
     public LocalDateTime getExpiredDate() {
         return expiredDate;
     }
