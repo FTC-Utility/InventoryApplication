@@ -24,6 +24,8 @@ public class UserToken {
     @Type(type = "com.ftc.fia.util.LocalDateTimeAttributeConverter")
     private LocalDateTime expiredDate;
 
+    private String secretKey;
+
     public UserToken() {
     }
 
@@ -75,6 +77,15 @@ public class UserToken {
         this.expiredDate = expiredDate;
     }
 
+    @Column(name = "secret_key", length = 16)
+    public String getSecretKey() {
+        return secretKey;
+    }
+
+    public void setSecretKey(String secretKey) {
+        this.secretKey = secretKey;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -84,12 +95,13 @@ public class UserToken {
                 Objects.equals(getTokenType(), userToken.getTokenType()) &&
                 Objects.equals(getUser(), userToken.getUser()) &&
                 Objects.equals(getValue(), userToken.getValue()) &&
-                Objects.equals(getExpiredDate(), userToken.getExpiredDate());
+                Objects.equals(getExpiredDate(), userToken.getExpiredDate()) &&
+                Objects.equals(getSecretKey(), userToken.getSecretKey());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getTokenType(), getUser(), getValue(), getExpiredDate());
+        return Objects.hash(getId(), getTokenType(), getUser(), getValue(), getExpiredDate(), getSecretKey());
     }
 
     @Override
@@ -100,6 +112,7 @@ public class UserToken {
                 ", user=" + user +
                 ", value='" + value + '\'' +
                 ", expiredDate=" + expiredDate +
+                ", secretKey='" + secretKey + '\'' +
                 '}';
     }
 }
