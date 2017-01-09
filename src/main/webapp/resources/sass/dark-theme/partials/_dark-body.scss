@@ -1,0 +1,15 @@
+// These are for global body changes
+
+/////////////////////////////////////////////////////////////
+////                                                     ////
+////    IF YOU ADD SOMETHING HERE YOU MUST ADD IT TO     ////
+////    _light-body.scss                                 ////
+////                                                     ////
+/////////////////////////////////////////////////////////////
+
+// Imports
+@import '../../variables/dark-theme-variables';
+
+body {
+  background-color: $body-background;
+}
