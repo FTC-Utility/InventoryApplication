@@ -33,8 +33,7 @@ public class NewPasswordEntryController {
     public String setPassword(@RequestParam("pin") String pin, @RequestParam("pwd") String password,
                               @RequestParam("confirmPwd") String confirmPassword, @RequestParam("token") String token,
                               Model model) {
-        // This is just stub code for now. This will have to change in a future sub-task that will do the real
-        // processing.
+
         System.out.println("PIN = [" + pin + "], password = [" + password + "], confirmPassword = [" + confirmPassword + "]");
         System.out.println("token = " + token);
 
@@ -43,13 +42,6 @@ public class NewPasswordEntryController {
         dataDto.setPwd(password);
         dataDto.setConfirmPwd(confirmPassword);
         dataDto.setToken(token);
-
-        /*
-        if (pin.equals("123456")) {
-            model.addAttribute("errorMessage", "This is an Error Message!");
-            return "errorPage";
-        }
-        */
 
         Map returnedMap = null;
         try {
