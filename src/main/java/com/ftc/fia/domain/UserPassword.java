@@ -20,6 +20,7 @@ public class UserPassword {
     @Type(type = "com.ftc.fia.util.LocalDateAttributeConverter")
     private LocalDate createdDate;
 
+
     @Type(type = "com.ftc.fia.util.LocalDateAttributeConverter")
     private LocalDate expireDate;
 
@@ -46,6 +47,7 @@ public class UserPassword {
         this.id = id;
     }
 
+    @Column(name ="password_hash")
     public String getPasswordHash() {
         return passwordHash;
     }
@@ -54,7 +56,7 @@ public class UserPassword {
         this.passwordHash = passwordHash;
     }
 
-    @Column(name = "created_date")
+    @Column(name = "created_date",columnDefinition = "TIMESTAMP")
     public LocalDate getCreatedDate() {
         return createdDate;
     }
@@ -63,7 +65,7 @@ public class UserPassword {
         this.createdDate = createdDate;
     }
 
-    @Column(name = "expire_date")
+    @Column(name = "expire_date", columnDefinition = "TIMESTAMP")
     public LocalDate getExpireDate() {
         return expireDate;
     }
