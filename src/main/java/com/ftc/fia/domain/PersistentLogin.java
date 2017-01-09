@@ -56,7 +56,6 @@ public class PersistentLogin {
         this.token = token;
     }
 
-    @Column(name = "last_used")
     @Column(name = "last_used",columnDefinition = "TIMESTAMP")
     public LocalDateTime getLastUsed() {
         return lastUsed;

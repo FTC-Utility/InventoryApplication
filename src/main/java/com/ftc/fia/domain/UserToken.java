@@ -15,13 +15,12 @@ public class UserToken {
 
     private int id;
 
-    private TokeType tokenType;
+    private TokenType tokenType;
 
     private User user;
 
     private String value;
 
-    @Column(name = "expire_date")
     @Type(type = "com.ftc.fia.util.LocalDateTimeAttributeConverter")
     private LocalDateTime expiredDate;
 
@@ -42,11 +41,11 @@ public class UserToken {
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name ="toke_type_id", referencedColumnName = "id",foreignKey = @ForeignKey(name = "FkUserTokens_TokenTypeID"))
-    public TokeType getTokenType() {
+    public TokenType getTokenType() {
         return tokenType;
     }
 
-    public void setTokenType(TokeType tokenType) {
+    public void setTokenType(TokenType tokenType) {
         this.tokenType = tokenType;
     }
 
