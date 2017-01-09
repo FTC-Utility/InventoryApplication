@@ -23,6 +23,17 @@ public class Software {
     @OneToMany(mappedBy = "software", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Collection<SoftwareLicense> softwareLicenses = new HashSet<>();
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "software", fetch = FetchType.LAZY)
+    private Collection<Audit> audits = new HashSet<>();
+
+    @ManyToOne (cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "manufacturer_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "FkSoftware_ManufacturerId"))
+    Manufacturer manufacturer;
+
+    @ManyToOne (cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "vendor_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "FkSoftware_VendorFk"))
+    Vendor vendor;
+
     public int getId() {
         return id;
     }

@@ -102,7 +102,7 @@ public class Issue
     public Issue() {
     }
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "issue", fetch = FetchType.LAZY)
     public Collection<Audit> getAudits() {
         return audits;
     }
