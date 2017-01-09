@@ -11,7 +11,7 @@ import java.util.Objects;
 public class WebsiteSkin {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private int id;
 
     @Column(name = "css_fileName")
@@ -27,6 +27,7 @@ public class WebsiteSkin {
 
     public WebsiteSkin() {
     }
+
 
     public int getId() {
         return id;

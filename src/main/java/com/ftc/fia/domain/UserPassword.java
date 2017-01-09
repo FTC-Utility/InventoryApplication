@@ -4,6 +4,7 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 /**
@@ -17,12 +18,12 @@ public class UserPassword {
 
     private String passwordHash;
 
-    @Type(type = "com.ftc.fia.util.LocalDateAttributeConverter")
-    private LocalDate createdDate;
+    @Type(type = "com.ftc.fia.util.LocalDateTimeAttributeConverter")
+    private LocalDateTime createdDate;
 
 
-    @Type(type = "com.ftc.fia.util.LocalDateAttributeConverter")
-    private LocalDate expireDate;
+    @Type(type = "com.ftc.fia.util.LocalDateTimeAttributeConverter")
+    private LocalDateTime expireDate;
 
     private String confirmPassword;
 
@@ -31,14 +32,14 @@ public class UserPassword {
     public UserPassword() {
     }
 
-    public UserPassword( String passwordHash, LocalDate createdDate, LocalDate expireDate) {
+    public UserPassword( String passwordHash, LocalDateTime createdDate, LocalDateTime expireDate) {
         this.passwordHash = passwordHash;
         this.createdDate = createdDate;
         this.expireDate = expireDate;
     }
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.TABLE)
     public int getId() {
         return id;
     }
@@ -57,20 +58,20 @@ public class UserPassword {
     }
 
     @Column(name = "created_date",columnDefinition = "TIMESTAMP")
-    public LocalDate getCreatedDate() {
+    public LocalDateTime getCreatedDate() {
         return createdDate;
     }
 
-    public void setCreatedDate(LocalDate createdDate) {
+    public void setCreatedDate(LocalDateTime createdDate) {
         this.createdDate = createdDate;
     }
 
     @Column(name = "expire_date", columnDefinition = "TIMESTAMP")
-    public LocalDate getExpireDate() {
+    public LocalDateTime getExpireDate() {
         return expireDate;
     }
 
-    public void setExpireDate(LocalDate expireDate) {
+    public void setExpireDate(LocalDateTime expireDate) {
         this.expireDate = expireDate;
     }
 

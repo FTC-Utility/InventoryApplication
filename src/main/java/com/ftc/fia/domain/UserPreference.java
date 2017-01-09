@@ -12,7 +12,7 @@ import java.util.Objects;
 public class UserPreference {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private int id;
 
     @Lob
@@ -34,6 +34,14 @@ public class UserPreference {
     private WebsiteSkin websiteSkin;
 
     public UserPreference() {
+    }
+
+    public UserPreference(Byte[] profilePic, boolean sendUserNotif, boolean sendAdminNotif, User user, WebsiteSkin websiteSkin) {
+        this.profilePic = profilePic;
+        this.sendUserNotif = sendUserNotif;
+        this.sendAdminNotif = sendAdminNotif;
+        this.user = user;
+        this.websiteSkin = websiteSkin;
     }
 
     public int getId() {

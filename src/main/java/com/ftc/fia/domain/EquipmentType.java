@@ -13,7 +13,8 @@ import java.util.Objects;
 public class EquipmentType {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="id")
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private int id;
 
     @Column(name = "name")

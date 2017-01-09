@@ -10,7 +10,7 @@ import java.util.Objects;
 @Table(name = "user_role")
 public class UserRole {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private int id;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
