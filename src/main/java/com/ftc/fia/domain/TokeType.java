@@ -11,7 +11,7 @@ import java.util.Objects;
 public class TokeType {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private int id;
 
     @Column(name = "description")

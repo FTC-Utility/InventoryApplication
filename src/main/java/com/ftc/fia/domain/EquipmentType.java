@@ -11,7 +11,8 @@ import java.util.Objects;
 public class EquipmentType {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="id")
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private int id;
 
     @Column(name = "name")
@@ -20,7 +21,7 @@ public class EquipmentType {
     public EquipmentType() {
     }
 
-    public EquipmentType(String description) {
+    public EquipmentType(String name) {
         this.name = name;
     }
 

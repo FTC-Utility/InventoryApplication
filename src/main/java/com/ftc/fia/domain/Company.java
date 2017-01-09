@@ -12,7 +12,7 @@ import java.util.Objects;
 @Table(name = "company")
 public class Company {
 
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id @GeneratedValue(strategy = GenerationType.TABLE)
     @Column(name ="id", nullable = false)
     @NotNull
     private int id;

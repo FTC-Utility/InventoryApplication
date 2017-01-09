@@ -11,7 +11,7 @@ import java.util.Objects;
 public class WebsiteRole {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.TABLE)
     @Column(name = "id")
     private int id;
 
@@ -24,6 +24,11 @@ public class WebsiteRole {
 
     public WebsiteRole() {
     }
+
+    public WebsiteRole(String description) {
+        this.description = description;
+    }
+
 
     public int getId() {
         return id;

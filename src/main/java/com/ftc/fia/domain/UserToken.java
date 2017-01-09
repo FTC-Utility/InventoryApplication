@@ -29,8 +29,17 @@ public class UserToken {
     public UserToken() {
     }
 
+    public UserToken(int id, TokeType tokenType, User user, String value, LocalDateTime expiredDate, String secretKey) {
+        this.id = id;
+        this.tokenType = tokenType;
+        this.user = user;
+        this.value = value;
+        this.expiredDate = expiredDate;
+        this.secretKey = secretKey;
+    }
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.TABLE)
     public int getId() {
         return id;
     }
