@@ -14,5 +14,5 @@ import java.util.List;
 @Repository
 public interface IUserPasswordRepository extends JpaRepository<UserPassword, Integer> {
 
-    public List<UserPassword> findByUser(User user);
+   List<UserPassword> findByUser(User user);
 }
