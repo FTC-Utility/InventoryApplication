@@ -1,9 +1,9 @@
 package com.ftc.fia.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.Objects;
 
 /**
@@ -13,27 +13,28 @@ import java.util.Objects;
 @Table(name = "hardware_Status")
 public class HardwareStatus {
 
-    @Id
-    @Column(name = "status")
-    private String status;
+    @Id @GeneratedValue
+    private int id;
 
     @Column(name = "description")
     private String description;
 
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "hardwareStatus")
+    private Collection<Hardware> hardwares = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "hardwareStatus", fetch = FetchType.LAZY)
+    private Collection<Audit> audits = new HashSet<>();
+
+
     public HardwareStatus() {
     }
 
-    public HardwareStatus(String status, String description) {
-        this.status = status;
-        this.description = description;
+    public int getId() {
+        return id;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getDescription() {
@@ -44,17 +45,29 @@ public class HardwareStatus {
         this.description = description;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof HardwareStatus)) return false;
-        HardwareStatus that = (HardwareStatus) o;
-        return Objects.equals(getStatus(), that.getStatus()) &&
-                Objects.equals(getDescription(), that.getDescription());
+    public Collection<Hardware> getHardwares() {
+        return hardwares;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(getStatus(), getDescription());
+    public void setHardwares(Collection<Hardware> hardwares) {
+        this.hardwares = hardwares;
+    }
+
+    public Collection<Audit> getAudits() {
+        return audits;
+    }
+
+    public void setAudits(Collection<Audit> audits) {
+        this.audits = audits;
+    }
+
+    public HardwareStatus(String description) {
+        this.description = description;
+    }
+
+    public HardwareStatus(String description, Collection<Hardware> hardwares, Collection<Audit> audits) {
+        this.description = description;
+        this.hardwares = hardwares;
+        this.audits = audits;
     }
 }

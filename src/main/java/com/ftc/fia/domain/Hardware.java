@@ -1,6 +1,6 @@
 package com.ftc.fia.domain;
 
-import com.oracle.jrockit.jfr.EventDefinition;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -17,30 +17,39 @@ import java.util.List;
 @Table(name="hardware")
 public class Hardware implements Serializable
 {
-    @Id @GeneratedValue
-    int id;
+    private int id;
 
-    String name;
-    String description;
+    private String name;
+    private String description;
 
-    @OneToOne
-    Manufacturer manufacturer;
+    private Location location;
 
-    @OneToOne
-    Vendor vendor;
+    private EquipmentType equipmentType;
 
-    @OneToOne
-    HardwareStatus hardware_status;
+    private Manufacturer manufacturer;
 
-    @OneToOne
-    EquipmentType equip_type;
+    private Vendor vendor;
+
+    private HardwareStatus hardwareStatus;
+
+    private Collection<Issue> issues = new ArrayList<>();
+
+    private Collection<Audit> audits = new ArrayList<>();
+
+    private String serial_num;
+
+    private String tag_num;
+
+    @Type(type = "com.ftc.fia.util.LocalDateAttributeConverter")
+    private LocalDate purchase_date;
+
+    private Collection<Position> positions = new ArrayList<>();
+
+    private Collection<Assigned> assigneds = new ArrayList<>();
 
     @OneToMany
-    @JoinTable(name = "position_hardware", joinColumns = @JoinColumn(name = "equip_type_id",
-            referencedColumnName = "equip_type_id"),
+    @JoinTable(name = "position_hardware", joinColumns = @JoinColumn(name = "equipment_type_id"),
             inverseJoinColumns = @JoinColumn(name = "position_id"))
-    Collection<Position> positions = new ArrayList<>();
-
     public Collection<Position> getPositions() {
         return positions;
     }
@@ -48,27 +57,6 @@ public class Hardware implements Serializable
     public void setPositions(List<Position> positions) {
         this.positions = positions;
     }
-
-    String serial_num;
-
-    String tag_num;
-
-    LocalDate purchase_date;
-
-
-    public Hardware(EquipmentType equip_type, String name, String description, Manufacturer manufacturer,
-                    Vendor vendor, String serial_num, String tag_num, LocalDate purchase_date, HardwareStatus hardware_status) {
-        this.equip_type = equip_type;
-        this.name = name;
-        this.description = description;
-        this.manufacturer = manufacturer;
-        this.vendor = vendor;
-        this.serial_num = serial_num;
-        this.tag_num = tag_num;
-        this.purchase_date = purchase_date;
-        this.hardware_status = hardware_status;
-    }
-
 
     public Hardware(String name, String description, String serial_num, String tag_num, LocalDate purchase_date) {
         this.name = name;
@@ -78,22 +66,20 @@ public class Hardware implements Serializable
         this.purchase_date = purchase_date;
     }
 
-    public HardwareStatus getHardware_status() {
-        return hardware_status;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "hardware", cascade = CascadeType.ALL)
+    public Collection<Issue> getIssues() {
+        return issues;
     }
 
-    public void setHardware_status(HardwareStatus hardware_status) {
-        this.hardware_status = hardware_status;
-    }
-
-    public Hardware() {
+    public void setIssues(Collection<Issue> issues) {
+        this.issues = issues;
     }
 
     @Override
     public String toString() {
         return "Hardware{" +
                 "id=" + id +
-                ", equip_type='" + equip_type + '\'' +
+                ", equip_type='" + equipmentType + '\'' +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", manufacturer=" + manufacturer +
@@ -103,6 +89,7 @@ public class Hardware implements Serializable
                 ", purchase_date=" + purchase_date +
                 '}';
     }
+
 
     @Override
     public boolean equals(Object o) {
@@ -115,43 +102,52 @@ public class Hardware implements Serializable
         if (getName() != null ? !getName().equals(hardware.getName()) : hardware.getName() != null) return false;
         if (getDescription() != null ? !getDescription().equals(hardware.getDescription()) : hardware.getDescription() != null)
             return false;
+        if (getLocation() != null ? !getLocation().equals(hardware.getLocation()) : hardware.getLocation() != null)
+            return false;
+        if (getEquipmentType() != null ? !getEquipmentType().equals(hardware.getEquipmentType()) : hardware.getEquipmentType() != null)
+            return false;
         if (getManufacturer() != null ? !getManufacturer().equals(hardware.getManufacturer()) : hardware.getManufacturer() != null)
             return false;
         if (getVendor() != null ? !getVendor().equals(hardware.getVendor()) : hardware.getVendor() != null)
             return false;
-        if (getHardware_status() != null ? !getHardware_status().equals(hardware.getHardware_status()) : hardware.getHardware_status() != null)
+        if (getHardwareStatus() != null ? !getHardwareStatus().equals(hardware.getHardwareStatus()) : hardware.getHardwareStatus() != null)
             return false;
-        if (getEquip_type() != null ? !getEquip_type().equals(hardware.getEquip_type()) : hardware.getEquip_type() != null)
+        if (getIssues() != null ? !getIssues().equals(hardware.getIssues()) : hardware.getIssues() != null)
+            return false;
+        if (getAudits() != null ? !getAudits().equals(hardware.getAudits()) : hardware.getAudits() != null)
             return false;
         if (getSerial_num() != null ? !getSerial_num().equals(hardware.getSerial_num()) : hardware.getSerial_num() != null)
             return false;
         if (getTag_num() != null ? !getTag_num().equals(hardware.getTag_num()) : hardware.getTag_num() != null)
             return false;
-        return getPurchase_date() != null ? getPurchase_date().equals(hardware.getPurchase_date()) : hardware.getPurchase_date() == null;
+        if (getPurchase_date() != null ? !getPurchase_date().equals(hardware.getPurchase_date()) : hardware.getPurchase_date() != null)
+            return false;
+        if (getPositions() != null ? !getPositions().equals(hardware.getPositions()) : hardware.getPositions() != null)
+            return false;
+        return getAssigneds() != null ? getAssigneds().equals(hardware.getAssigneds()) : hardware.getAssigneds() == null;
     }
 
     @Override
     public int hashCode() {
         int result = getId();
-        result = 31 * result + (getQuip_type() != null ? getQuip_type().hashCode() : 0);
         result = 31 * result + (getName() != null ? getName().hashCode() : 0);
         result = 31 * result + (getDescription() != null ? getDescription().hashCode() : 0);
+        result = 31 * result + (getLocation() != null ? getLocation().hashCode() : 0);
+        result = 31 * result + (getEquipmentType() != null ? getEquipmentType().hashCode() : 0);
         result = 31 * result + (getManufacturer() != null ? getManufacturer().hashCode() : 0);
         result = 31 * result + (getVendor() != null ? getVendor().hashCode() : 0);
+        result = 31 * result + (getHardwareStatus() != null ? getHardwareStatus().hashCode() : 0);
+        result = 31 * result + (getIssues() != null ? getIssues().hashCode() : 0);
+        result = 31 * result + (getAudits() != null ? getAudits().hashCode() : 0);
         result = 31 * result + (getSerial_num() != null ? getSerial_num().hashCode() : 0);
         result = 31 * result + (getTag_num() != null ? getTag_num().hashCode() : 0);
         result = 31 * result + (getPurchase_date() != null ? getPurchase_date().hashCode() : 0);
+        result = 31 * result + (getPositions() != null ? getPositions().hashCode() : 0);
+        result = 31 * result + (getAssigneds() != null ? getAssigneds().hashCode() : 0);
         return result;
     }
 
-    public EquipmentType getEquip_type() {
-        return equip_type;
-    }
-
-    public void setEquip_type(EquipmentType equip_type) {
-        this.equip_type = equip_type;
-    }
-
+    @Id @GeneratedValue
     public int getId() {
         return id;
     }
@@ -160,8 +156,56 @@ public class Hardware implements Serializable
         this.id = id;
     }
 
-    public EquipmentType getQuip_type() {
-        return equip_type;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "location_id", foreignKey = @ForeignKey(name = "FkHardware_LocationID"))
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "equipment_type_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "FkHardware_EquipTypeID"))
+    public EquipmentType getEquipmentType() {
+        return equipmentType;
+    }
+
+    public void setEquipmentType(EquipmentType equipmentType) {
+        this.equipmentType = equipmentType;
+    }
+
+    @ManyToOne (cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "hardware_status_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "FkHardware_HardwareStatusID"))
+    public HardwareStatus getHardwareStatus() {
+        return hardwareStatus;
+    }
+
+    public void setHardwareStatus(HardwareStatus hardwareStatus) {
+        this.hardwareStatus = hardwareStatus;
+    }
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "hardware", fetch = FetchType.LAZY)
+    public Collection<Audit> getAudits() {
+        return audits;
+    }
+
+    public void setAudits(Collection<Audit> audits) {
+        this.audits = audits;
+    }
+
+    public void setPositions(Collection<Position> positions) {
+        this.positions = positions;
+    }
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "hardware", fetch = FetchType.LAZY)
+    public Collection<Assigned> getAssigneds() {
+        return assigneds;
+    }
+
+    public void setAssigneds(Collection<Assigned> assigneds) {
+        this.assigneds = assigneds;
     }
 
     public String getName() {
@@ -180,6 +224,8 @@ public class Hardware implements Serializable
         this.description = description;
     }
 
+    @ManyToOne (cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "manufacturer_id",  foreignKey = @ForeignKey(name = "FkHardware_ManufacturerID"))
     public Manufacturer getManufacturer() {
         return manufacturer;
     }
@@ -188,6 +234,8 @@ public class Hardware implements Serializable
         this.manufacturer = manufacturer;
     }
 
+    @ManyToOne (cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "vendor_id", foreignKey = @ForeignKey(name = "FkHardware_VendorID"))
     public Vendor getVendor() {
         return vendor;
     }

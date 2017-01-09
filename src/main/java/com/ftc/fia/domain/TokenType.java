@@ -8,7 +8,7 @@ import java.util.Objects;
  */
 @Entity
 @Table(name ="token_type")
-public class TokeType {
+public class TokenType {
 
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
@@ -33,16 +33,16 @@ public class TokeType {
         this.description = description;
     }
 
-    public TokeType() {
+    public TokenType() {
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof TokeType)) return false;
-        TokeType tokeType = (TokeType) o;
-        return Objects.equals(getId(), tokeType.getId()) &&
-                Objects.equals(getDescription(), tokeType.getDescription());
+        if (!(o instanceof TokenType)) return false;
+        TokenType tokenType = (TokenType) o;
+        return Objects.equals(getId(), tokenType.getId()) &&
+                Objects.equals(getDescription(), tokenType.getDescription());
     }
 
     @Override
@@ -52,7 +52,7 @@ public class TokeType {
 
     @Override
     public String toString() {
-        return "TokeType{" +
+        return "TokenType{" +
                 "type='" + id + '\'' +
                 ", description='" + description + '\'' +
                 '}';

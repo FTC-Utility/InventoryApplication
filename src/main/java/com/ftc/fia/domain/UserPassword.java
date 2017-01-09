@@ -25,7 +25,6 @@ public class UserPassword {
     @Type(type = "com.ftc.fia.util.LocalDateTimeAttributeConverter")
     private LocalDateTime expireDate;
 
-
     private String confirmPassword;
 
     private User user;

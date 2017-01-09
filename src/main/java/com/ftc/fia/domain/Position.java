@@ -1,6 +1,8 @@
 package com.ftc.fia.domain;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Objects;
 
 /**
@@ -18,6 +20,9 @@ public class Position {
     @Column(name = "description")
     private String description;
 
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "position")
+    private Collection<PositionHardware> positionHardwares = new ArrayList<>();
+
     public Position() {
     }
 
@@ -31,6 +36,14 @@ public class Position {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public Collection<PositionHardware> getPositionHardwares() {
+        return positionHardwares;
+    }
+
+    public void setPositionHardwares(Collection<PositionHardware> positionHardwares) {
+        this.positionHardwares = positionHardwares;
     }
 
     public String getDescription() {

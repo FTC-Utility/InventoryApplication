@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Objects;
 
 /**
@@ -19,8 +20,19 @@ public class Software {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "software")
-    private Collection<SoftwareLicense> softwareLicenses = new ArrayList<>();
+    @OneToMany(mappedBy = "software", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Collection<SoftwareLicense> softwareLicenses = new HashSet<>();
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "software", fetch = FetchType.LAZY)
+    private Collection<Audit> audits = new HashSet<>();
+
+    @ManyToOne (cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "manufacturer_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "FkSoftware_ManufacturerId"))
+    Manufacturer manufacturer;
+
+    @ManyToOne (cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "vendor_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "FkSoftware_VendorFk"))
+    Vendor vendor;
 
     public int getId() {
         return id;
@@ -39,6 +51,14 @@ public class Software {
     }
 
     public Software() {
+    }
+
+    public Collection<SoftwareLicense> getSoftwareLicenses() {
+        return softwareLicenses;
+    }
+
+    public void setSoftwareLicenses(Collection<SoftwareLicense> softwareLicenses) {
+        this.softwareLicenses = softwareLicenses;
     }
 
     public Software(String name) {
