@@ -17,22 +17,26 @@ public class Assigned
 {
     int id;
 
-    SoftwareLicense softwareLicense;
+    private SoftwareLicense softwareLicense;
 
     @Type(type = "com.ftc.fia.util.LocalDateAttributeConverter")
-    LocalDate assigned;
+    private LocalDate assignedDate;
 
     @Type(type = "com.ftc.fia.util.LocalDateAttributeConverter")
-    LocalDate unassigned;
+    private LocalDate unassignedDate;
 
-    Collection<Audit> audits = new HashSet<>();
+    private Collection<Audit> audits = new HashSet<>();
 
-    public Assigned(LocalDate assigned, LocalDate unassigned) {
-        this.assigned = assigned;
-        this.unassigned = unassigned;
+    private Hardware hardware;
+
+    public Assigned(LocalDate assignedDate, LocalDate unassignedDate) {
+        this.assignedDate = assignedDate;
+        this.unassignedDate = unassignedDate;
     }
 
-    @OneToMany(cascade = CascadeType.ALL)
+    private User user;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "assigned", fetch = FetchType.LAZY)
     public Collection<Audit> getAudits() {
         return audits;
     }
@@ -54,6 +58,17 @@ public class Assigned
     }
 
     @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "hardware_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "FkAssigned_HardwareID"))
+    public Hardware getHardware() {
+        return hardware;
+    }
+
+    public void setHardware(Hardware hardware) {
+        this.hardware = hardware;
+    }
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "software_license_id", foreignKey = @ForeignKey(name = "FkAssigned_SoftLicenseID"))
     public SoftwareLicense getSoftwareLicense() {
         return softwareLicense;
     }
@@ -62,19 +77,31 @@ public class Assigned
         this.softwareLicense = softwareLicense;
     }
 
-    public LocalDate getAssigned() {
-        return assigned;
+    @Column(name = "assigned_date")
+    public LocalDate getAssignedDate() {
+        return assignedDate;
     }
 
-    public void setAssigned(LocalDate assigned) {
-        this.assigned = assigned;
+    public void setAssignedDate(LocalDate assignedDate) {
+        this.assignedDate = assignedDate;
     }
 
-    public LocalDate getUnassigned() {
-        return unassigned;
+    @Column(name = "unassigned_date")
+    public LocalDate getUnassignedDate() {
+        return unassignedDate;
     }
 
-    public void setUnassigned(LocalDate unassigned) {
-        this.unassigned = unassigned;
+    public void setUnassignedDate(LocalDate unassigned) {
+        this.unassignedDate = unassignedDate;
+    }
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "FkAssigned_UserID"))
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

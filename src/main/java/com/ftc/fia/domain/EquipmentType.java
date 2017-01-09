@@ -1,6 +1,8 @@
 package com.ftc.fia.domain;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Objects;
 
 /**
@@ -11,16 +13,26 @@ import java.util.Objects;
 public class EquipmentType {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="id")
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private int id;
 
     @Column(name = "name")
     private String name;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "equipmentType", fetch = FetchType.LAZY)
+    private Collection<Hardware> hardwares = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "equipmentType", fetch = FetchType.LAZY)
+    private Collection<Audit> audits = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "equipmentType", fetch = FetchType.LAZY)
+    private Collection<PositionHardware> positionHardwares = new ArrayList<>();
+
     public EquipmentType() {
     }
 
-    public EquipmentType(String description) {
+    public EquipmentType(String name) {
         this.name = name;
     }
 
@@ -41,8 +53,32 @@ public class EquipmentType {
         return name;
     }
 
+    public Collection<Audit> getAudits() {
+        return audits;
+    }
+
+    public void setAudits(Collection<Audit> audits) {
+        this.audits = audits;
+    }
+
+    public Collection<PositionHardware> getPositionHardwares() {
+        return positionHardwares;
+    }
+
+    public void setPositionHardwares(Collection<PositionHardware> positionHardwares) {
+        this.positionHardwares = positionHardwares;
+    }
+
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Collection<Hardware> getHardwares() {
+        return hardwares;
+    }
+
+    public void setHardwares(Collection<Hardware> hardwares) {
+        this.hardwares = hardwares;
     }
 
     @Override

@@ -1,5 +1,7 @@
 package com.ftc.fia.domain;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -14,30 +16,33 @@ import java.util.HashSet;
 @Table (name = "software_license")
 public class SoftwareLicense
 {
-    @Id @GeneratedValue
     private int id;
 
-    @ManyToOne
-    @JoinColumn(name = "software_id")
     private Software software;
 
     private String licenceNumber;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "license_type_id")
     private LicenseType licenseType;
 
-    @Column(name = "max_users")
     private int maxUsers;
 
-    @Column(name = "expiration_date")
+    @Type(type = "com.ftc.fia.util.LocalDateAttributeConverter")
     private LocalDate expirationDate;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "softwareLicense", fetch = FetchType.LAZY)
     private Collection<Assigned> assigneds = new HashSet<>();
 
-    @OneToMany(mappedBy = "softwareLicense")
     private Collection<Issue> issues = new HashSet<>();
+
+    private Collection<Audit> audits = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "softwareLicense")
+    public Collection<Audit> getAudits() {
+        return audits;
+    }
+
+    public void setAudits(Collection<Audit> audits) {
+        this.audits = audits;
+    }
 
     public SoftwareLicense() {
     }
@@ -89,6 +94,7 @@ public class SoftwareLicense
         return result;
     }
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "softwareLicense", fetch = FetchType.LAZY)
     public Collection<Assigned> getAssigneds() {
         return assigneds;
     }
@@ -97,6 +103,7 @@ public class SoftwareLicense
         this.assigneds = assigneds;
     }
 
+    @OneToMany(mappedBy = "softwareLicense", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     public Collection<Issue> getIssues() {
         return issues;
     }
@@ -105,6 +112,7 @@ public class SoftwareLicense
         this.issues = issues;
     }
 
+    @Id @GeneratedValue
     public int getId() {
         return id;
     }
@@ -113,6 +121,8 @@ public class SoftwareLicense
         this.id = id;
     }
 
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "software_id", foreignKey = @ForeignKey(name = "FkSoftLicense_SoftwareId"))
     public Software getSoftware() {
         return software;
     }
@@ -129,6 +139,8 @@ public class SoftwareLicense
         this.licenceNumber = licenceNumber;
     }
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "license_type_id", foreignKey = @ForeignKey(name = "FkSoftLicense_LicenseTypeID"))
     public LicenseType getLicenseType() {
         return licenseType;
     }
@@ -137,6 +149,7 @@ public class SoftwareLicense
         this.licenseType = licenseType;
     }
 
+    @Column(name = "max_users")
     public int getMaxUsers() {
         return maxUsers;
     }
@@ -145,6 +158,7 @@ public class SoftwareLicense
         this.maxUsers = maxUsers;
     }
 
+    @Column(name = "expiration_date")
     public LocalDate getExpirationDate() {
         return expirationDate;
     }

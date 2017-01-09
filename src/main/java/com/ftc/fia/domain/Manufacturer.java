@@ -1,6 +1,9 @@
 package com.ftc.fia.domain;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.Objects;
 
 /**
@@ -10,26 +13,34 @@ import java.util.Objects;
 @Table(name = "manufacturer")
 public class Manufacturer {
 
-    @Id
-    @GeneratedValue
+    @Id  @GeneratedValue
     @Column(name = "id")
     private int id;
 
     @Column(name ="name")
     private String name;
 
-    @Column(name = "cust_service")
-    private String cust_service;
+    @Column(name = "custService")
+    private String custService;
 
     @Column(name = "website")
     private String website;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "manufacturer", fetch = FetchType.LAZY)
+    private Collection<Hardware> hardwares = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "manufacturer", fetch = FetchType.LAZY)
+    private Collection<Software> softwares = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "manufacturer", fetch = FetchType.LAZY)
+    private Collection<Audit> audits = new HashSet<>();
 
     public Manufacturer() {
     }
 
     public Manufacturer(String name, String cust_service, String website) {
         this.name = name;
-        this.cust_service = cust_service;
+        this.custService = cust_service;
         this.website = website;
     }
 
@@ -49,12 +60,12 @@ public class Manufacturer {
         this.name = name;
     }
 
-    public String getCust_service() {
-        return cust_service;
+    public String getCustService() {
+        return custService;
     }
 
-    public void setCust_service(String cust_service) {
-        this.cust_service = cust_service;
+    public void setCustService(String custService) {
+        this.custService = custService;
     }
 
     public String getWebsite() {
@@ -65,20 +76,28 @@ public class Manufacturer {
         this.website = website;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Manufacturer)) return false;
-        Manufacturer that = (Manufacturer) o;
-        return getId() == that.getId() &&
-                Objects.equals(getName(), that.getName()) &&
-                Objects.equals(getCust_service(), that.getCust_service()) &&
-                Objects.equals(getWebsite(), that.getWebsite());
+    public Collection<Hardware> getHardwares() {
+        return hardwares;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(getId(), getName(), getCust_service(), getWebsite());
+    public void setHardwares(Collection<Hardware> hardwares) {
+        this.hardwares = hardwares;
+    }
+
+    public Collection<Software> getSoftwares() {
+        return softwares;
+    }
+
+    public void setSoftwares(Collection<Software> softwares) {
+        this.softwares = softwares;
+    }
+
+    public Collection<Audit> getAudits() {
+        return audits;
+    }
+
+    public void setAudits(Collection<Audit> audits) {
+        this.audits = audits;
     }
 
     @Override
@@ -86,8 +105,36 @@ public class Manufacturer {
         return "Manufacturer{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", cust_service='" + cust_service + '\'' +
+                ", custService='" + custService + '\'' +
                 ", website='" + website + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Manufacturer)) return false;
+
+        Manufacturer that = (Manufacturer) o;
+
+        if (getId() != that.getId()) return false;
+        if (getName() != null ? !getName().equals(that.getName()) : that.getName() != null) return false;
+        if (getCustService() != null ? !getCustService().equals(that.getCustService()) : that.getCustService() != null)
+            return false;
+        if (getWebsite() != null ? !getWebsite().equals(that.getWebsite()) : that.getWebsite() != null) return false;
+        if (getHardwares() != null ? !getHardwares().equals(that.getHardwares()) : that.getHardwares() != null)
+            return false;
+        return getSoftwares() != null ? getSoftwares().equals(that.getSoftwares()) : that.getSoftwares() == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getId();
+        result = 31 * result + (getName() != null ? getName().hashCode() : 0);
+        result = 31 * result + (getCustService() != null ? getCustService().hashCode() : 0);
+        result = 31 * result + (getWebsite() != null ? getWebsite().hashCode() : 0);
+        result = 31 * result + (getHardwares() != null ? getHardwares().hashCode() : 0);
+        result = 31 * result + (getSoftwares() != null ? getSoftwares().hashCode() : 0);
+        return result;
     }
 }

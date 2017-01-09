@@ -41,7 +41,7 @@ public class EquipmentTypeServiceImplTest {
 
     @Test
     public void createEquipmentType() throws Exception {
-        EquipmentType equipmentType = new EquipmentType("Monitoooooor");
+        EquipmentType equipmentType = new EquipmentType("DOCK");
         EquipmentType equipmentTypeResult = equipmentTypeService.createEquipmentType(equipmentType);
         assertEquals(equipmentType, equipmentTypeResult);
     }
@@ -52,7 +52,7 @@ public class EquipmentTypeServiceImplTest {
         EquipmentType result = equipmentTypeService.getEquipmentByDescription("Monitoooooor");
         EquipmentType expected = new EquipmentType("Monitor");
         if(result != null) {
-            result.setDescription("Monitor");
+            result.setName("Monitor");
         } else {
             EquipmentType newEquipmentType = new EquipmentType("Monitoooooor");
             result = equipmentTypeService.createEquipmentType(expected);

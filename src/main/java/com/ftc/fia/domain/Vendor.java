@@ -1,6 +1,9 @@
 package com.ftc.fia.domain;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.Objects;
 
 /**
@@ -10,8 +13,7 @@ import java.util.Objects;
 @Table(name = "vendor")
 public class Vendor {
 
-    @Id
-    @GeneratedValue
+    @Id  @GeneratedValue
     private int id;
 
     @Column(name = "name")
@@ -22,6 +24,15 @@ public class Vendor {
 
     @Column(name = "website")
     private String website;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "vendor", fetch = FetchType.LAZY)
+    private Collection<Hardware> hardwares = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "vendor", fetch = FetchType.LAZY)
+    private Collection<Software> softwares = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "vendor", fetch = FetchType.LAZY)
+    private Collection<Audit> audits = new HashSet<>();
 
     public Vendor() {
     }
@@ -62,6 +73,30 @@ public class Vendor {
 
     public void setWebsite(String website) {
         this.website = website;
+    }
+
+    public Collection<Hardware> getHardwares() {
+        return hardwares;
+    }
+
+    public void setHardwares(Collection<Hardware> hardwares) {
+        this.hardwares = hardwares;
+    }
+
+    public Collection<Software> getSoftwares() {
+        return softwares;
+    }
+
+    public void setSoftwares(Collection<Software> softwares) {
+        this.softwares = softwares;
+    }
+
+    public Collection<Audit> getAudits() {
+        return audits;
+    }
+
+    public void setAudits(Collection<Audit> audits) {
+        this.audits = audits;
     }
 
     @Override

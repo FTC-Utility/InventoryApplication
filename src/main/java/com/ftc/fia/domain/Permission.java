@@ -11,7 +11,7 @@ import java.util.Objects;
 public class Permission {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.TABLE)
     @Column(name = "id")
     private int id;
 
@@ -23,6 +23,10 @@ public class Permission {
 
     public Permission(int id, String description) {
         this.id = id;
+        this.description = description;
+    }
+
+    public Permission(String description) {
         this.description = description;
     }
 

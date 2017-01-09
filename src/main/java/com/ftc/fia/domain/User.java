@@ -1,6 +1,8 @@
 package com.ftc.fia.domain;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
@@ -9,10 +11,11 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "user")
+@SequenceGenerator(name="seq", initialValue = 1, allocationSize = 100)
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq")
     private int id;
 
     @Column(name = "fist_name", nullable = false)
@@ -42,6 +45,15 @@ public class User {
     @Column(name = "confirmed", columnDefinition = "TINYINT")
     private boolean confirmed;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
+    private Collection<Assigned> assigneds = new ArrayList<>();
+
+    @OneToMany(mappedBy = "requestor", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Collection<Issue> RequestedIssues = new ArrayList<>();
+
+    @OneToMany(mappedBy = "resolvedBy", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Collection<Issue> resolvedIssues = new ArrayList<>();
+
 
     public User(String firstName, String lastName, String email) {
         this.firstName = firstName;
@@ -51,6 +63,31 @@ public class User {
 
     public User() {
     }
+
+    public Collection<Issue> getRequestedissues() {
+        return RequestedIssues;
+    }
+
+    public void setRequestedissues(Collection<Issue> requestedissues) {
+        RequestedIssues = requestedissues;
+    }
+
+    public Collection<Issue> getResolvedissues() {
+        return resolvedIssues;
+    }
+
+    public void setResolvedissues(Collection<Issue> resolvedissues) {
+        this.resolvedIssues = resolvedissues;
+    }
+
+    public Collection<Assigned> getAssigneds() {
+        return assigneds;
+    }
+
+    public void setAssigneds(Collection<Assigned> assigneds) {
+        this.assigneds = assigneds;
+    }
+
 
     public int getId() {
         return id;

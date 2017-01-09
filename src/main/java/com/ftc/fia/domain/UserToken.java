@@ -15,7 +15,7 @@ public class UserToken {
 
     private int id;
 
-    private TokeType tokenType;
+    private TokenType tokenType;
 
     private User user;
 
@@ -29,8 +29,17 @@ public class UserToken {
     public UserToken() {
     }
 
+    public UserToken(int id, TokeType tokenType, User user, String value, LocalDateTime expiredDate, String secretKey) {
+        this.id = id;
+        this.tokenType = tokenType;
+        this.user = user;
+        this.value = value;
+        this.expiredDate = expiredDate;
+        this.secretKey = secretKey;
+    }
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.TABLE)
     public int getId() {
         return id;
     }
@@ -41,11 +50,11 @@ public class UserToken {
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name ="toke_type_id", referencedColumnName = "id",foreignKey = @ForeignKey(name = "FkUserTokens_TokenTypeID"))
-    public TokeType getTokenType() {
+    public TokenType getTokenType() {
         return tokenType;
     }
 
-    public void setTokenType(TokeType tokenType) {
+    public void setTokenType(TokenType tokenType) {
         this.tokenType = tokenType;
     }
 

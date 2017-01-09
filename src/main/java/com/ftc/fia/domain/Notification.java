@@ -12,7 +12,7 @@ public class Notification {
 
     @Id
     @Column(name ="id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private int id;
 
     @Column(name = "description")
@@ -23,6 +23,10 @@ public class Notification {
 
     public Notification(int id, String description) {
         this.id = id;
+        this.description = description;
+    }
+
+    public Notification(String description) {
         this.description = description;
     }
 

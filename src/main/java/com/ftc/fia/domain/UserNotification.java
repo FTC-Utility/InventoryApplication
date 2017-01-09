@@ -13,7 +13,7 @@ import java.util.Objects;
 public class UserNotification {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.TABLE)
     @Column(name = "id")
     private int id;
 
@@ -37,6 +37,12 @@ public class UserNotification {
     public UserNotification() {
     }
 
+    public UserNotification(User user, Notification notification, NotificationType notificationType, boolean active) {
+        this.user = user;
+        this.notification = notification;
+        this.notificationType = notificationType;
+        this.active = active;
+    }
 
     public int getId() {
         return id;
