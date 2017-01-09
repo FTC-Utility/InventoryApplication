@@ -66,6 +66,7 @@ public class NewPasswordEntryController {
             return "errorPage";
         }
 
-        return "login";
+        System.out.println("NewPasswordEntryController.setPassword: Forward to \"login\"");
+        return "redirect:/login";
     }
 }
