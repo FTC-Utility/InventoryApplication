@@ -20,7 +20,7 @@ public class Manufacturer {
     @Column(name ="name")
     private String name;
 
-    @Column(name = "custService")
+    @Column(name = "cust_service")
     private String custService;
 
     @Column(name = "website")
@@ -43,6 +43,8 @@ public class Manufacturer {
         this.custService = cust_service;
         this.website = website;
     }
+
+
 
     public int getId() {
         return id;
