@@ -16,7 +16,7 @@
 <body>
 <div class="container">
     <div class="row">
-        <div class="col-xs-12 col-md-4 col-md-offset-4 account-wall clearfix">
+        <div class="col-xs-12 col-md-6 col-md-offset-3 account-wall clearfix">
 
             <h1 class="text-center login-title">New Password Entry</h1>
 

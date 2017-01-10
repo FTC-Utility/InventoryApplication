@@ -1,0 +1,29 @@
+/////////////////////////////////////////////////////////////
+////                                                     ////
+////    IF YOU ADD SOMETHING HERE YOU MUST ADD IT TO     ////
+////    dark-login.scss                                  ////
+////                                                     ////
+/////////////////////////////////////////////////////////////
+
+// Imports
+@import '../../variables/light-theme-variables';
+
+#login-page,
+#signup-page,
+#lost-password{
+
+  .form-signin {
+
+    label {
+      color: $form-label-color;
+    }
+  }
+
+  .account-wall {
+    background-color: $form-background;
+  }
+
+  .login-title {
+    color: $login-font-color;
+  }
+}

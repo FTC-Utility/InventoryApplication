@@ -29,7 +29,7 @@ public class UserToken {
     public UserToken() {
     }
 
-    public UserToken(int id, TokeType tokenType, User user, String value, LocalDateTime expiredDate, String secretKey) {
+    public UserToken(int id, TokenType tokenType, User user, String value, LocalDateTime expiredDate, String secretKey) {
         this.id = id;
         this.tokenType = tokenType;
         this.user = user;

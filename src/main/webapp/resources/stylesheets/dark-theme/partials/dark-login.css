@@ -1,0 +1,18 @@
+/* line 17, ../../../sass/dark-theme/partials/dark-login.scss */
+#login-page .form-signin label,
+#signup-page .form-signin label,
+#lost-password .form-signin label {
+  color: #dcdcdc;
+}
+/* line 22, ../../../sass/dark-theme/partials/dark-login.scss */
+#login-page .account-wall,
+#signup-page .account-wall,
+#lost-password .account-wall {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+/* line 26, ../../../sass/dark-theme/partials/dark-login.scss */
+#login-page .login-title,
+#signup-page .login-title,
+#lost-password .login-title {
+  color: #dcdcdc;
+}

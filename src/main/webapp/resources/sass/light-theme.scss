@@ -1,0 +1,12 @@
+@import 'compass';
+
+///////////////////////////////////////////////////////////////
+////                                                       ////
+////   IF YOU ADD A FILE HERE ADD IT TO DARK-THEME.SCSS    ////
+////                                                       ////
+///////////////////////////////////////////////////////////////
+
+// Import each of the partials needed for the light-theme output
+@import 'light-theme/partials/_light-body';
+@import 'common/common';
+@import 'light-theme/partials/light-login';
