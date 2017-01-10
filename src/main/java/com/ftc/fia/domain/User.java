@@ -32,15 +32,14 @@ public class User {
     private Company company;
 
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    //@JoinColumn(name = "notification_id",referencedColumnName = "id", foreignKey = @ForeignKey(name = "FkUserNotif_UserID"))
-    private List<UserNotification> userNotifications;
+    private List<UserNotification> userNotifications = new ArrayList<>();
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name="position_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "FkUser_PositionID"))
     private Position position;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<UserRole> user_roles;
+    private List<UserRole> user_roles= new ArrayList<>();
 
     @Column(name = "confirmed", columnDefinition = "TINYINT")
     private boolean confirmed;
@@ -54,6 +53,8 @@ public class User {
     @OneToMany(mappedBy = "resolvedBy", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Collection<Issue> resolvedIssues = new ArrayList<>();
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Collection<UserPreference> userPreferences = new ArrayList<>();
 
     public User(String firstName, String lastName, String email) {
         this.firstName = firstName;
@@ -62,6 +63,30 @@ public class User {
     }
 
     public User() {
+    }
+
+    public Collection<Issue> getRequestedIssues() {
+        return RequestedIssues;
+    }
+
+    public void setRequestedIssues(Collection<Issue> requestedIssues) {
+        RequestedIssues = requestedIssues;
+    }
+
+    public Collection<Issue> getResolvedIssues() {
+        return resolvedIssues;
+    }
+
+    public void setResolvedIssues(Collection<Issue> resolvedIssues) {
+        this.resolvedIssues = resolvedIssues;
+    }
+
+    public Collection<UserPreference> getUserPreferences() {
+        return userPreferences;
+    }
+
+    public void setUserPreferences(Collection<UserPreference> userPreferences) {
+        this.userPreferences = userPreferences;
     }
 
     public Collection<Issue> getRequestedissues() {

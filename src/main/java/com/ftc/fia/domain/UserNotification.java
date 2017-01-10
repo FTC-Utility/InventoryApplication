@@ -3,6 +3,8 @@ package com.ftc.fia.domain;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Objects;
 
 /**
@@ -17,24 +19,31 @@ public class UserNotification {
     @Column(name = "id")
     private int id;
 
-    @ManyToOne
-    @JoinColumn(name ="user_id",referencedColumnName = "id",foreignKey = @ForeignKey(name ="FkUserNotif_UserID" ))
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name ="user_id", nullable = false, referencedColumnName = "id",foreignKey = @ForeignKey(name ="FkUserNotif_UserID" ))
     private User user;
 
-    @ManyToOne
-    @JoinColumn(name = "notification_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "FkUserNotif_NotificationID"))
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "notification_id", nullable = false, referencedColumnName = "id", foreignKey = @ForeignKey(name = "FkUserNotif_NotificationID"))
     private Notification notification;
 
-    @ManyToOne
-    @JoinColumn(name = "notif_type_id", referencedColumnName = "id",foreignKey = @ForeignKey(name="FkUserNotif_NotifTypeID"))
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "notification_type_id", nullable = false, referencedColumnName = "id",foreignKey = @ForeignKey(name="FkUserNotif_NotifTypeID"))
     private NotificationType notificationType;
 
-    @Column(name = "active", columnDefinition = "TINYINT")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userNotification")
+    private Collection<Audit> audits = new ArrayList<>();
+
+    @Column(name = "active", columnDefinition = "TINYINT", nullable = false)
     @Type(type = "org.hibernate.type.NumericBooleanType")
     private boolean active;
 
 
     public UserNotification() {
+    }
+
+    public UserNotification(boolean active) {
+        this.active = active;
     }
 
     public UserNotification(User user, Notification notification, NotificationType notificationType, boolean active) {
@@ -82,6 +91,14 @@ public class UserNotification {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public Collection<Audit> getAudits() {
+        return audits;
+    }
+
+    public void setAudits(Collection<Audit> audits) {
+        this.audits = audits;
     }
 
     @Override

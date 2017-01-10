@@ -1,6 +1,8 @@
 package com.ftc.fia.domain;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Objects;
 
 /**
@@ -17,6 +19,13 @@ public class NotificationType {
 
     @Column(name = "description")
     private String description;
+
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "notificationType")
+    private Collection<UserNotification> userNotifications = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "notificationType")
+    private Collection<Audit> audits = new ArrayList<>();
 
     public NotificationType() {
     }
@@ -44,6 +53,22 @@ public class NotificationType {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Collection<UserNotification> getUserNotifications() {
+        return userNotifications;
+    }
+
+    public void setUserNotifications(Collection<UserNotification> userNotifications) {
+        this.userNotifications = userNotifications;
+    }
+
+    public Collection<Audit> getAudits() {
+        return audits;
+    }
+
+    public void setAudits(Collection<Audit> audits) {
+        this.audits = audits;
     }
 
     @Override
