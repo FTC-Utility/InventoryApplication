@@ -68,7 +68,7 @@ public class Assigned
     }
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "software_license_id", foreignKey = @ForeignKey(name = "FkAssigned_SoftLicenseID"))
+    @JoinColumn(name = "soft_license_id", foreignKey = @ForeignKey(name = "FkAssigned_SoftLicenseID"))
     public SoftwareLicense getSoftwareLicense() {
         return softwareLicense;
     }
@@ -77,7 +77,7 @@ public class Assigned
         this.softwareLicense = softwareLicense;
     }
 
-    @Column(name = "assigned_date")
+    @Column(name = "assigned_date", nullable = false)
     public LocalDate getAssignedDate() {
         return assignedDate;
     }
@@ -96,7 +96,7 @@ public class Assigned
     }
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "FkAssigned_UserID"))
+    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false, foreignKey = @ForeignKey(name = "FkAssigned_UserID"))
     public User getUser() {
         return user;
     }
@@ -104,4 +104,39 @@ public class Assigned
     public void setUser(User user) {
         this.user = user;
     }
+
+    @Override
+    public String toString() {
+        return "Assigned{" +
+                "id=" + id +
+                ", softwareLicense=" + softwareLicense +
+                ", assignedDate=" + assignedDate +
+                ", unassignedDate=" + unassignedDate +
+                ", audits=" + audits +
+                ", hardware=" + hardware +
+                ", user=" + user +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Assigned)) return false;
+
+        Assigned assigned = (Assigned) o;
+
+        if (getId() != assigned.getId()) return false;
+        if (getSoftwareLicense() != null ? !getSoftwareLicense().equals(assigned.getSoftwareLicense()) : assigned.getSoftwareLicense() != null)
+            return false;
+        if (getAssignedDate() != null ? !getAssignedDate().equals(assigned.getAssignedDate()) : assigned.getAssignedDate() != null)
+            return false;
+        if (getUnassignedDate() != null ? !getUnassignedDate().equals(assigned.getUnassignedDate()) : assigned.getUnassignedDate() != null)
+            return false;
+        if (getAudits() != null ? !getAudits().equals(assigned.getAudits()) : assigned.getAudits() != null)
+            return false;
+        if (getHardware() != null ? !getHardware().equals(assigned.getHardware()) : assigned.getHardware() != null)
+            return false;
+        return getUser() != null ? getUser().equals(assigned.getUser()) : assigned.getUser() == null;
+    }
+
 }
