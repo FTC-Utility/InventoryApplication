@@ -1,3 +1,4 @@
+/*
 import com.ftc.fia.controller.TestController;
 import com.ftc.fia.domain.TestMe;
 import com.ftc.fia.service.ITestMeService;
@@ -17,9 +18,11 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+*/
 /**
  * Created by Zelalem Belay on 12/21/2016.
- */
+ *//*
+
 
 public class DemoTester
 {
@@ -56,3 +59,4 @@ public class DemoTester
     }
 
 }
+*/
