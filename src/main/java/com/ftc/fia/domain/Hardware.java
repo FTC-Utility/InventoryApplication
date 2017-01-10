@@ -38,7 +38,7 @@ public class Hardware implements Serializable
 
     private String serial_num;
 
-    private String tag_num;
+    private String tagNum;
 
     @Type(type = "com.ftc.fia.util.LocalDateAttributeConverter")
     private LocalDate purchase_date;
@@ -58,11 +58,14 @@ public class Hardware implements Serializable
         this.positions = positions;
     }
 
+    public Hardware() {
+    }
+
     public Hardware(String name, String description, String serial_num, String tag_num, LocalDate purchase_date) {
         this.name = name;
         this.description = description;
         this.serial_num = serial_num;
-        this.tag_num = tag_num;
+        this.tagNum = tag_num;
         this.purchase_date = purchase_date;
     }
 
@@ -85,7 +88,7 @@ public class Hardware implements Serializable
                 ", manufacturer=" + manufacturer +
                 ", vendor=" + vendor +
                 ", serial_num='" + serial_num + '\'' +
-                ", tag_num='" + tag_num + '\'' +
+                ", tag_num='" + tagNum + '\'' +
                 ", purchase_date=" + purchase_date +
                 '}';
     }
@@ -118,7 +121,7 @@ public class Hardware implements Serializable
             return false;
         if (getSerial_num() != null ? !getSerial_num().equals(hardware.getSerial_num()) : hardware.getSerial_num() != null)
             return false;
-        if (getTag_num() != null ? !getTag_num().equals(hardware.getTag_num()) : hardware.getTag_num() != null)
+        if (getTagNum() != null ? !getTagNum().equals(hardware.getTagNum()) : hardware.getTagNum() != null)
             return false;
         if (getPurchase_date() != null ? !getPurchase_date().equals(hardware.getPurchase_date()) : hardware.getPurchase_date() != null)
             return false;
@@ -140,7 +143,7 @@ public class Hardware implements Serializable
         result = 31 * result + (getIssues() != null ? getIssues().hashCode() : 0);
         result = 31 * result + (getAudits() != null ? getAudits().hashCode() : 0);
         result = 31 * result + (getSerial_num() != null ? getSerial_num().hashCode() : 0);
-        result = 31 * result + (getTag_num() != null ? getTag_num().hashCode() : 0);
+        result = 31 * result + (getTagNum() != null ? getTagNum().hashCode() : 0);
         result = 31 * result + (getPurchase_date() != null ? getPurchase_date().hashCode() : 0);
         result = 31 * result + (getPositions() != null ? getPositions().hashCode() : 0);
         result = 31 * result + (getAssigneds() != null ? getAssigneds().hashCode() : 0);
@@ -157,7 +160,7 @@ public class Hardware implements Serializable
     }
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "location_id", foreignKey = @ForeignKey(name = "FkHardware_LocationID"))
+    @JoinColumn(name = "location_id", foreignKey = @ForeignKey(name = "FkHardware_LocationID"), nullable = false)
     public Location getLocation() {
         return location;
     }
@@ -167,7 +170,7 @@ public class Hardware implements Serializable
     }
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "equipment_type_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "FkHardware_EquipTypeID"))
+    @JoinColumn(name = "equipment_type_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "FkHardware_EquipTypeID"), nullable = false)
     public EquipmentType getEquipmentType() {
         return equipmentType;
     }
@@ -208,6 +211,7 @@ public class Hardware implements Serializable
         this.assigneds = assigneds;
     }
 
+    @Column(name = "name", nullable = false)
     public String getName() {
         return name;
     }
@@ -225,7 +229,7 @@ public class Hardware implements Serializable
     }
 
     @ManyToOne (cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "manufacturer_id",  foreignKey = @ForeignKey(name = "FkHardware_ManufacturerID"))
+    @JoinColumn(name = "manufacturer_id",  foreignKey = @ForeignKey(name = "FkHardware_ManufacturerID"), nullable = false)
     public Manufacturer getManufacturer() {
         return manufacturer;
     }
@@ -235,7 +239,7 @@ public class Hardware implements Serializable
     }
 
     @ManyToOne (cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "vendor_id", foreignKey = @ForeignKey(name = "FkHardware_VendorID"))
+    @JoinColumn(name = "vendor_id", foreignKey = @ForeignKey(name = "FkHardware_VendorID"), nullable = false)
     public Vendor getVendor() {
         return vendor;
     }
@@ -244,6 +248,7 @@ public class Hardware implements Serializable
         this.vendor = vendor;
     }
 
+    @Column(name = "serial_num", columnDefinition = "VARCHAR(45)", nullable = false)
     public String getSerial_num() {
         return serial_num;
     }
@@ -252,12 +257,13 @@ public class Hardware implements Serializable
         this.serial_num = serial_num;
     }
 
-    public String getTag_num() {
-        return tag_num;
+    @Column(name = "tag_num", columnDefinition = "VARCHAR(45)")
+    public String getTagNum() {
+        return tagNum;
     }
 
-    public void setTag_num(String tag_num) {
-        this.tag_num = tag_num;
+    public void setTagNum(String tag_num) {
+        this.tagNum = tag_num;
     }
 
     public LocalDate getPurchase_date() {

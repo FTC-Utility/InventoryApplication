@@ -17,11 +17,14 @@ public class Position {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @Column(name = "description")
+    @Column(name = "description", nullable = false, columnDefinition = "VARCHAR(75)")
     private String description;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "position")
     private Collection<PositionHardware> positionHardwares = new ArrayList<>();
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "position")
+    private Collection<PositionSoftware> positionSoftwares = new ArrayList<>();
 
     public Position() {
     }
@@ -36,6 +39,14 @@ public class Position {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public Collection<PositionSoftware> getPositionSoftwares() {
+        return positionSoftwares;
+    }
+
+    public void setPositionSoftwares(Collection<PositionSoftware> positionSoftwares) {
+        this.positionSoftwares = positionSoftwares;
     }
 
     public Collection<PositionHardware> getPositionHardwares() {

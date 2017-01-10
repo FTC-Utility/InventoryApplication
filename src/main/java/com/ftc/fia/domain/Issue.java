@@ -35,8 +35,28 @@ public class Issue
     private String description;
     private String resolution;
 
+    public Issue(LocalDate requestDate, LocalDate resolveDate, String description, String resolution) {
+        this.requestDate = requestDate;
+        this.resolveDate = resolveDate;
+        this.description = description;
+        this.resolution = resolution;
+    }
+
+    public Issue(SoftwareLicense softwareLicense, Hardware hardware, Collection<Audit> audits, User requestor,
+                 User resolvedBy, LocalDate requestDate, LocalDate resolveDate, String description, String resolution) {
+        this.softwareLicense = softwareLicense;
+        this.hardware = hardware;
+        this.audits = audits;
+        this.requestor = requestor;
+        this.resolvedBy = resolvedBy;
+        this.requestDate = requestDate;
+        this.resolveDate = resolveDate;
+        this.description = description;
+        this.resolution = resolution;
+    }
+
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "requestor", referencedColumnName = "id", foreignKey = @ForeignKey(name = "Fk_IssueRequestUserID"))
+    @JoinColumn(name = "requestor",nullable = false, referencedColumnName = "id", foreignKey = @ForeignKey(name = "Fk_IssueRequestUserID"))
     public User getRequestor() {
         return requestor;
     }
@@ -46,7 +66,7 @@ public class Issue
     }
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "resolved_By", referencedColumnName = "id", foreignKey = @ForeignKey(name = "Fk_IssueResolveUserID"))
+    @JoinColumn(name = "resolved_by", referencedColumnName = "id", foreignKey = @ForeignKey(name = "Fk_IssueResolveUserID"))
     public User getResolvedBy() {
         return resolvedBy;
     }
@@ -65,7 +85,7 @@ public class Issue
         this.hardware = hardware;
     }
 
-    @Column(name = "request_date")
+    @Column(name = "request_date", nullable = false)
     public LocalDate getRequestDate() {
         return requestDate;
     }
@@ -83,6 +103,7 @@ public class Issue
         this.resolveDate = resolveDate;
     }
 
+    @Column(name = "description", nullable = false)
     public String getDescription() {
         return description;
     }
@@ -129,5 +150,21 @@ public class Issue
 
     public void setSoftwareLicense(SoftwareLicense softwareLicense) {
         this.softwareLicense = softwareLicense;
+    }
+
+    @Override
+    public String toString() {
+        return "Issue{" +
+                "id=" + id +
+                ", softwareLicense=" + softwareLicense +
+                ", hardware=" + hardware +
+                ", audits=" + audits +
+                ", requestor=" + requestor +
+                ", resolvedBy=" + resolvedBy +
+                ", requestDate=" + requestDate +
+                ", resolveDate=" + resolveDate +
+                ", description='" + description + '\'' +
+                ", resolution='" + resolution + '\'' +
+                '}';
     }
 }

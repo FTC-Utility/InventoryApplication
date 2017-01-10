@@ -16,7 +16,7 @@ public class Vendor {
     @Id  @GeneratedValue
     private int id;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false, columnDefinition = "VARCHAR(125)")
     private String name;
 
     @Column(name = "cust_service")
