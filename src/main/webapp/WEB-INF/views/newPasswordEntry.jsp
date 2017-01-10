@@ -11,10 +11,10 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.8/validator.min.js"></script>
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/resources/stylesheets/light-theme.css">
 </head>
 <body>
-<div class="container">
+<div id="new-password-entry" class="container">
     <div class="row">
         <div class="col-xs-12 col-md-6 col-md-offset-3 account-wall clearfix">
 
