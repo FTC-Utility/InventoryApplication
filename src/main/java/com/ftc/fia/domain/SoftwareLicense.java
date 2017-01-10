@@ -83,16 +83,6 @@ public class SoftwareLicense
         return getExpirationDate() != null ? getExpirationDate().equals(that.getExpirationDate()) : that.getExpirationDate() == null;
     }
 
-    @Override
-    public int hashCode() {
-        int result = getId();
-        result = 31 * result + (getSoftware() != null ? getSoftware().hashCode() : 0);
-        result = 31 * result + (getLicenceNumber() != null ? getLicenceNumber().hashCode() : 0);
-        result = 31 * result + (getLicenseType() != null ? getLicenseType().hashCode() : 0);
-        result = 31 * result + getMaxUsers();
-        result = 31 * result + (getExpirationDate() != null ? getExpirationDate().hashCode() : 0);
-        return result;
-    }
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "softwareLicense", fetch = FetchType.LAZY)
     public Collection<Assigned> getAssigneds() {
@@ -122,7 +112,7 @@ public class SoftwareLicense
     }
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "software_id", foreignKey = @ForeignKey(name = "FkSoftLicense_SoftwareId"))
+    @JoinColumn(name = "software_id", foreignKey = @ForeignKey(name = "FkSoftLicense_SoftwareId"), nullable = false)
     public Software getSoftware() {
         return software;
     }
@@ -131,6 +121,7 @@ public class SoftwareLicense
         this.software = software;
     }
 
+    @Column(name = "license_num", columnDefinition = "VARCHAR(45) default 'Not Applicable'", nullable = false)
     public String getLicenceNumber() {
         return licenceNumber;
     }
@@ -140,7 +131,7 @@ public class SoftwareLicense
     }
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "license_type_id", foreignKey = @ForeignKey(name = "FkSoftLicense_LicenseTypeID"))
+    @JoinColumn(name = "license_type_id", foreignKey = @ForeignKey(name = "FkSoftLicense_LicenseTypeID"), nullable = false)
     public LicenseType getLicenseType() {
         return licenseType;
     }
@@ -149,7 +140,7 @@ public class SoftwareLicense
         this.licenseType = licenseType;
     }
 
-    @Column(name = "max_users")
+    @Column(name = "max_users", nullable = false, columnDefinition = "INT(11) default '1'")
     public int getMaxUsers() {
         return maxUsers;
     }
