@@ -26,7 +26,7 @@
                 <div class="form-group">
                     <label for="Email">Email Address:</label>
                     <input type="email" id="email" name="email" class="form-control" placeholder="example@mail.com"
-                           pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                           pattern="[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
                            title="Must have the pattern similar to 'example@mail.com' pattern."
                            data-error="Must have the pattern similar to 'example@mail.com' pattern."
                            autofocus required>
