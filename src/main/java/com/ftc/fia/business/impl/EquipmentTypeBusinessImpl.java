@@ -1,6 +1,6 @@
 package com.ftc.fia.business.impl;
 
-import com.ftc.fia.business.IEquipmentTypeBuisness;
+import com.ftc.fia.business.IEquipmentTypeBusiness;
 import com.ftc.fia.domain.EquipmentType;
 import com.ftc.fia.repository.IEquipmentTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,7 @@ import java.util.List;
  */
 
 @Component
-public class EquipmentTypeBuisnessImpl implements IEquipmentTypeBuisness {
+public class EquipmentTypeBusinessImpl implements IEquipmentTypeBusiness {
 
     @Autowired
     IEquipmentTypeRepository equipmentTypeRepository;

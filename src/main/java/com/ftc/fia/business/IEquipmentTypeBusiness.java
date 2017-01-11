@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by Eyuel Tadesse on 1/3/2017.
  */
-public interface IEquipmentTypeBuisness {
+public interface IEquipmentTypeBusiness {
     EquipmentType getEquipmentTypeById(int id);
     EquipmentType getEquipmentTypeByDescription(String description);
     List<EquipmentType> findAll();
