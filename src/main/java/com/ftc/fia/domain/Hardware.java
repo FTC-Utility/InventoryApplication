@@ -7,7 +7,6 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 /**
  * Created by Zelalem Belay on 12/30/2016.
@@ -43,20 +42,7 @@ public class Hardware implements Serializable
     @Type(type = "com.ftc.fia.util.LocalDateAttributeConverter")
     private LocalDate purchase_date;
 
-    private Collection<Position> positions = new ArrayList<>();
-
     private Collection<Assigned> assigneds = new ArrayList<>();
-
-    @OneToMany
-    @JoinTable(name = "position_hardware", joinColumns = @JoinColumn(name = "equipment_type_id"),
-            inverseJoinColumns = @JoinColumn(name = "position_id"))
-    public Collection<Position> getPositions() {
-        return positions;
-    }
-
-    public void setPositions(List<Position> positions) {
-        this.positions = positions;
-    }
 
     public Hardware() {
     }
@@ -93,62 +79,6 @@ public class Hardware implements Serializable
                 '}';
     }
 
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Hardware)) return false;
-
-        Hardware hardware = (Hardware) o;
-
-        if (getId() != hardware.getId()) return false;
-        if (getName() != null ? !getName().equals(hardware.getName()) : hardware.getName() != null) return false;
-        if (getDescription() != null ? !getDescription().equals(hardware.getDescription()) : hardware.getDescription() != null)
-            return false;
-        if (getLocation() != null ? !getLocation().equals(hardware.getLocation()) : hardware.getLocation() != null)
-            return false;
-        if (getEquipmentType() != null ? !getEquipmentType().equals(hardware.getEquipmentType()) : hardware.getEquipmentType() != null)
-            return false;
-        if (getManufacturer() != null ? !getManufacturer().equals(hardware.getManufacturer()) : hardware.getManufacturer() != null)
-            return false;
-        if (getVendor() != null ? !getVendor().equals(hardware.getVendor()) : hardware.getVendor() != null)
-            return false;
-        if (getHardwareStatus() != null ? !getHardwareStatus().equals(hardware.getHardwareStatus()) : hardware.getHardwareStatus() != null)
-            return false;
-        if (getIssues() != null ? !getIssues().equals(hardware.getIssues()) : hardware.getIssues() != null)
-            return false;
-        if (getAudits() != null ? !getAudits().equals(hardware.getAudits()) : hardware.getAudits() != null)
-            return false;
-        if (getSerial_num() != null ? !getSerial_num().equals(hardware.getSerial_num()) : hardware.getSerial_num() != null)
-            return false;
-        if (getTagNum() != null ? !getTagNum().equals(hardware.getTagNum()) : hardware.getTagNum() != null)
-            return false;
-        if (getPurchase_date() != null ? !getPurchase_date().equals(hardware.getPurchase_date()) : hardware.getPurchase_date() != null)
-            return false;
-        if (getPositions() != null ? !getPositions().equals(hardware.getPositions()) : hardware.getPositions() != null)
-            return false;
-        return getAssigneds() != null ? getAssigneds().equals(hardware.getAssigneds()) : hardware.getAssigneds() == null;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = getId();
-        result = 31 * result + (getName() != null ? getName().hashCode() : 0);
-        result = 31 * result + (getDescription() != null ? getDescription().hashCode() : 0);
-        result = 31 * result + (getLocation() != null ? getLocation().hashCode() : 0);
-        result = 31 * result + (getEquipmentType() != null ? getEquipmentType().hashCode() : 0);
-        result = 31 * result + (getManufacturer() != null ? getManufacturer().hashCode() : 0);
-        result = 31 * result + (getVendor() != null ? getVendor().hashCode() : 0);
-        result = 31 * result + (getHardwareStatus() != null ? getHardwareStatus().hashCode() : 0);
-        result = 31 * result + (getIssues() != null ? getIssues().hashCode() : 0);
-        result = 31 * result + (getAudits() != null ? getAudits().hashCode() : 0);
-        result = 31 * result + (getSerial_num() != null ? getSerial_num().hashCode() : 0);
-        result = 31 * result + (getTagNum() != null ? getTagNum().hashCode() : 0);
-        result = 31 * result + (getPurchase_date() != null ? getPurchase_date().hashCode() : 0);
-        result = 31 * result + (getPositions() != null ? getPositions().hashCode() : 0);
-        result = 31 * result + (getAssigneds() != null ? getAssigneds().hashCode() : 0);
-        return result;
-    }
 
     @Id @GeneratedValue
     public int getId() {
@@ -196,10 +126,6 @@ public class Hardware implements Serializable
 
     public void setAudits(Collection<Audit> audits) {
         this.audits = audits;
-    }
-
-    public void setPositions(Collection<Position> positions) {
-        this.positions = positions;
     }
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "hardware", fetch = FetchType.LAZY)
@@ -274,4 +200,56 @@ public class Hardware implements Serializable
         this.purchase_date = purchase_date;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Hardware)) return false;
+
+        Hardware hardware = (Hardware) o;
+
+        if (getId() != hardware.getId()) return false;
+        if (getName() != null ? !getName().equals(hardware.getName()) : hardware.getName() != null) return false;
+        if (getDescription() != null ? !getDescription().equals(hardware.getDescription()) : hardware.getDescription() != null)
+            return false;
+        if (getLocation() != null ? !getLocation().equals(hardware.getLocation()) : hardware.getLocation() != null)
+            return false;
+        if (getEquipmentType() != null ? !getEquipmentType().equals(hardware.getEquipmentType()) : hardware.getEquipmentType() != null)
+            return false;
+        if (getManufacturer() != null ? !getManufacturer().equals(hardware.getManufacturer()) : hardware.getManufacturer() != null)
+            return false;
+        if (getVendor() != null ? !getVendor().equals(hardware.getVendor()) : hardware.getVendor() != null)
+            return false;
+        if (getHardwareStatus() != null ? !getHardwareStatus().equals(hardware.getHardwareStatus()) : hardware.getHardwareStatus() != null)
+            return false;
+        if (getIssues() != null ? !getIssues().equals(hardware.getIssues()) : hardware.getIssues() != null)
+            return false;
+        if (getAudits() != null ? !getAudits().equals(hardware.getAudits()) : hardware.getAudits() != null)
+            return false;
+        if (getSerial_num() != null ? !getSerial_num().equals(hardware.getSerial_num()) : hardware.getSerial_num() != null)
+            return false;
+        if (getTagNum() != null ? !getTagNum().equals(hardware.getTagNum()) : hardware.getTagNum() != null)
+            return false;
+        if (getPurchase_date() != null ? !getPurchase_date().equals(hardware.getPurchase_date()) : hardware.getPurchase_date() != null)
+            return false;
+        return getAssigneds() != null ? getAssigneds().equals(hardware.getAssigneds()) : hardware.getAssigneds() == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getId();
+        result = 31 * result + (getName() != null ? getName().hashCode() : 0);
+        result = 31 * result + (getDescription() != null ? getDescription().hashCode() : 0);
+        result = 31 * result + (getLocation() != null ? getLocation().hashCode() : 0);
+        result = 31 * result + (getEquipmentType() != null ? getEquipmentType().hashCode() : 0);
+        result = 31 * result + (getManufacturer() != null ? getManufacturer().hashCode() : 0);
+        result = 31 * result + (getVendor() != null ? getVendor().hashCode() : 0);
+        result = 31 * result + (getHardwareStatus() != null ? getHardwareStatus().hashCode() : 0);
+        result = 31 * result + (getIssues() != null ? getIssues().hashCode() : 0);
+        result = 31 * result + (getAudits() != null ? getAudits().hashCode() : 0);
+        result = 31 * result + (getSerial_num() != null ? getSerial_num().hashCode() : 0);
+        result = 31 * result + (getTagNum() != null ? getTagNum().hashCode() : 0);
+        result = 31 * result + (getPurchase_date() != null ? getPurchase_date().hashCode() : 0);
+        result = 31 * result + (getAssigneds() != null ? getAssigneds().hashCode() : 0);
+        return result;
+    }
 }

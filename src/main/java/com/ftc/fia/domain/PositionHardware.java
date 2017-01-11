@@ -12,10 +12,10 @@ import java.util.Collection;
 @Table(name = "position_hardware")
 public class PositionHardware
 {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue
     private int id;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "position_id", referencedColumnName = "id", nullable = false, foreignKey = @ForeignKey(name = "FkPosHardware_PositionID"))
     private Position position;
 
@@ -26,7 +26,7 @@ public class PositionHardware
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "positionHardware", fetch = FetchType.LAZY)
     private Collection<Audit> audits = new ArrayList<>();
 
-    @Column(name = "quantity", nullable = false)
+    @Column(name = "quantity", nullable = false, columnDefinition = "INT(11) default 1")
     private int quantity;
 
     public PositionHardware() {
@@ -74,5 +74,43 @@ public class PositionHardware
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof PositionHardware)) return false;
+
+        PositionHardware that = (PositionHardware) o;
+
+        if (getId() != that.getId()) return false;
+        if (getQuantity() != that.getQuantity()) return false;
+        if (getPosition() != null ? !getPosition().equals(that.getPosition()) : that.getPosition() != null)
+            return false;
+        if (getEquipmentType() != null ? !getEquipmentType().equals(that.getEquipmentType()) : that.getEquipmentType() != null)
+            return false;
+        return getAudits() != null ? getAudits().equals(that.getAudits()) : that.getAudits() == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getId();
+        result = 31 * result + (getPosition() != null ? getPosition().hashCode() : 0);
+        result = 31 * result + (getEquipmentType() != null ? getEquipmentType().hashCode() : 0);
+        result = 31 * result + (getAudits() != null ? getAudits().hashCode() : 0);
+        result = 31 * result + getQuantity();
+        return result;
+    }
+
+
+    @Override
+    public String toString() {
+        return "PositionHardware{" +
+                "id=" + id +
+                ", position=" + position +
+                ", equipmentType=" + equipmentType +
+                ", audits=" + audits +
+                ", quantity=" + quantity +
+                '}';
     }
 }
