@@ -4,11 +4,6 @@
     <option name="compassConfigPath" value="$MODULE_DIR$/../../config.rb" />
     <option name="compassExecutableFilePath" value="C:/Ruby22/bin/compass.bat" />
     <option name="compassSupportEnabled" value="true" />
-    <option name="importPaths">
-      <list>
-        <option value="C:/Ruby22/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets" />
-      </list>
-    </option>
   </component>
   <component name="FacetManager">
     <facet type="web" name="Web Gradle : InventoryApplication.war">

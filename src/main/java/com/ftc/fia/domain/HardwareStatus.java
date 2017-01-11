@@ -16,7 +16,7 @@ public class HardwareStatus {
     @Id @GeneratedValue
     private int id;
 
-    @Column(name = "description")
+    @Column(name = "description", nullable = false, columnDefinition = "VARCHAR(75)")
     private String description;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "hardwareStatus")

@@ -1,14 +1,14 @@
 package com.ftc.fia.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Objects;
 
 /**
  * Created by Eyuel Tadesse on 12/28/2016.
  */
+
 @Entity
 @Table(name = "audit_event")
 public class AuditEvent {
@@ -16,8 +16,11 @@ public class AuditEvent {
     @Id
     private int id;
 
-    @Column(name = "description")
+    @Column(name = "description", nullable = false, columnDefinition = "VARCHAR(75)")
     private String description;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "auditEvent")
+    private Collection<Audit> audits = new ArrayList<>();
 
     public AuditEvent() {
     }
@@ -41,6 +44,14 @@ public class AuditEvent {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Collection<Audit> getAudits() {
+        return audits;
+    }
+
+    public void setAudits(Collection<Audit> audits) {
+        this.audits = audits;
     }
 
     @Override

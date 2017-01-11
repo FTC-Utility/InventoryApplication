@@ -17,7 +17,7 @@ public class Software {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false, columnDefinition = "VARCHAR(75)")
     private String name;
 
     @OneToMany(mappedBy = "software", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -27,12 +27,15 @@ public class Software {
     private Collection<Audit> audits = new HashSet<>();
 
     @ManyToOne (cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "manufacturer_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "FkSoftware_ManufacturerId"))
+    @JoinColumn(name = "manufacturer_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "FkSoftware_ManufacturerId"), nullable = false)
     Manufacturer manufacturer;
 
     @ManyToOne (cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "vendor_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "FkSoftware_VendorFk"))
+    @JoinColumn(name = "vendor_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "FkSoftware_VendorFk"), nullable = false)
     Vendor vendor;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "software", fetch = FetchType.LAZY)
+    private Collection<PositionSoftware> positionSoftwares = new HashSet<>();
 
     public int getId() {
         return id;
@@ -51,6 +54,38 @@ public class Software {
     }
 
     public Software() {
+    }
+
+    public Collection<Audit> getAudits() {
+        return audits;
+    }
+
+    public void setAudits(Collection<Audit> audits) {
+        this.audits = audits;
+    }
+
+    public Manufacturer getManufacturer() {
+        return manufacturer;
+    }
+
+    public void setManufacturer(Manufacturer manufacturer) {
+        this.manufacturer = manufacturer;
+    }
+
+    public Vendor getVendor() {
+        return vendor;
+    }
+
+    public void setVendor(Vendor vendor) {
+        this.vendor = vendor;
+    }
+
+    public Collection<PositionSoftware> getPositionSoftwares() {
+        return positionSoftwares;
+    }
+
+    public void setPositionSoftwares(Collection<PositionSoftware> positionSoftwares) {
+        this.positionSoftwares = positionSoftwares;
     }
 
     public Collection<SoftwareLicense> getSoftwareLicenses() {

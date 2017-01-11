@@ -16,17 +16,17 @@ public class PositionHardware
     private int id;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "position_id", referencedColumnName = "id")
+    @JoinColumn(name = "position_id", referencedColumnName = "id", nullable = false, foreignKey = @ForeignKey(name = "FkPosHardware_PositionID"))
     private Position position;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "equipment_type_id", referencedColumnName = "id")
+    @JoinColumn(name = "equipment_type_id", referencedColumnName = "id", nullable = false, foreignKey = @ForeignKey(name = "FkPosHardware_EquipTypeID"))
     private EquipmentType equipmentType;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "positionHardware", fetch = FetchType.LAZY)
     private Collection<Audit> audits = new ArrayList<>();
 
-    @Column(name = "quantity")
+    @Column(name = "quantity", nullable = false)
     private int quantity;
 
     public PositionHardware() {

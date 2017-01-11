@@ -1,7 +1,9 @@
 package com.ftc.fia.domain;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Objects;
 
 /**
@@ -17,26 +19,35 @@ public class UserPreference {
 
     @Lob
     @Column(name = "profile_Pic")
-    private Byte[] profilePic;
+    private byte[] profilePic;
 
-    @Column(name = "send_user_notif")
+    @Column(name = "send_user_notif", nullable = false)
     private boolean sendUserNotif;
 
-    @Column(name = "send_admin_notif")
+    @Column(name = "send_admin_notif", nullable = false)
     private boolean sendAdminNotif;
 
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userPreference")
+    private Collection<Audit> audits = new ArrayList<>();
+
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name="user_id", referencedColumnName = "id",foreignKey = @ForeignKey(name = "FkUserPref_UserId"))
+    @JoinColumn(name="user_id", nullable = false, referencedColumnName = "id",foreignKey = @ForeignKey(name = "FkUserPref_UserId"))
     private User user;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name="site_skin_name", referencedColumnName = "id", foreignKey = @ForeignKey(name = "FkUserPref_SiteSkinID"))
+    @JoinColumn(name="site_skin_name",  nullable = false, referencedColumnName = "id", foreignKey = @ForeignKey(name = "FkUserPref_SiteSkinID"))
     private WebsiteSkin websiteSkin;
 
     public UserPreference() {
     }
 
-    public UserPreference(Byte[] profilePic, boolean sendUserNotif, boolean sendAdminNotif, User user, WebsiteSkin websiteSkin) {
+    public UserPreference(byte[] profilePic, boolean sendUserNotif, boolean sendAdminNotif) {
+        this.profilePic = profilePic;
+        this.sendUserNotif = sendUserNotif;
+        this.sendAdminNotif = sendAdminNotif;
+    }
+
+    public UserPreference(byte[] profilePic, boolean sendUserNotif, boolean sendAdminNotif, User user, WebsiteSkin websiteSkin) {
         this.profilePic = profilePic;
         this.sendUserNotif = sendUserNotif;
         this.sendAdminNotif = sendAdminNotif;
@@ -52,11 +63,11 @@ public class UserPreference {
         this.id = id;
     }
 
-    public Byte[] getProfilePic() {
+    public byte[] getProfilePic() {
         return profilePic;
     }
 
-    public void setProfilePic(Byte[] profilePic) {
+    public void setProfilePic(byte[] profilePic) {
         this.profilePic = profilePic;
     }
 
@@ -90,6 +101,14 @@ public class UserPreference {
 
     public void setWebsiteSkin(WebsiteSkin websiteSkin) {
         this.websiteSkin = websiteSkin;
+    }
+
+    public Collection<Audit> getAudits() {
+        return audits;
+    }
+
+    public void setAudits(Collection<Audit> audits) {
+        this.audits = audits;
     }
 
     @Override
