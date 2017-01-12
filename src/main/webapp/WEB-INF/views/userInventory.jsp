@@ -15,6 +15,9 @@
 </head>
 <body>
 <div class="container">
+
+    <form:form action="processUserInventory" method="post">
+
     <c:if test="${empty userEquipmentList}">
         <h2>It looks like you have no equipment. Please add some.</h2>
     </c:if>
@@ -74,7 +77,7 @@
     </c:if>
 
     <br/>
-    <form:form action="processUserInventory" method="post">
+
         <input type="submit" class="btn btn-primary" name="addEquipment" value="Add Equipment">
     </form:form>
 </div>
