@@ -72,7 +72,7 @@ public class UserInventoryHomePageController {
             equipment.setDefective("false");
             equipment.setDescription("Laptop");
             equipment.setLocation("Melbourne, FL");
-            equipment.setSerialNumber("9876543");
+            equipment.setSerialNumber("9876546");
             equipment.setVendor("Asus");
             userEquipmentList.add(equipment);
         }
