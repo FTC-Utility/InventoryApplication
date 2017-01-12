@@ -31,6 +31,12 @@ public class UserInventoryHomePageController {
         return "userInventory";
     }
 
+    @RequestMapping(value="/processUserInventory", params="addEquipment", method=RequestMethod.POST)
+    public String addEquipment(Model model) {
+        System.out.println("UserInventoryHomePageController.addEquipment: Executed!");
+        return "addEquipment";
+    }
+
     private List<UserInventoryEquipmentDto> getUserEquipmentList(String userEmail) {
         List<UserInventoryEquipmentDto> userEquipmentList = new ArrayList<UserInventoryEquipmentDto>();
 
