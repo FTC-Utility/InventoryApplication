@@ -12,5 +12,5 @@ import java.util.List;
 @Repository
 public interface IUserTokenRepository extends JpaRepository<UserToken, Integer>   {
 
-    public List<UserToken> findByValue(String value);
+    List<UserToken> findByValue(String value);
 }
