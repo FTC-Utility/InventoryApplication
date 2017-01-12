@@ -14,7 +14,9 @@ public class EquipmentType {
 
     @Id
     @Column(name="id")
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue(strategy = GenerationType.TABLE, generator = "equipmentGen")
+    @TableGenerator(name = "equipmentGen",
+                    table = "hibernate_sequences",pkColumnName = "sequence_name",pkColumnValue = "equipment_Type",valueColumnName = "next_val", initialValue = 1, allocationSize = 0)
     private int id;
 
     @Column(name = "name")

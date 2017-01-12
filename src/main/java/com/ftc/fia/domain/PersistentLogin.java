@@ -11,10 +11,8 @@ import java.util.Date;
  * Created by Eyuel Tadesse on 12/30/2016.
  */
 @Entity
-@Table(name ="persistent_login")
+@Table(name ="persistent_logins")
 public class PersistentLogin {
-
-    int id;
 
     private String series;
 

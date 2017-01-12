@@ -41,7 +41,7 @@ public class EquipmentTypeServiceImplTest {
 
     @Test
     public void createEquipmentType() throws Exception {
-        EquipmentType equipmentType = new EquipmentType("MousexxxTesst");
+        EquipmentType equipmentType = new EquipmentType("MousexxxTessts");
         EquipmentType equipmentTypeResult = equipmentTypeService.createEquipmentType(equipmentType);
         assertEquals(equipmentType, equipmentTypeResult);
     }

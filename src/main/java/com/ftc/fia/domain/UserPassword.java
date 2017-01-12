@@ -57,7 +57,7 @@ public class UserPassword {
         this.passwordHash = passwordHash;
     }
 
-    @Column(name = "created_date",columnDefinition = "TIMESTAMP")
+    @Column(name = "create_date",columnDefinition = "TIMESTAMP")
     public LocalDateTime getCreatedDate() {
         return createdDate;
     }
