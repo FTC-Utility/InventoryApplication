@@ -15,15 +15,16 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 @ComponentScan(basePackages = "com.ftc.fia")
 @PropertySource(value = {"classpath:application.properties"})
 @EnableCaching
+
 public class AppConfig {
 
-    @Bean
-    public static PropertySourcesPlaceholderConfigurer placeholderConfigurer() {
-        return new PropertySourcesPlaceholderConfigurer();
-    }
+  @Bean
+  public static PropertySourcesPlaceholderConfigurer placeholderConfigurer() {
+    return new PropertySourcesPlaceholderConfigurer();
+  }
 
-    @Bean
-    public CacheManager cacheManager() {
-        return new ConcurrentMapCacheManager();
-    }
+  @Bean
+  public CacheManager cacheManager() {
+    return new ConcurrentMapCacheManager();
+  }
 }

@@ -46,6 +46,14 @@ public class WebsiteRole {
         this.description = description;
     }
 
+    public String getType() {
+        return description;
+    }
+
+    public void setType(String description) {
+        this.description = description;
+    }
+
 /*    public List<UserRole> getUser_role() {
         return user_role;
     }
