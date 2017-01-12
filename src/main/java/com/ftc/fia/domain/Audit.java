@@ -1,5 +1,6 @@
 package com.ftc.fia.domain;
 
+
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
@@ -38,6 +39,16 @@ public class Audit
     private WebsiteSkin websiteSkin;
     private NotificationType notificationType;
     private Notification notification;
+    private User user;
+    private RolePermission rolePermission;
+    private UserPassword userPassword;
+    private TokenType tokenType;
+    private UserToken usertoken;
+    private Company company;
+    private UserRole userRole;
+    private Position position;
+    private PersistentLogin persistent_login_series;
+    private Permission permission;
 
     public Audit(LocalDate date, String oldValue, String newValue) {
         this.date = date;
@@ -271,5 +282,105 @@ public class Audit
 
     public void setAssigned(Assigned assigned) {
         this.assigned = assigned;
+    }
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "FkAudit_UserID"),referencedColumnName = "id")
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "role_permission_id", foreignKey = @ForeignKey(name = "FkAudit_RolePermissionID"),referencedColumnName = "id")
+    public RolePermission getRolePermission() {
+        return rolePermission;
+    }
+
+    public void setRolePermission(RolePermission rolePermission) {
+        this.rolePermission = rolePermission;
+    }
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_password_id", foreignKey = @ForeignKey(name = "FkAudit_UserPasswordID"), referencedColumnName = "id")
+    public UserPassword getUserPassword() {
+        return userPassword;
+    }
+
+    public void setUserPassword(UserPassword userPassword) {
+        this.userPassword = userPassword;
+    }
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "token_type_id", foreignKey = @ForeignKey(name ="FkAudit_TokenTypeID"), referencedColumnName = "id")
+    public TokenType getTokenType() {
+        return tokenType;
+    }
+
+    public void setTokenType(TokenType tokenType) {
+        this.tokenType = tokenType;
+    }
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_token_id", foreignKey = @ForeignKey(name = "FkAudit_UserTokenID"), referencedColumnName = "id")
+    public UserToken getUsertoken() {
+        return usertoken;
+    }
+
+    public void setUsertoken(UserToken usertoken) {
+        this.usertoken = usertoken;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "company_id", foreignKey = @ForeignKey(name = "FkAudit_CompanyID"), referencedColumnName = "id")
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "user_role_id", foreignKey = @ForeignKey(name = "FkAudit_UserRoleID"), referencedColumnName = "id")
+    public UserRole getUserRole() {
+        return userRole;
+    }
+
+    public void setUserRole(UserRole userRole) {
+        this.userRole = userRole;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "position_id", foreignKey = @ForeignKey(name = "FkAudit_PositionID"), referencedColumnName = "id")
+    public Position getPosition() {
+        return position;
+    }
+
+    public void setPosition(Position position) {
+        this.position = position;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "persistent_login_series", foreignKey = @ForeignKey(name = "FkAudit_PersistLoginSeries"), referencedColumnName = "series")
+    public PersistentLogin getPersistent_login_series() {
+        return persistent_login_series;
+    }
+
+    public void setPersistent_login_series(PersistentLogin persistent_login_series) {
+        this.persistent_login_series = persistent_login_series;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "permission_id", foreignKey = @ForeignKey(name = "FkAudit_PermissionID"), referencedColumnName = "id")
+    public Permission getPermission() {
+        return permission;
+    }
+
+    public void setPermission(Permission permission) {
+        this.permission = permission;
     }
 }
