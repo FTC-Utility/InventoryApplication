@@ -1,6 +1,6 @@
 package com.ftc.fia.service.impl;
 
-import com.ftc.fia.business.IEquipmentTypeBuisness;
+import com.ftc.fia.business.IEquipmentTypeBusiness;
 import com.ftc.fia.domain.EquipmentType;
 import com.ftc.fia.service.IEquipmentTypeService;
 import org.slf4j.Logger;
@@ -21,29 +21,29 @@ public class EquipmentTypeServiceImpl implements IEquipmentTypeService {
     static final Logger logger = LoggerFactory.getLogger(EquipmentTypeServiceImpl.class);
 
     @Autowired
-    IEquipmentTypeBuisness equipmentTypeBuisness;
+    IEquipmentTypeBusiness equipmentTypeBusiness;
 
 
     @Override
     public EquipmentType getEquipmentTypeById(int id) {
-        return equipmentTypeBuisness.getEquipmentTypeById(id);
+        return equipmentTypeBusiness.getEquipmentTypeById(id);
     }
 
     @Override
     public EquipmentType getEquipmentByDescription(String description) {
         logger.info("Getting EquipmentType By Description : {}",description);
-        return equipmentTypeBuisness.getEquipmentTypeByDescription(description);
+        return equipmentTypeBusiness.getEquipmentTypeByDescription(description);
     }
 
     public List<EquipmentType> findAll() {
         logger.info("Getting all EquipmentType","findallEquipmentType");
-        return equipmentTypeBuisness.findAll();
+        return equipmentTypeBusiness.findAll();
     }
 
     @Override
     public EquipmentType createEquipmentType(EquipmentType equipmentType) {
         logger.info("Creating EquipmentType {}",equipmentType);
-        return equipmentTypeBuisness.createEquipmentType(equipmentType);
+        return equipmentTypeBusiness.createEquipmentType(equipmentType);
     }
 
     @Override
@@ -55,6 +55,6 @@ public class EquipmentTypeServiceImpl implements IEquipmentTypeService {
     @Override
     public void deleteEquipmentType(EquipmentType equipmentType) {
         logger.info("Deleting EquipmentType",equipmentType);
-        equipmentTypeBuisness.deleteEquipmentType(equipmentType);
+        equipmentTypeBusiness.deleteEquipmentType(equipmentType);
     }
 }
