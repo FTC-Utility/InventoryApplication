@@ -44,7 +44,14 @@ public class Manufacturer {
         this.website = website;
     }
 
-
+    public Manufacturer(String name, String custService, String website, Collection<Hardware> hardwares, Collection<Software> softwares, Collection<Audit> audits) {
+        this.name = name;
+        this.custService = custService;
+        this.website = website;
+        this.hardwares = hardwares;
+        this.softwares = softwares;
+        this.audits = audits;
+    }
 
     public int getId() {
         return id;
