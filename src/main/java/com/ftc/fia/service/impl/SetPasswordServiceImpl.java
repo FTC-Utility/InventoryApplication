@@ -5,14 +5,15 @@ import com.ftc.fia.dto.NewPasswordEntryDto;
 import com.ftc.fia.service.ISetPasswordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashMap;
 import java.util.Map;
 
 /**
  * Created by FPerez on 1/6/2017.
  */
 @Service
+@Transactional
 public class SetPasswordServiceImpl implements ISetPasswordService {
 
     @Autowired
