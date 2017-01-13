@@ -11,6 +11,6 @@ public class SecurityWebApplicationInitializer extends AbstractSecurityWebApplic
     Add a ContextLoaderListener that loads the SecurityConfiguration.
    */
   public SecurityWebApplicationInitializer() {
-    super(SecurityConfiguration.class);
+    //super(SecurityConfiguration.class);
   }
 }

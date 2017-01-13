@@ -20,7 +20,7 @@
 
             <h1 class="text-center login-title">Login</h1>
 
-            <form action="signIn" id="signIn" method="post" class="form-signin">
+            <form action="signIn" id="signIn" method="POST" class="form-signin">
                 <a href="newUserRegisterHere"><b>New User? Register Here</b></a>
                 <br/><br/>
 

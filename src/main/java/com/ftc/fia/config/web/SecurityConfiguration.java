@@ -23,10 +23,9 @@ import org.springframework.security.web.authentication.rememberme.PersistentToke
  */
 @Configuration
 @EnableWebSecurity
-
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
   @Autowired
-  @Qualifier("userDetailsService")
+//  @Qualifier("userDetailsServiceImpl")
   UserDetailsService userDetailsService;
 
   @Autowired
@@ -53,6 +52,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         .passwordParameter("password").and().rememberMe().rememberMeParameter("remember-me")
         .tokenRepository(tokenRepository).tokenValiditySeconds(86400).and().csrf().and().exceptionHandling()
         .accessDeniedPage("/Access_Denied");
+
+    http.authorizeRequests().antMatchers("/login").anonymous();
   }
 
   @Bean
