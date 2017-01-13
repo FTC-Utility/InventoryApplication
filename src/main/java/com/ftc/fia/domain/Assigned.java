@@ -34,6 +34,16 @@ public class Assigned
         this.unassignedDate = unassignedDate;
     }
 
+    public Assigned(int id, SoftwareLicense softwareLicense, LocalDate assignedDate, LocalDate unassignedDate, Collection<Audit> audits, Hardware hardware, User user) {
+        this.id = id;
+        this.softwareLicense = softwareLicense;
+        this.assignedDate = assignedDate;
+        this.unassignedDate = unassignedDate;
+        this.audits = audits;
+        this.hardware = hardware;
+        this.user = user;
+    }
+
     private User user;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "assigned", fetch = FetchType.LAZY)
@@ -113,7 +123,7 @@ public class Assigned
                 ", assignedDate=" + assignedDate +
                 ", unassignedDate=" + unassignedDate +
                 ", audits=" + audits +
-                ", hardware=" + hardware +
+                ", hardware=" + this.getHardware()  +
                 ", user=" + user +
                 '}';
     }
