@@ -1,5 +1,13 @@
 package com.ftc.fia.controller;
 
+import com.ftc.fia.domain.PersistentLogin;
+import com.ftc.fia.domain.User;
+import com.ftc.fia.domain.WebsiteRole;
+import com.ftc.fia.repository.IEquipmentTypeRepository;
+import com.ftc.fia.service.IEquipmentTypeService;
+import com.ftc.fia.service.IPersistentLoginService;
+import com.ftc.fia.service.IUserService;
+import com.ftc.fia.service.IWebsiteRoleService;
 import com.ftc.fia.service.impl.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationTrustResolver;
@@ -13,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+
 /**
  * Created by FPerez on 12/30/2016.
  */
@@ -25,19 +35,55 @@ public class LoginController {
 //  @Autowired
   UserDetailsService userDetailsService = new UserDetailsServiceImpl();
 
+  @Autowired
+  IPersistentLoginService iPersistentLoginService;
+
+  @Autowired
+  IUserService iUserService;
+
+  @Autowired
+  IWebsiteRoleService iWebsiteRoleService;
+
+  @Autowired
+  IEquipmentTypeService iEquipmentTypeService;
+
   @RequestMapping(value = "/login", method = RequestMethod.GET)
   public String login(Model model) {
     // Modified by Barrero on 1/9/2017 to work with Spring Security.
-
-//    UserDetailsServiceImpl userDetailsService;
-
-//    System.out.println(((UserDetailsServiceImpl) userDetailsService).user);
-
-    UserDetails user = userDetailsService.loadUserByUsername("handro1104@gmail.com");
     if (isCurrentAuthenticationAnonymous()) {
+//      testJPA();
       return "login";
     } else {
       return "redirect:/test";
+    }
+  }
+
+  private void testJPA() {
+    PersistentLogin p1 = iPersistentLoginService.getPersistentLoginBySeries("gfd");
+    System.out.println("PersistentLogin series: " + p1.getSeries());
+    PersistentLogin p2 = iPersistentLoginService.getPersistentLoginByUserId(1);
+    System.out.println("PersistentLogin series: " + p2.getSeries());
+
+    User u = iUserService.findBySSO("handro1104@gmail.com");
+    System.out.println("\nUser email: " + u.getEmail());
+    List<User> l = iUserService.findAllUsers();
+    for(User u1:l){
+      System.out.println("User email: " + u1.getEmail());
+    }
+    boolean b = iUserService.isUserSSOUnique(1, "hfg");
+    System.out.println("\nUser with id: " + 1 + " and email: hfg unique:" + b);
+
+    WebsiteRole w1 = iWebsiteRoleService.findById(1);
+    System.out.println("\nWebsiteRole1 description: " + w1.getDescription());
+    List<WebsiteRole> l2 = iWebsiteRoleService.findAll();
+    for(WebsiteRole w3:l2){
+      System.out.println("WebsiteRole2 description: " + w3.getDescription());
+    }
+    WebsiteRole w2 = iWebsiteRoleService.findByType("ADMIN");
+    if(w2 != null){
+      System.out.println("WebsiteRole3 description: " + w2.getDescription());}
+    else{
+      System.out.println("WebsiteRole3 is null for description ADMIN");
     }
   }
 
@@ -46,9 +92,9 @@ public class LoginController {
    */
   private boolean isCurrentAuthenticationAnonymous() {
     final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-    if(authentication == null){
-      return true;
-    }
+//    if(authentication == null){
+//      return true;
+//    }
     return authenticationTrustResolver.isAnonymous(authentication);
   }
 
@@ -68,6 +114,14 @@ public class LoginController {
     // model.addAttribute();
     System.out.println("Method Executed: newUserRegisterHere");
     return "newUserSignUp";
+  }
+
+  @RequestMapping(value = "/list", method = RequestMethod.POST)
+  public String list(Model model) {
+    // model.addAttribute();
+    model.addAttribute("test",iEquipmentTypeService.findAll());
+
+    return "list";
   }
 
   @RequestMapping(value = "/lostPassword", method = RequestMethod.GET)

@@ -16,15 +16,14 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 @Service("userDetailsServiceImpl")
-public class UserDetailsServiceImpl implements UserDetailsService {
+public class UserDetailsServiceImpl implements UserDetailsService{
 
-//  @Autowired
-  IUserDetailsBusiness userDetailsBusinessImpl = new UserDetailsBusinessImpl();
+  @Autowired
+  IUserDetailsBusiness userDetailsBusinessImpl;
 
 
   public String user = "abv";
 
-  @Override
   public UserDetails loadUserByUsername(String ssoId) throws UsernameNotFoundException {
     return userDetailsBusinessImpl.loadUserByUsername(ssoId);
   }

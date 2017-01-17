@@ -22,7 +22,7 @@ public class UserBusinessImpl implements IUserBusiness {
 
   @Override
   public User findBySSO(String sso) {
-    return iUserRepository.findBySSO(sso);
+    return iUserRepository.findByEmail(sso);
   }
 
   @Override

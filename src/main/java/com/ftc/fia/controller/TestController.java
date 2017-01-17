@@ -52,32 +52,34 @@ public class TestController {
   public String test(Model model) {
 
     // Test services for Spring Security.
-    PersistentLogin p1 = iPersistentLoginService.getPersistentLoginBySeries("gfd");
-    System.out.println("PersistentLogin series: " + p1.getSeries());
-    PersistentLogin p2 = iPersistentLoginService.getPersistentLoginByUserId(1);
-    System.out.println("PersistentLogin series: " + p2.getSeries());
+//    PersistentLogin p1 = iPersistentLoginService.getPersistentLoginBySeries("gfd");
+//    System.out.println("PersistentLogin series: " + p1.getSeries());
+//    PersistentLogin p2 = iPersistentLoginService.getPersistentLoginByUserId(1);
+//    System.out.println("PersistentLogin series: " + p2.getSeries());
+//
+//    User u = iUserService.findBySSO("hfg");
+//    System.out.println("\nUser email: " + u.getEmail());
+//    List<User> l = iUserService.findAllUsers();
+//    for(User u1:l){
+//      System.out.println("User email: " + u1.getEmail());
+//    }
+//    boolean b = iUserService.isUserSSOUnique(1, "hfg");
+//    System.out.println("\nUser with id: " + 1 + " and email: hfg unique:" + b);
+//
+//    WebsiteRole w1 = iWebsiteRoleService.findById(7);
+//    System.out.println("\nWebsiteRole1 description: " + w1.getDescription());
+//    List<WebsiteRole> l2 = iWebsiteRoleService.findAll();
+//    for(WebsiteRole w3:l2){
+//      System.out.println("WebsiteRole2 description: " + w3.getDescription());
+//    }
+//    WebsiteRole w2 = iWebsiteRoleService.findByType("ADMIN");
+//    if(w2 != null){
+//    System.out.println("WebsiteRole3 description: " + w2.getDescription());}
+//    else{
+//      System.out.println("WebsiteRole3 is null for description ADMIN");
+//    }
 
-    User u = iUserService.findBySSO("hfg");
-    System.out.println("\nUser email: " + u.getEmail());
-    List<User> l = iUserService.findAllUsers();
-    for(User u1:l){
-      System.out.println("User email: " + u1.getEmail());
-    }
-    boolean b = iUserService.isUserSSOUnique(1, "hfg");
-    System.out.println("\nUser with id: " + 1 + " and email: hfg unique:" + b);
-
-    WebsiteRole w1 = iWebsiteRoleService.findById(7);
-    System.out.println("\nWebsiteRole1 description: " + w1.getDescription());
-    List<WebsiteRole> l2 = iWebsiteRoleService.findAll();
-    for(WebsiteRole w3:l2){
-      System.out.println("WebsiteRole2 description: " + w3.getDescription());
-    }
-    WebsiteRole w2 = iWebsiteRoleService.findByType("ADMIN");
-    if(w2 != null){
-    System.out.println("WebsiteRole3 description: " + w2.getDescription());}
-    else{
-      System.out.println("WebsiteRole3 is null for description ADMIN");
-    }
+    System.out.println("ff");
 
     return "test";
   }
@@ -93,6 +95,16 @@ public class TestController {
   public String testPost(TestMe testMe) {
     iTestMeService.createTest(testMe);
     return "redirect:/";
+  }
+
+
+  @RequestMapping("/ab")
+  public String getA()
+  {
+
+    iTestMeService.createTest(null);
+
+    return "test";
   }
 
 }
