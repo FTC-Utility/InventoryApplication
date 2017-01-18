@@ -27,6 +27,17 @@ public class User {
     @Column(name = "email",nullable = false)
     private String email;
 
+    @Column(name = "password",nullable = false)
+    private String password;
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     @OneToOne
     @JoinColumn(name="company_id",referencedColumnName = "id", foreignKey = @ForeignKey(name = "FkUser_CompanyID"))
     private Company company;
@@ -207,18 +218,18 @@ public class User {
         return Objects.hash(getId(), getFirstName(), getLastName(), getEmail(), getCompany(), getUserNotifications(), getPosition(), getUser_roles(), isConfirmed());
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                ", company_id=" + company +
-                ", userNotifications=" + userNotifications +
-                ", position_id=" + position +
-                ", user_roles=" + user_roles +
-                ", confirmed=" + confirmed +
-                '}';
-    }
+//    @Override
+//    public String toString() {
+//        return "User{" +
+//                "id=" + id +
+//                ", firstName='" + firstName + '\'' +
+//                ", lastName='" + lastName + '\'' +
+//                ", email='" + email + '\'' +
+//                ", company_id=" + company +
+//                ", userNotifications=" + userNotifications +
+//                ", position_id=" + position +
+//                ", user_roles=" + user_roles +
+//                ", confirmed=" + confirmed +
+//                '}';
+//    }
 }

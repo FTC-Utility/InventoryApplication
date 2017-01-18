@@ -25,7 +25,7 @@ import org.springframework.security.web.authentication.rememberme.PersistentToke
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
   @Autowired
-//  @Qualifier("userDetailsServiceImpl")
+  @Qualifier("userDetailsServiceImpl")
   UserDetailsService userDetailsService;
 
   @Autowired
@@ -43,18 +43,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         .access("hasRole('USER') or hasRole('ADMIN') or hasRole('DBA')");
 
     http.authorizeRequests().antMatchers("/test")
-        .access("hasRole('ADMIN')");
+        .access("hasRole('ADMIN') or hasRole('USER')");
 
-
-    http.authorizeRequests().antMatchers("/newuser/**", "/delete-user-*").access("hasRole('ADMIN')");
 
     http.authorizeRequests().antMatchers("/edit-user-*").access("hasRole('ADMIN') or hasRole('DBA')").and()
-        .formLogin().loginPage("/login").loginProcessingUrl("/login").usernameParameter("ssoId")
+        .formLogin().loginPage("/login").loginProcessingUrl("/login").usernameParameter("email")
         .passwordParameter("password").and().rememberMe().rememberMeParameter("remember-me")
         .tokenRepository(tokenRepository).tokenValiditySeconds(86400).and().csrf().and().exceptionHandling()
         .accessDeniedPage("/Access_Denied");
 
-    http.authorizeRequests().antMatchers("/login").anonymous();
   }
 
   @Bean

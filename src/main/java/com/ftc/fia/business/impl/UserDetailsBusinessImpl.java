@@ -58,12 +58,17 @@ public class UserDetailsBusinessImpl implements IUserDetailsBusiness {
 //    iUserRepository = jpaRepositoryFactory.getRepository(IUserRepository.class);
     User user = iUserRepository.findByEmail(ssoId);
 //    System.out.println("UserDetailsBusinessImpl loadUserByUsername");
+    String password = user.getPassword();
+
     if (user == null) {
       throw new UsernameNotFoundException("Username not found");
     }
-    int userId = user.getId();
-    UserPassword userPassword = iUserPasswordRepository.findByUserId(userId);
-    String password = userPassword.getPasswordHash();
+//    int userId = user.getId();
+
+//    UserPassword userPassword = iUserPasswordRepository.findByUserId(userId);
+//    String password = userPassword.getPasswordHash();
+
+//    String password = user.getPassword();
     return new org.springframework.security.core.userdetails.User(user.getEmail(), password,
         true, true, true, true, getGrantedAuthorities(user));
   }

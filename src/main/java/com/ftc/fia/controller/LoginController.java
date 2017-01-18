@@ -3,24 +3,25 @@ package com.ftc.fia.controller;
 import com.ftc.fia.domain.PersistentLogin;
 import com.ftc.fia.domain.User;
 import com.ftc.fia.domain.WebsiteRole;
-import com.ftc.fia.repository.IEquipmentTypeRepository;
 import com.ftc.fia.service.IEquipmentTypeService;
 import com.ftc.fia.service.IPersistentLoginService;
 import com.ftc.fia.service.IUserService;
 import com.ftc.fia.service.IWebsiteRoleService;
-import com.ftc.fia.service.impl.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationTrustResolver;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -32,8 +33,8 @@ public class LoginController {
   @Autowired
   AuthenticationTrustResolver authenticationTrustResolver;
 
-//  @Autowired
-  UserDetailsService userDetailsService = new UserDetailsServiceImpl();
+  @Autowired
+  UserDetailsService userDetailsService;
 
   @Autowired
   IPersistentLoginService iPersistentLoginService;
@@ -47,6 +48,9 @@ public class LoginController {
   @Autowired
   IEquipmentTypeService iEquipmentTypeService;
 
+  @Autowired
+  PersistentTokenBasedRememberMeServices persistentTokenBasedRememberMeServices;
+
   @RequestMapping(value = "/login", method = RequestMethod.GET)
   public String login(Model model) {
     // Modified by Barrero on 1/9/2017 to work with Spring Security.
@@ -57,6 +61,30 @@ public class LoginController {
       return "redirect:/test";
     }
   }
+
+
+
+  @RequestMapping(value = { "/", "/list" }, method = RequestMethod.GET)
+  public String testList(ModelMap model) {
+
+    List<User> users = iUserService.findAllUsers();
+    model.addAttribute("users", users);
+    model.addAttribute("loggedinuser", getPrincipal());
+    return "test";
+  }
+
+  private String getPrincipal(){
+    String userName = null;
+    Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+    if (principal instanceof UserDetails) {
+      userName = ((UserDetails)principal).getUsername();
+    } else {
+      userName = principal.toString();
+    }
+    return userName + "Role: "+ ((UserDetails)principal).getAuthorities();
+  }
+
 
   private void testJPA() {
     PersistentLogin p1 = iPersistentLoginService.getPersistentLoginBySeries("gfd");
@@ -86,6 +114,20 @@ public class LoginController {
       System.out.println("WebsiteRole3 is null for description ADMIN");
     }
   }
+
+
+  @RequestMapping(value="/logout", method = RequestMethod.GET)
+  public String logoutPage (HttpServletRequest request, HttpServletResponse response){
+    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    if (auth != null){
+      //new SecurityContextLogoutHandler().logout(request, response, auth);
+      persistentTokenBasedRememberMeServices.logout(request, response, auth);
+      SecurityContextHolder.getContext().setAuthentication(null);
+    }
+    return "redirect:/login?logout";
+  }
+
+
 
   /**
    * This method returns true if users is already authenticated [logged-in], else false.

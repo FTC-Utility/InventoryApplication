@@ -1,8 +1,6 @@
 package com.ftc.fia.service.impl;
 
 import com.ftc.fia.business.IUserDetailsBusiness;
-import com.ftc.fia.business.impl.UserDetailsBusinessImpl;
-import com.ftc.fia.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -21,11 +19,10 @@ public class UserDetailsServiceImpl implements UserDetailsService{
   @Autowired
   IUserDetailsBusiness userDetailsBusinessImpl;
 
+  public UserDetails loadUserByUsername(String ssoId){
 
-  public String user = "abv";
-
-  public UserDetails loadUserByUsername(String ssoId) throws UsernameNotFoundException {
-    return userDetailsBusinessImpl.loadUserByUsername(ssoId);
+      UserDetails userDetails = userDetailsBusinessImpl.loadUserByUsername(ssoId);
+    return userDetails;
   }
 
 }

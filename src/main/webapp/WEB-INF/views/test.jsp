@@ -9,6 +9,7 @@
 <body>
 <h1>Data: ${data}</h1>
 <center style="margin-top: 150px">
+	<%@include file="securityHeader.jsp" %>
 	<form action="test" method="post">
 	<table>
 		<tr>

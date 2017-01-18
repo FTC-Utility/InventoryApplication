@@ -1,9 +1,11 @@
-package com.ftc.fia.util;
+package com.ftc.fia.repository;
 
 import com.ftc.fia.domain.PersistentLogin;
 import com.ftc.fia.domain.User;
 import com.ftc.fia.service.IPersistentLoginService;
 import com.ftc.fia.service.IUserService;
+import org.hibernate.Criteria;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.web.authentication.rememberme.PersistentRememberMeToken;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
@@ -22,7 +24,7 @@ import java.util.Date;
  */
 @Repository
 @Transactional
-public class TokenRepository implements PersistentTokenRepository {
+public class TokenRepository implements PersistentTokenRepository  {
 
   @Autowired
   IUserService userService;
@@ -73,7 +75,10 @@ public class TokenRepository implements PersistentTokenRepository {
   @Override
   public PersistentRememberMeToken getTokenForSeries(String seriesId) {
     // The PersistentLogin is identified by the series primary key column in the database.
-    PersistentLogin persistentLogin = iPersistentLoginService.getPersistentLoginBySeries(seriesId);
+
+    try
+    {
+      PersistentLogin persistentLogin = iPersistentLoginService.getPersistentLoginBySeries(seriesId);
     /*
      The first argument in the PersistentRememberMeToken constructor is the name associated with persistentLogin, but
      the name is the name (EMail) of the user and the user is obtained from persistentLogin.
@@ -81,14 +86,17 @@ public class TokenRepository implements PersistentTokenRepository {
      Additionally, the last used date should be java.util.Date, but persistentLogin gives a LocalDateTime object, so it
      has to be converted.
       */
-    String userName = persistentLogin.getUser().getEmail();
-    LocalDateTime localDateTime = persistentLogin.getLastUsed();
-    Instant instant = localDateTime.atZone(ZoneId.systemDefault()).toInstant();
-    java.util.Date lastUsed = Date.from(instant);
-    PersistentRememberMeToken persistentRememberMeToken = new PersistentRememberMeToken(userName, persistentLogin
-        .getSeries(),
-        persistentLogin.getToken(), lastUsed);
-    return persistentRememberMeToken;
+      String userName = persistentLogin.getUser().getEmail();
+      LocalDateTime localDateTime = persistentLogin.getLastUsed();
+      Instant instant = localDateTime.atZone(ZoneId.systemDefault()).toInstant();
+      java.util.Date lastUsed = Date.from(instant);
+      PersistentRememberMeToken persistentRememberMeToken = new PersistentRememberMeToken(userName, persistentLogin
+              .getSeries(),
+              persistentLogin.getToken(), lastUsed);
+      return persistentRememberMeToken;
+    }catch (Exception e){
+      return null;
+    }
   }
 
   @Override
@@ -103,6 +111,8 @@ public class TokenRepository implements PersistentTokenRepository {
     User user = userService.findBySSO(username);
     int id = user.getId();
     PersistentLogin persistentLogin = iPersistentLoginService.getPersistentLoginByUserId(id);
+
+    if(persistentLogin!=null)
     iPersistentLoginService.deletePersistentLogin(persistentLogin);
   }
 }
