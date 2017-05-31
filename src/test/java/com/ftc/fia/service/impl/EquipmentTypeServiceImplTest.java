@@ -1,4 +1,4 @@
-package com.ftc.fia.service.impl;
+/* package com.ftc.fia.service.impl;
 
 
 import com.ftc.fia.domain.EquipmentType;
@@ -26,7 +26,7 @@ public class EquipmentTypeServiceImplTest {
 
     @Autowired
     private IEquipmentTypeService equipmentTypeService;
-/*
+
     @Test
     public void getEquipmentTypeById() throws Exception {
         EquipmentType equipmentTypeById = equipmentTypeService.getEquipmentTypeById(8);
@@ -75,3 +75,4 @@ public class EquipmentTypeServiceImplTest {
     }
 */
 }
+*/
